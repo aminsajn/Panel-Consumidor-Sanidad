@@ -1,0 +1,501 @@
+﻿edad,ccaa,tiene_seguro,marca_seguro,satisfaccion,top_of_mind,atributo_clave,barrera,canal_contratacion,buyer_persona,precio_max_mensual
+45-54,País Vasco,Si,Sanitas,3.4,DKV,Atención personalizada,Precio demasiado alto,Comparador online,Ejecutivo Exigente,60
+35-44,Aragón,Si,Asisa,2.5,No sé,Precio asequible,No lo necesito,Empresa / colectivo,Joven Saludable,45
+55+,Canarias,Si,Sanitas,3.4,Sanitas,Sin copagos,Mala experiencia previa,Agente / corredor,Familiar Tradicional,80
+45-54,Andalucía,Si,Adeslas,4.4,Sanitas,Tiempo de espera corto,Desconfianza en privado,Empresa / colectivo,Joven Saludable,35
+18-24,Andalucía,No,Sin seguro,,Mapfre,Red médica amplia,Precio demasiado alto,Agente / corredor,Joven Saludable,45
+55+,Galicia,Si,DKV,4.9,Asisa,Cobertura dental,Precio demasiado alto,Comparador online,Joven Saludable,35
+45-54,Cataluña,No,Sin seguro,,DKV,Precio asequible,Mala experiencia previa,Empresa / colectivo,Ejecutivo Exigente,45
+45-54,Castilla y León,Si,Asisa,3.4,Sanitas,Red médica amplia,Mala experiencia previa,Agente / corredor,Senior Dependiente,35
+25-34,Andalucía,No,Sin seguro,,Adeslas,Red médica amplia,Ya tengo Seg. Social,Agente / corredor,Joven Saludable,35
+35-44,Madrid,Si,Mapfre Salud,2.2,DKV,App / gestión digital,No lo necesito,Comparador online,Familiar Tradicional,60
+35-44,Madrid,No,Sin seguro,,Adeslas,Red médica amplia,Ya tengo Seg. Social,Web del asegurador,Preventivo Digital,35
+55+,Castilla y León,Si,Sanitas,3.6,Adeslas,Precio asequible,Ya tengo Seg. Social,Comparador online,Joven Saludable,35
+45-54,Madrid,Si,Adeslas,3.0,Asisa,Red médica amplia,Precio demasiado alto,Comparador online,Preventivo Digital,100
+55+,Cataluña,No,Sin seguro,,DKV,Precio asequible,Precio demasiado alto,Empresa / colectivo,Preventivo Digital,25
+35-44,Cataluña,Si,DKV,3.6,AXA,Precio asequible,Precio demasiado alto,Agente / corredor,Preventivo Digital,60
+25-34,Madrid,Si,Sanitas,3.9,Sanitas,Tiempo de espera corto,Desconfianza en privado,Empresa / colectivo,Senior Dependiente,45
+35-44,Cataluña,No,Sin seguro,,Adeslas,Red médica amplia,Precio demasiado alto,Banco / caja,Joven Saludable,35
+18-24,Galicia,No,Sin seguro,,No sé,Red médica amplia,Precio demasiado alto,Agente / corredor,Familiar Tradicional,45
+55+,Madrid,Si,DKV,4.9,Adeslas,Tiempo de espera corto,Ya tengo Seg. Social,Web del asegurador,Joven Saludable,35
+45-54,Castilla y León,Si,DKV,4.6,Adeslas,Precio asequible,Precio demasiado alto,Agente / corredor,Senior Dependiente,60
+45-54,Murcia,No,Sin seguro,,Sanitas,Tiempo de espera corto,Precio demasiado alto,Web del asegurador,Ejecutivo Exigente,35
+35-44,Cataluña,No,Sin seguro,,Asisa,Red médica amplia,Ya tengo Seg. Social,Empresa / colectivo,Senior Dependiente,35
+55+,Madrid,No,Sin seguro,,AXA,Red médica amplia,Precio demasiado alto,Web del asegurador,Familiar Tradicional,45
+55+,C. Valenciana,Si,DKV,3.7,DKV,Red médica amplia,No lo necesito,Empresa / colectivo,Ejecutivo Exigente,100
+45-54,Madrid,No,Sin seguro,,DKV,Precio asequible,Trámites complicados,Web del asegurador,Ejecutivo Exigente,80
+25-34,Cataluña,Si,Sanitas,4.1,Adeslas,Precio asequible,Precio demasiado alto,Agente / corredor,Ejecutivo Exigente,100
+35-44,Baleares,No,Sin seguro,,Sanitas,Atención personalizada,Trámites complicados,Agente / corredor,Familiar Tradicional,60
+18-24,Otros,Si,DKV,3.3,Sanitas,Precio asequible,Trámites complicados,Comparador online,Familiar Tradicional,60
+25-34,Galicia,No,Sin seguro,,Adeslas,Tiempo de espera corto,Desconfianza en privado,Empresa / colectivo,Senior Dependiente,45
+45-54,Cataluña,Si,Asisa,2.4,Sanitas,Tiempo de espera corto,No lo necesito,Web del asegurador,Ejecutivo Exigente,100
+45-54,País Vasco,Si,Adeslas,2.5,Sanitas,Red médica amplia,No lo necesito,Comparador online,Familiar Tradicional,45
+55+,País Vasco,No,Sin seguro,,Adeslas,Tiempo de espera corto,No lo necesito,Agente / corredor,Familiar Tradicional,45
+25-34,Cataluña,Si,Asisa,3.5,Asisa,Precio asequible,No lo necesito,Agente / corredor,Ejecutivo Exigente,60
+35-44,C. Valenciana,No,Sin seguro,,DKV,Precio asequible,Precio demasiado alto,Agente / corredor,Familiar Tradicional,45
+35-44,Madrid,Si,Adeslas,4.0,Adeslas,Red médica amplia,Mala experiencia previa,Banco / caja,Joven Saludable,35
+25-34,Madrid,No,Sin seguro,,Sanitas,App / gestión digital,Ya tengo Seg. Social,Empresa / colectivo,Senior Dependiente,45
+25-34,Andalucía,Si,Sanitas,4.2,Mapfre,Sin copagos,Desconfianza en privado,Empresa / colectivo,Familiar Tradicional,45
+35-44,Madrid,Si,Adeslas,2.9,DKV,Red médica amplia,Precio demasiado alto,Agente / corredor,Joven Saludable,80
+25-34,Madrid,Si,Adeslas,2.2,Mapfre,Tiempo de espera corto,Precio demasiado alto,Agente / corredor,Familiar Tradicional,45
+45-54,Castilla y León,Si,Adeslas,2.9,Sanitas,App / gestión digital,Ya tengo Seg. Social,Empresa / colectivo,Familiar Tradicional,80
+35-44,Asturias,Si,Adeslas,2.9,Mapfre,Precio asequible,Ya tengo Seg. Social,Web del asegurador,Senior Dependiente,45
+55+,Andalucía,No,Sin seguro,,Adeslas,App / gestión digital,Ya tengo Seg. Social,Comparador online,Joven Saludable,60
+45-54,Castilla y León,No,Sin seguro,,Sanitas,Tiempo de espera corto,Precio demasiado alto,Comparador online,Senior Dependiente,35
+25-34,Otros,No,Sin seguro,,Adeslas,Cobertura dental,Precio demasiado alto,Web del asegurador,Familiar Tradicional,100
+55+,Madrid,Si,Asisa,3.3,Sanitas,Reputación de marca,Ya tengo Seg. Social,Empresa / colectivo,Familiar Tradicional,45
+45-54,Andalucía,Si,Asisa,3.3,Sanitas,Red médica amplia,Precio demasiado alto,Banco / caja,Ejecutivo Exigente,35
+35-44,Cataluña,Si,DKV,4.0,Adeslas,Precio asequible,Mala experiencia previa,Web del asegurador,Ejecutivo Exigente,35
+25-34,Madrid,No,Sin seguro,,DKV,Tiempo de espera corto,Precio demasiado alto,Empresa / colectivo,Preventivo Digital,35
+45-54,Galicia,No,Sin seguro,,Sanitas,Red médica amplia,Precio demasiado alto,Comparador online,Familiar Tradicional,45
+25-34,Andalucía,Si,DKV,4.3,Sanitas,Precio asequible,Precio demasiado alto,Agente / corredor,Senior Dependiente,60
+25-34,Andalucía,No,Sin seguro,,Adeslas,Reputación de marca,Ya tengo Seg. Social,Comparador online,Senior Dependiente,100
+18-24,Madrid,Si,Asisa,4.8,Sanitas,Red médica amplia,Ya tengo Seg. Social,Agente / corredor,Joven Saludable,60
+45-54,Madrid,Si,Adeslas,3.3,Sanitas,Precio asequible,No lo necesito,Empresa / colectivo,Familiar Tradicional,45
+45-54,Aragón,Si,DKV,4.2,Sanitas,Atención personalizada,Mala experiencia previa,Comparador online,Ejecutivo Exigente,45
+45-54,Madrid,Si,Asisa,3.3,Adeslas,Precio asequible,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,80
+45-54,Madrid,No,Sin seguro,,DKV,Precio asequible,No lo necesito,Web del asegurador,Senior Dependiente,80
+35-44,Cataluña,No,Sin seguro,,No sé,Sin copagos,Precio demasiado alto,Empresa / colectivo,Ejecutivo Exigente,45
+35-44,Andalucía,Si,Sanitas,3.3,Asisa,Precio asequible,Precio demasiado alto,Agente / corredor,Preventivo Digital,100
+25-34,C. Valenciana,Si,Asisa,3.6,Asisa,Red médica amplia,Ya tengo Seg. Social,Agente / corredor,Joven Saludable,45
+18-24,Andalucía,No,Sin seguro,,Mapfre,Red médica amplia,Precio demasiado alto,Agente / corredor,Ejecutivo Exigente,80
+45-54,Madrid,No,Sin seguro,,No sé,Sin copagos,No lo necesito,Empresa / colectivo,Joven Saludable,100
+35-44,Madrid,Si,Mapfre Salud,3.0,Asisa,Red médica amplia,No lo necesito,Web del asegurador,Ejecutivo Exigente,60
+35-44,Castilla y León,Si,Adeslas,3.0,AXA,Tiempo de espera corto,No lo necesito,Agente / corredor,Preventivo Digital,35
+45-54,C. Valenciana,No,Sin seguro,,AXA,Red médica amplia,Ya tengo Seg. Social,Comparador online,Familiar Tradicional,60
+45-54,C. Valenciana,Si,Sanitas,3.2,Mapfre,Precio asequible,No lo necesito,Web del asegurador,Preventivo Digital,35
+35-44,País Vasco,No,Sin seguro,,Sanitas,Cobertura dental,Ya tengo Seg. Social,Web del asegurador,Senior Dependiente,80
+35-44,Galicia,Si,Sanitas,4.2,Adeslas,Tiempo de espera corto,Precio demasiado alto,Web del asegurador,Senior Dependiente,45
+25-34,Madrid,No,Sin seguro,,Adeslas,Sin copagos,Precio demasiado alto,Agente / corredor,Ejecutivo Exigente,60
+18-24,Cataluña,Si,Sanitas,4.0,Sanitas,Red médica amplia,No lo necesito,Empresa / colectivo,Senior Dependiente,100
+35-44,Andalucía,Si,DKV,3.8,Asisa,Tiempo de espera corto,Mala experiencia previa,Web del asegurador,Familiar Tradicional,35
+25-34,Cataluña,No,Sin seguro,,Sanitas,Atención personalizada,Precio demasiado alto,Agente / corredor,Senior Dependiente,45
+35-44,Castilla y León,Si,Otra,3.6,Asisa,Precio asequible,Ya tengo Seg. Social,Banco / caja,Familiar Tradicional,60
+55+,Andalucía,Si,DKV,4.1,Asisa,Red médica amplia,Desconfianza en privado,Comparador online,Familiar Tradicional,45
+25-34,Galicia,No,Sin seguro,,Mapfre,Atención personalizada,Desconfianza en privado,Empresa / colectivo,Ejecutivo Exigente,35
+18-24,Murcia,No,Sin seguro,,Adeslas,Precio asequible,Ya tengo Seg. Social,Comparador online,Familiar Tradicional,25
+25-34,Andalucía,Si,AXA Salud,3.7,Adeslas,Tiempo de espera corto,No lo necesito,Comparador online,Ejecutivo Exigente,45
+25-34,Aragón,Si,Mapfre Salud,2.8,Mapfre,Sin copagos,No lo necesito,Web del asegurador,Senior Dependiente,60
+45-54,C. Valenciana,Si,Adeslas,2.9,Mapfre,Red médica amplia,Trámites complicados,Empresa / colectivo,Familiar Tradicional,60
+35-44,Murcia,No,Sin seguro,,No sé,Precio asequible,Precio demasiado alto,Empresa / colectivo,Joven Saludable,35
+45-54,Cataluña,Si,Sanitas,3.5,AXA,Red médica amplia,Trámites complicados,Agente / corredor,Familiar Tradicional,45
+45-54,Andalucía,Si,Otra,2.9,AXA,Precio asequible,Precio demasiado alto,Agente / corredor,Senior Dependiente,45
+35-44,Andalucía,No,Sin seguro,,Sanitas,Red médica amplia,Desconfianza en privado,Agente / corredor,Senior Dependiente,35
+55+,Madrid,No,Sin seguro,,Sanitas,App / gestión digital,Precio demasiado alto,Empresa / colectivo,Ejecutivo Exigente,60
+25-34,Cataluña,No,Sin seguro,,Adeslas,Red médica amplia,Precio demasiado alto,Comparador online,Joven Saludable,45
+18-24,Canarias,No,Sin seguro,,Asisa,Tiempo de espera corto,Precio demasiado alto,Comparador online,Preventivo Digital,45
+18-24,C. Valenciana,No,Sin seguro,,No sé,Red médica amplia,Ya tengo Seg. Social,Web del asegurador,Senior Dependiente,100
+45-54,Madrid,No,Sin seguro,,Sanitas,Precio asequible,Precio demasiado alto,Agente / corredor,Ejecutivo Exigente,45
+35-44,Cataluña,No,Sin seguro,,Asisa,Precio asequible,Precio demasiado alto,Web del asegurador,Ejecutivo Exigente,60
+25-34,Madrid,Si,Sanitas,3.1,Sanitas,App / gestión digital,Ya tengo Seg. Social,Empresa / colectivo,Senior Dependiente,25
+35-44,Madrid,Si,Adeslas,2.7,Adeslas,Precio asequible,Ya tengo Seg. Social,Comparador online,Familiar Tradicional,35
+25-34,Canarias,Si,AXA Salud,2.3,Adeslas,Precio asequible,Desconfianza en privado,Comparador online,Senior Dependiente,35
+45-54,Andalucía,No,Sin seguro,,Adeslas,Atención personalizada,Trámites complicados,Comparador online,Familiar Tradicional,60
+35-44,Cataluña,Si,Asisa,3.0,No sé,Tiempo de espera corto,No lo necesito,Comparador online,Senior Dependiente,80
+35-44,C. Valenciana,Si,Adeslas,4.2,Sanitas,Red médica amplia,Precio demasiado alto,Banco / caja,Familiar Tradicional,35
+25-34,Madrid,Si,Sanitas,4.2,Mapfre,Cobertura dental,Precio demasiado alto,Web del asegurador,Familiar Tradicional,35
+45-54,Cataluña,Si,Otra,4.4,DKV,Precio asequible,Trámites complicados,Agente / corredor,Preventivo Digital,45
+35-44,País Vasco,Si,Adeslas,2.9,Adeslas,Red médica amplia,Precio demasiado alto,Agente / corredor,Senior Dependiente,60
+18-24,C. Valenciana,No,Sin seguro,,Adeslas,Precio asequible,Ya tengo Seg. Social,Web del asegurador,Senior Dependiente,60
+18-24,Asturias,No,Sin seguro,,Mapfre,Red médica amplia,Mala experiencia previa,Agente / corredor,Preventivo Digital,60
+55+,C. Valenciana,Si,Adeslas,3.9,Adeslas,Red médica amplia,Mala experiencia previa,Agente / corredor,Ejecutivo Exigente,100
+55+,Andalucía,Si,Adeslas,3.4,AXA,App / gestión digital,Ya tengo Seg. Social,Banco / caja,Familiar Tradicional,45
+45-54,Galicia,Si,Asisa,2.9,Adeslas,Red médica amplia,No lo necesito,Agente / corredor,Familiar Tradicional,60
+25-34,Aragón,No,Sin seguro,,DKV,Atención personalizada,Ya tengo Seg. Social,Banco / caja,Ejecutivo Exigente,45
+55+,País Vasco,No,Sin seguro,,Mapfre,Cobertura dental,Desconfianza en privado,Comparador online,Familiar Tradicional,45
+45-54,Navarra,Si,Adeslas,4.1,Adeslas,Tiempo de espera corto,Precio demasiado alto,Empresa / colectivo,Preventivo Digital,100
+45-54,Galicia,No,Sin seguro,,Sanitas,App / gestión digital,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,35
+35-44,Murcia,Si,AXA Salud,3.5,No sé,App / gestión digital,No lo necesito,Web del asegurador,Familiar Tradicional,60
+25-34,Madrid,Si,Mapfre Salud,2.2,Adeslas,Reputación de marca,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,60
+18-24,País Vasco,No,Sin seguro,,Sanitas,Precio asequible,No lo necesito,Agente / corredor,Familiar Tradicional,100
+55+,Andalucía,Si,Asisa,3.8,Sanitas,Red médica amplia,Precio demasiado alto,Banco / caja,Familiar Tradicional,45
+35-44,Andalucía,Si,Adeslas,3.7,Adeslas,Tiempo de espera corto,Trámites complicados,Web del asegurador,Joven Saludable,45
+25-34,C. Valenciana,Si,Adeslas,3.5,DKV,Tiempo de espera corto,Desconfianza en privado,Agente / corredor,Familiar Tradicional,80
+25-34,Navarra,Si,Adeslas,2.8,DKV,Red médica amplia,Ya tengo Seg. Social,Empresa / colectivo,Joven Saludable,60
+35-44,Asturias,No,Sin seguro,,Sanitas,Tiempo de espera corto,Desconfianza en privado,Empresa / colectivo,Senior Dependiente,45
+25-34,Cataluña,No,Sin seguro,,Mapfre,Red médica amplia,Precio demasiado alto,Web del asegurador,Joven Saludable,60
+55+,País Vasco,Si,Adeslas,3.6,Adeslas,Cobertura dental,Ya tengo Seg. Social,Empresa / colectivo,Joven Saludable,35
+45-54,Galicia,Si,Sanitas,4.6,Adeslas,Red médica amplia,Precio demasiado alto,Agente / corredor,Ejecutivo Exigente,60
+45-54,Cataluña,No,Sin seguro,,Asisa,Red médica amplia,Trámites complicados,Empresa / colectivo,Familiar Tradicional,80
+35-44,Madrid,Si,Asisa,3.5,No sé,Red médica amplia,Desconfianza en privado,Agente / corredor,Familiar Tradicional,45
+45-54,Madrid,No,Sin seguro,,Adeslas,Red médica amplia,Trámites complicados,Agente / corredor,Preventivo Digital,45
+35-44,Galicia,No,Sin seguro,,Adeslas,Red médica amplia,Trámites complicados,Agente / corredor,Joven Saludable,100
+45-54,Andalucía,Si,Sanitas,2.8,Asisa,Red médica amplia,Mala experiencia previa,Web del asegurador,Familiar Tradicional,80
+18-24,Asturias,No,Sin seguro,,Mapfre,Red médica amplia,Precio demasiado alto,Web del asegurador,Ejecutivo Exigente,80
+35-44,Andalucía,Si,Sanitas,3.9,Adeslas,Red médica amplia,Mala experiencia previa,Web del asegurador,Senior Dependiente,45
+18-24,Cantabria,Si,Sanitas,3.9,Sanitas,Precio asequible,Ya tengo Seg. Social,Agente / corredor,Joven Saludable,150
+35-44,Cataluña,Si,Otra,3.8,DKV,Precio asequible,Ya tengo Seg. Social,Agente / corredor,Joven Saludable,35
+25-34,Galicia,Si,Sanitas,3.9,Sanitas,Precio asequible,Ya tengo Seg. Social,Empresa / colectivo,Senior Dependiente,45
+25-34,Madrid,No,Sin seguro,,Adeslas,Precio asequible,Precio demasiado alto,Agente / corredor,Joven Saludable,45
+18-24,Andalucía,No,Sin seguro,,Adeslas,Red médica amplia,Precio demasiado alto,Empresa / colectivo,Joven Saludable,80
+35-44,Castilla y León,No,Sin seguro,,Sanitas,Red médica amplia,Precio demasiado alto,Banco / caja,Familiar Tradicional,100
+25-34,Canarias,No,Sin seguro,,Sanitas,Red médica amplia,Precio demasiado alto,Web del asegurador,Familiar Tradicional,60
+55+,Castilla y León,Si,Adeslas,2.9,Mapfre,App / gestión digital,Ya tengo Seg. Social,Comparador online,Preventivo Digital,60
+35-44,Madrid,Si,DKV,4.1,Asisa,Reputación de marca,Trámites complicados,Agente / corredor,Joven Saludable,45
+35-44,Cataluña,No,Sin seguro,,DKV,Cobertura dental,No lo necesito,Agente / corredor,Ejecutivo Exigente,45
+45-54,Madrid,No,Sin seguro,,No sé,Tiempo de espera corto,Ya tengo Seg. Social,Empresa / colectivo,Joven Saludable,45
+18-24,Madrid,Si,Sanitas,3.5,Sanitas,Tiempo de espera corto,Ya tengo Seg. Social,Comparador online,Familiar Tradicional,25
+55+,País Vasco,Si,Mapfre Salud,3.3,Sanitas,Precio asequible,Ya tengo Seg. Social,Comparador online,Senior Dependiente,45
+35-44,País Vasco,Si,Sanitas,4.3,No sé,App / gestión digital,Precio demasiado alto,Agente / corredor,Familiar Tradicional,80
+45-54,Galicia,Si,Sanitas,3.3,Adeslas,App / gestión digital,Desconfianza en privado,Comparador online,Senior Dependiente,60
+18-24,Murcia,No,Sin seguro,,DKV,Atención personalizada,Precio demasiado alto,Web del asegurador,Joven Saludable,80
+35-44,País Vasco,Si,AXA Salud,4.7,DKV,Cobertura dental,No lo necesito,Web del asegurador,Familiar Tradicional,45
+35-44,Castilla y León,No,Sin seguro,,Adeslas,Precio asequible,Desconfianza en privado,Agente / corredor,Familiar Tradicional,45
+55+,Madrid,No,Sin seguro,,Sanitas,App / gestión digital,Ya tengo Seg. Social,Banco / caja,Senior Dependiente,25
+35-44,Madrid,No,Sin seguro,,Adeslas,Atención personalizada,Trámites complicados,Agente / corredor,Familiar Tradicional,45
+35-44,C. Valenciana,Si,Sanitas,3.9,Adeslas,Precio asequible,Precio demasiado alto,Comparador online,Familiar Tradicional,45
+25-34,Murcia,Si,Adeslas,4.0,Sanitas,Cobertura dental,Trámites complicados,Empresa / colectivo,Senior Dependiente,35
+25-34,Madrid,No,Sin seguro,,Sanitas,Red médica amplia,No lo necesito,Empresa / colectivo,Ejecutivo Exigente,25
+35-44,Andalucía,No,Sin seguro,,Mapfre,Reputación de marca,Desconfianza en privado,Empresa / colectivo,Ejecutivo Exigente,60
+35-44,País Vasco,Si,Adeslas,3.9,AXA,App / gestión digital,No lo necesito,Comparador online,Familiar Tradicional,45
+18-24,Madrid,No,Sin seguro,,Mapfre,Red médica amplia,Desconfianza en privado,Agente / corredor,Senior Dependiente,45
+55+,Cataluña,Si,Adeslas,3.7,Adeslas,Tiempo de espera corto,Mala experiencia previa,Agente / corredor,Familiar Tradicional,35
+55+,Aragón,No,Sin seguro,,Sanitas,Red médica amplia,Ya tengo Seg. Social,Empresa / colectivo,Familiar Tradicional,45
+25-34,País Vasco,Si,Adeslas,3.8,Adeslas,App / gestión digital,Desconfianza en privado,Web del asegurador,Familiar Tradicional,45
+35-44,Madrid,Si,Sanitas,1.9,Adeslas,App / gestión digital,No lo necesito,Agente / corredor,Familiar Tradicional,45
+18-24,Murcia,Si,Sanitas,4.1,No sé,Tiempo de espera corto,Ya tengo Seg. Social,Agente / corredor,Familiar Tradicional,60
+45-54,Cataluña,Si,Mapfre Salud,2.7,Sanitas,Atención personalizada,Trámites complicados,Web del asegurador,Familiar Tradicional,25
+25-34,Murcia,Si,Sanitas,3.6,Adeslas,Red médica amplia,Ya tengo Seg. Social,Agente / corredor,Familiar Tradicional,100
+45-54,Cataluña,Si,DKV,4.3,Mapfre,Red médica amplia,Ya tengo Seg. Social,Agente / corredor,Ejecutivo Exigente,25
+45-54,C. Valenciana,Si,Adeslas,4.1,Sanitas,Precio asequible,Precio demasiado alto,Comparador online,Senior Dependiente,45
+45-54,Cataluña,No,Sin seguro,,Adeslas,Red médica amplia,Precio demasiado alto,Web del asegurador,Familiar Tradicional,35
+18-24,Cataluña,Si,DKV,3.6,Adeslas,Precio asequible,Desconfianza en privado,Banco / caja,Familiar Tradicional,45
+55+,Aragón,No,Sin seguro,,Asisa,Red médica amplia,Ya tengo Seg. Social,Banco / caja,Preventivo Digital,45
+25-34,Madrid,No,Sin seguro,,Mapfre,Precio asequible,Ya tengo Seg. Social,Agente / corredor,Senior Dependiente,80
+18-24,Madrid,Si,Adeslas,3.2,Adeslas,Precio asequible,Precio demasiado alto,Empresa / colectivo,Joven Saludable,45
+35-44,Cataluña,Si,Mapfre Salud,3.0,AXA,Atención personalizada,Ya tengo Seg. Social,Empresa / colectivo,Familiar Tradicional,60
+35-44,País Vasco,No,Sin seguro,,Mapfre,Red médica amplia,Desconfianza en privado,Empresa / colectivo,Ejecutivo Exigente,35
+55+,Castilla y León,No,Sin seguro,,Mapfre,Cobertura dental,Trámites complicados,Agente / corredor,Familiar Tradicional,25
+45-54,Otros,Si,Asisa,3.4,Adeslas,Precio asequible,Precio demasiado alto,Agente / corredor,Familiar Tradicional,45
+25-34,Cataluña,No,Sin seguro,,Adeslas,Precio asequible,Ya tengo Seg. Social,Agente / corredor,Ejecutivo Exigente,45
+55+,Cataluña,Si,Adeslas,3.3,Mapfre,Tiempo de espera corto,Ya tengo Seg. Social,Empresa / colectivo,Joven Saludable,45
+25-34,Madrid,Si,DKV,4.4,Sanitas,Precio asequible,No lo necesito,Banco / caja,Ejecutivo Exigente,100
+35-44,C. Valenciana,No,Sin seguro,,Asisa,Red médica amplia,Ya tengo Seg. Social,Empresa / colectivo,Joven Saludable,60
+25-34,Otros,Si,Adeslas,2.5,DKV,Tiempo de espera corto,Ya tengo Seg. Social,Empresa / colectivo,Familiar Tradicional,150
+55+,País Vasco,No,Sin seguro,,Adeslas,Red médica amplia,Ya tengo Seg. Social,Banco / caja,Familiar Tradicional,45
+25-34,C. Valenciana,Si,Adeslas,3.4,Mapfre,Precio asequible,Ya tengo Seg. Social,Empresa / colectivo,Senior Dependiente,80
+18-24,Cataluña,No,Sin seguro,,No sé,Tiempo de espera corto,Ya tengo Seg. Social,Agente / corredor,Senior Dependiente,45
+35-44,Canarias,Si,Adeslas,4.4,DKV,Precio asequible,Ya tengo Seg. Social,Comparador online,Familiar Tradicional,60
+55+,Andalucía,Si,Adeslas,3.3,Sanitas,Atención personalizada,Desconfianza en privado,Web del asegurador,Joven Saludable,150
+55+,Madrid,Si,Adeslas,3.7,AXA,Red médica amplia,No lo necesito,Agente / corredor,Familiar Tradicional,60
+45-54,Cataluña,Si,Adeslas,4.0,Asisa,Sin copagos,Precio demasiado alto,Web del asegurador,Familiar Tradicional,80
+55+,Madrid,No,Sin seguro,,DKV,App / gestión digital,Desconfianza en privado,Banco / caja,Joven Saludable,60
+55+,Madrid,Si,AXA Salud,3.8,Mapfre,Sin copagos,Trámites complicados,Agente / corredor,Familiar Tradicional,35
+35-44,Madrid,Si,Sanitas,4.8,DKV,Atención personalizada,Precio demasiado alto,Web del asegurador,Ejecutivo Exigente,60
+25-34,Andalucía,Si,Asisa,3.3,Sanitas,Red médica amplia,Ya tengo Seg. Social,Agente / corredor,Ejecutivo Exigente,45
+45-54,C. Valenciana,Si,Sanitas,4.0,Adeslas,Tiempo de espera corto,Precio demasiado alto,Agente / corredor,Familiar Tradicional,100
+45-54,Cataluña,No,Sin seguro,,Adeslas,Red médica amplia,No lo necesito,Agente / corredor,Familiar Tradicional,80
+35-44,Cataluña,Si,Asisa,3.4,Asisa,Atención personalizada,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,35
+18-24,Baleares,No,Sin seguro,,Asisa,Tiempo de espera corto,No lo necesito,Comparador online,Preventivo Digital,35
+45-54,Galicia,Si,Asisa,4.1,Asisa,Red médica amplia,Precio demasiado alto,Agente / corredor,Joven Saludable,25
+25-34,Andalucía,No,Sin seguro,,Sanitas,Cobertura dental,Ya tengo Seg. Social,Web del asegurador,Ejecutivo Exigente,45
+55+,Cataluña,Si,Adeslas,3.2,Mapfre,Red médica amplia,Mala experiencia previa,Agente / corredor,Familiar Tradicional,35
+25-34,Aragón,Si,Adeslas,4.7,AXA,Tiempo de espera corto,Ya tengo Seg. Social,Agente / corredor,Joven Saludable,60
+25-34,Madrid,No,Sin seguro,,Adeslas,App / gestión digital,Trámites complicados,Empresa / colectivo,Familiar Tradicional,45
+55+,Cataluña,No,Sin seguro,,DKV,Red médica amplia,Mala experiencia previa,Empresa / colectivo,Joven Saludable,80
+25-34,Aragón,No,Sin seguro,,DKV,Tiempo de espera corto,Trámites complicados,Empresa / colectivo,Senior Dependiente,35
+25-34,Andalucía,Si,Adeslas,3.1,Asisa,Atención personalizada,Precio demasiado alto,Web del asegurador,Ejecutivo Exigente,45
+45-54,Galicia,Si,AXA Salud,4.6,Adeslas,Red médica amplia,Desconfianza en privado,Empresa / colectivo,Familiar Tradicional,35
+55+,C. Valenciana,No,Sin seguro,,Mapfre,Tiempo de espera corto,Precio demasiado alto,Agente / corredor,Familiar Tradicional,80
+25-34,C. Valenciana,Si,Sanitas,3.1,No sé,Red médica amplia,Ya tengo Seg. Social,Agente / corredor,Familiar Tradicional,35
+25-34,Cataluña,No,Sin seguro,,DKV,Tiempo de espera corto,Trámites complicados,Banco / caja,Ejecutivo Exigente,35
+45-54,Madrid,Si,DKV,4.5,AXA,Red médica amplia,No lo necesito,Comparador online,Senior Dependiente,35
+55+,Cataluña,Si,Sanitas,3.7,No sé,Cobertura dental,Ya tengo Seg. Social,Comparador online,Familiar Tradicional,80
+35-44,Madrid,No,Sin seguro,,Sanitas,Cobertura dental,Ya tengo Seg. Social,Comparador online,Joven Saludable,35
+25-34,Murcia,No,Sin seguro,,Asisa,Red médica amplia,Desconfianza en privado,Empresa / colectivo,Joven Saludable,60
+18-24,Cataluña,Si,Asisa,3.8,Sanitas,Precio asequible,No lo necesito,Comparador online,Familiar Tradicional,60
+25-34,Andalucía,Si,Sanitas,3.9,No sé,Tiempo de espera corto,Ya tengo Seg. Social,Web del asegurador,Familiar Tradicional,60
+25-34,Galicia,Si,Adeslas,4.0,Adeslas,App / gestión digital,Trámites complicados,Agente / corredor,Familiar Tradicional,35
+45-54,Galicia,Si,Sanitas,3.1,Sanitas,Precio asequible,Precio demasiado alto,Agente / corredor,Joven Saludable,25
+25-34,Andalucía,Si,Asisa,2.4,AXA,Red médica amplia,Precio demasiado alto,Agente / corredor,Ejecutivo Exigente,45
+35-44,Andalucía,Si,Sanitas,3.0,Sanitas,Red médica amplia,No lo necesito,Agente / corredor,Joven Saludable,35
+45-54,Otros,No,Sin seguro,,Mapfre,Reputación de marca,Mala experiencia previa,Web del asegurador,Senior Dependiente,60
+35-44,País Vasco,No,Sin seguro,,Sanitas,Precio asequible,Precio demasiado alto,Empresa / colectivo,Senior Dependiente,45
+25-34,Castilla y León,Si,Adeslas,2.8,No sé,Atención personalizada,Precio demasiado alto,Comparador online,Preventivo Digital,45
+45-54,Aragón,Si,Adeslas,2.9,AXA,Precio asequible,Precio demasiado alto,Empresa / colectivo,Senior Dependiente,35
+45-54,Galicia,Si,Asisa,2.9,Sanitas,Cobertura dental,Trámites complicados,Agente / corredor,Senior Dependiente,60
+45-54,Madrid,Si,Otra,3.0,DKV,Red médica amplia,Precio demasiado alto,Empresa / colectivo,Senior Dependiente,35
+25-34,Andalucía,Si,AXA Salud,3.6,Sanitas,Red médica amplia,Ya tengo Seg. Social,Web del asegurador,Joven Saludable,60
+25-34,Madrid,Si,Adeslas,3.0,Asisa,Cobertura dental,Mala experiencia previa,Agente / corredor,Senior Dependiente,25
+55+,C. Valenciana,No,Sin seguro,,DKV,Sin copagos,Precio demasiado alto,Web del asegurador,Preventivo Digital,150
+35-44,Baleares,Si,Adeslas,3.0,Mapfre,Precio asequible,Ya tengo Seg. Social,Web del asegurador,Ejecutivo Exigente,60
+25-34,Andalucía,Si,Adeslas,3.4,Adeslas,Precio asequible,Ya tengo Seg. Social,Agente / corredor,Joven Saludable,35
+35-44,Andalucía,Si,Asisa,3.9,Adeslas,Precio asequible,Desconfianza en privado,Comparador online,Ejecutivo Exigente,25
+45-54,Madrid,No,Sin seguro,,DKV,Precio asequible,Precio demasiado alto,Comparador online,Senior Dependiente,45
+55+,Baleares,No,Sin seguro,,Asisa,Red médica amplia,Ya tengo Seg. Social,Empresa / colectivo,Ejecutivo Exigente,35
+25-34,Madrid,Si,Asisa,3.0,Asisa,Cobertura dental,Precio demasiado alto,Agente / corredor,Senior Dependiente,35
+55+,Madrid,No,Sin seguro,,Adeslas,Red médica amplia,No lo necesito,Comparador online,Senior Dependiente,80
+18-24,Madrid,Si,Adeslas,3.4,Sanitas,App / gestión digital,Desconfianza en privado,Empresa / colectivo,Preventivo Digital,60
+35-44,Madrid,Si,Adeslas,3.5,Mapfre,Red médica amplia,Precio demasiado alto,Agente / corredor,Familiar Tradicional,35
+45-54,Andalucía,No,Sin seguro,,Adeslas,Red médica amplia,Ya tengo Seg. Social,Empresa / colectivo,Joven Saludable,45
+18-24,Andalucía,Si,Sanitas,3.1,Sanitas,Tiempo de espera corto,Trámites complicados,Web del asegurador,Senior Dependiente,35
+25-34,Cataluña,Si,Sanitas,3.5,No sé,Precio asequible,Precio demasiado alto,Web del asegurador,Preventivo Digital,150
+35-44,Madrid,Si,Asisa,2.9,Adeslas,Tiempo de espera corto,Precio demasiado alto,Agente / corredor,Preventivo Digital,25
+55+,Madrid,Si,Otra,3.9,DKV,Red médica amplia,Ya tengo Seg. Social,Web del asegurador,Joven Saludable,60
+45-54,Cataluña,No,Sin seguro,,Adeslas,Sin copagos,Precio demasiado alto,Agente / corredor,Joven Saludable,60
+55+,Madrid,Si,Asisa,3.8,Mapfre,App / gestión digital,Precio demasiado alto,Agente / corredor,Familiar Tradicional,25
+45-54,País Vasco,Si,Mapfre Salud,2.7,DKV,Atención personalizada,Ya tengo Seg. Social,Agente / corredor,Preventivo Digital,35
+35-44,Madrid,Si,DKV,4.0,AXA,Red médica amplia,Precio demasiado alto,Banco / caja,Familiar Tradicional,45
+45-54,Cataluña,Si,Asisa,3.6,Adeslas,Precio asequible,Ya tengo Seg. Social,Web del asegurador,Joven Saludable,80
+18-24,Cataluña,Si,Sanitas,3.9,Asisa,Precio asequible,No lo necesito,Web del asegurador,Senior Dependiente,45
+18-24,Cataluña,Si,Otra,3.6,DKV,Tiempo de espera corto,Ya tengo Seg. Social,Web del asegurador,Ejecutivo Exigente,60
+55+,Madrid,No,Sin seguro,,Adeslas,Precio asequible,Precio demasiado alto,Comparador online,Familiar Tradicional,80
+45-54,Madrid,Si,Sanitas,3.1,Adeslas,Red médica amplia,Desconfianza en privado,Empresa / colectivo,Familiar Tradicional,80
+25-34,Murcia,Si,Adeslas,4.5,Adeslas,Precio asequible,Precio demasiado alto,Comparador online,Senior Dependiente,45
+35-44,Madrid,Si,DKV,3.7,No sé,Red médica amplia,Desconfianza en privado,Web del asegurador,Ejecutivo Exigente,45
+45-54,Andalucía,Si,Sanitas,3.3,DKV,Precio asequible,Precio demasiado alto,Agente / corredor,Familiar Tradicional,60
+55+,Andalucía,Si,Adeslas,2.7,Asisa,Red médica amplia,Desconfianza en privado,Empresa / colectivo,Joven Saludable,35
+45-54,Cataluña,Si,DKV,4.0,DKV,Red médica amplia,Precio demasiado alto,Web del asegurador,Familiar Tradicional,80
+35-44,Andalucía,Si,Asisa,4.0,Asisa,Tiempo de espera corto,Precio demasiado alto,Comparador online,Senior Dependiente,25
+35-44,Galicia,No,Sin seguro,,Sanitas,Precio asequible,Ya tengo Seg. Social,Comparador online,Familiar Tradicional,35
+35-44,Castilla y León,No,Sin seguro,,Sanitas,Precio asequible,Precio demasiado alto,Web del asegurador,Familiar Tradicional,80
+45-54,Cataluña,Si,Asisa,3.5,Asisa,Tiempo de espera corto,Precio demasiado alto,Banco / caja,Familiar Tradicional,45
+55+,Cataluña,Si,Asisa,3.2,Adeslas,App / gestión digital,No lo necesito,Empresa / colectivo,Ejecutivo Exigente,35
+35-44,Madrid,Si,AXA Salud,4.0,AXA,Precio asequible,Desconfianza en privado,Agente / corredor,Ejecutivo Exigente,35
+25-34,Andalucía,Si,Sanitas,4.3,Mapfre,Tiempo de espera corto,Precio demasiado alto,Web del asegurador,Senior Dependiente,45
+25-34,País Vasco,Si,Adeslas,4.0,Sanitas,Sin copagos,Trámites complicados,Agente / corredor,Ejecutivo Exigente,80
+45-54,Madrid,No,Sin seguro,,Asisa,Tiempo de espera corto,Desconfianza en privado,Comparador online,Familiar Tradicional,25
+55+,Cataluña,No,Sin seguro,,Adeslas,Cobertura dental,Trámites complicados,Agente / corredor,Familiar Tradicional,25
+18-24,Canarias,No,Sin seguro,,No sé,App / gestión digital,No lo necesito,Web del asegurador,Familiar Tradicional,45
+18-24,Madrid,Si,Asisa,2.2,AXA,Red médica amplia,No lo necesito,Empresa / colectivo,Preventivo Digital,100
+45-54,Andalucía,No,Sin seguro,,No sé,Precio asequible,Ya tengo Seg. Social,Agente / corredor,Familiar Tradicional,35
+25-34,País Vasco,Si,Adeslas,3.9,Sanitas,App / gestión digital,No lo necesito,Agente / corredor,Preventivo Digital,100
+55+,Madrid,Si,Asisa,3.6,Adeslas,Reputación de marca,Trámites complicados,Empresa / colectivo,Familiar Tradicional,80
+25-34,Madrid,Si,Adeslas,3.0,Adeslas,Precio asequible,Precio demasiado alto,Agente / corredor,Familiar Tradicional,45
+25-34,Madrid,No,Sin seguro,,Adeslas,Red médica amplia,Precio demasiado alto,Web del asegurador,Familiar Tradicional,80
+55+,Canarias,Si,Adeslas,3.8,Adeslas,Tiempo de espera corto,Precio demasiado alto,Web del asegurador,Familiar Tradicional,60
+25-34,Madrid,No,Sin seguro,,Adeslas,Red médica amplia,Mala experiencia previa,Agente / corredor,Senior Dependiente,45
+25-34,Madrid,Si,AXA Salud,4.3,No sé,App / gestión digital,Ya tengo Seg. Social,Agente / corredor,Ejecutivo Exigente,45
+25-34,Madrid,No,Sin seguro,,Adeslas,Tiempo de espera corto,No lo necesito,Comparador online,Familiar Tradicional,80
+18-24,Madrid,Si,Adeslas,3.1,Adeslas,App / gestión digital,Desconfianza en privado,Banco / caja,Joven Saludable,80
+18-24,C. Valenciana,Si,DKV,4.6,Mapfre,Atención personalizada,Mala experiencia previa,Agente / corredor,Joven Saludable,60
+18-24,Madrid,No,Sin seguro,,Asisa,Tiempo de espera corto,Precio demasiado alto,Banco / caja,Preventivo Digital,150
+25-34,Andalucía,Si,Mapfre Salud,3.4,DKV,Tiempo de espera corto,Desconfianza en privado,Empresa / colectivo,Preventivo Digital,45
+18-24,C. Valenciana,Si,Sanitas,2.1,Asisa,App / gestión digital,Trámites complicados,Empresa / colectivo,Joven Saludable,80
+45-54,Castilla y León,Si,Sanitas,3.7,AXA,Atención personalizada,Precio demasiado alto,Empresa / colectivo,Senior Dependiente,80
+45-54,Madrid,Si,Adeslas,3.6,Asisa,Atención personalizada,Desconfianza en privado,Empresa / colectivo,Senior Dependiente,35
+35-44,Murcia,Si,Adeslas,3.3,Asisa,Red médica amplia,Precio demasiado alto,Comparador online,Ejecutivo Exigente,25
+25-34,C. Valenciana,Si,Adeslas,3.7,DKV,Tiempo de espera corto,No lo necesito,Web del asegurador,Joven Saludable,45
+35-44,Madrid,Si,Asisa,3.2,Sanitas,Red médica amplia,Ya tengo Seg. Social,Empresa / colectivo,Familiar Tradicional,80
+55+,Galicia,No,Sin seguro,,Sanitas,Atención personalizada,Precio demasiado alto,Web del asegurador,Senior Dependiente,45
+55+,Murcia,Si,DKV,5.0,Sanitas,Tiempo de espera corto,Precio demasiado alto,Agente / corredor,Preventivo Digital,60
+18-24,Cataluña,Si,DKV,3.9,Adeslas,Precio asequible,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,25
+25-34,Canarias,Si,Sanitas,3.2,Mapfre,Red médica amplia,Precio demasiado alto,Agente / corredor,Senior Dependiente,45
+25-34,Andalucía,Si,AXA Salud,4.1,Adeslas,Precio asequible,No lo necesito,Agente / corredor,Preventivo Digital,60
+25-34,C. Valenciana,No,Sin seguro,,Adeslas,App / gestión digital,Precio demasiado alto,Agente / corredor,Familiar Tradicional,35
+35-44,Asturias,No,Sin seguro,,Adeslas,Red médica amplia,Precio demasiado alto,Agente / corredor,Ejecutivo Exigente,80
+35-44,Cataluña,No,Sin seguro,,Mapfre,Red médica amplia,No lo necesito,Empresa / colectivo,Preventivo Digital,35
+18-24,Castilla y León,Si,Asisa,3.1,Sanitas,Cobertura dental,No lo necesito,Empresa / colectivo,Preventivo Digital,100
+35-44,Cataluña,Si,Adeslas,3.4,DKV,App / gestión digital,Ya tengo Seg. Social,Web del asegurador,Familiar Tradicional,35
+35-44,Galicia,Si,Mapfre Salud,3.1,Mapfre,Red médica amplia,Mala experiencia previa,Agente / corredor,Familiar Tradicional,150
+18-24,C. Valenciana,Si,DKV,4.6,Adeslas,Precio asequible,Ya tengo Seg. Social,Web del asegurador,Joven Saludable,60
+55+,Madrid,Si,Sanitas,3.1,DKV,Sin copagos,Desconfianza en privado,Web del asegurador,Familiar Tradicional,35
+18-24,Cataluña,No,Sin seguro,,Sanitas,App / gestión digital,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,25
+55+,Cataluña,Si,Sanitas,4.2,Adeslas,Tiempo de espera corto,No lo necesito,Empresa / colectivo,Familiar Tradicional,25
+18-24,Madrid,Si,Asisa,3.6,DKV,Precio asequible,Mala experiencia previa,Web del asegurador,Familiar Tradicional,60
+55+,Madrid,Si,Adeslas,4.6,AXA,Precio asequible,Desconfianza en privado,Web del asegurador,Joven Saludable,80
+55+,Cataluña,Si,Asisa,3.4,Sanitas,Red médica amplia,Ya tengo Seg. Social,Banco / caja,Joven Saludable,45
+55+,Madrid,Si,Asisa,2.7,Asisa,App / gestión digital,No lo necesito,Comparador online,Joven Saludable,45
+45-54,Madrid,Si,Asisa,3.4,Sanitas,Red médica amplia,Precio demasiado alto,Web del asegurador,Senior Dependiente,60
+45-54,País Vasco,No,Sin seguro,,Asisa,Red médica amplia,No lo necesito,Web del asegurador,Ejecutivo Exigente,45
+45-54,País Vasco,Si,Adeslas,3.7,Asisa,App / gestión digital,Desconfianza en privado,Agente / corredor,Familiar Tradicional,60
+45-54,País Vasco,Si,Asisa,4.0,Asisa,Sin copagos,Mala experiencia previa,Banco / caja,Familiar Tradicional,45
+25-34,Cataluña,Si,Adeslas,2.9,Asisa,App / gestión digital,Ya tengo Seg. Social,Web del asegurador,Familiar Tradicional,60
+35-44,Aragón,No,Sin seguro,,Adeslas,Precio asequible,Precio demasiado alto,Agente / corredor,Familiar Tradicional,150
+35-44,C. Valenciana,Si,Mapfre Salud,2.3,DKV,Precio asequible,Ya tengo Seg. Social,Banco / caja,Familiar Tradicional,45
+55+,Madrid,No,Sin seguro,,DKV,Precio asequible,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,25
+35-44,Madrid,No,Sin seguro,,DKV,Precio asequible,Precio demasiado alto,Agente / corredor,Familiar Tradicional,35
+35-44,País Vasco,Si,Asisa,3.4,Adeslas,Tiempo de espera corto,Precio demasiado alto,Agente / corredor,Joven Saludable,45
+45-54,Madrid,No,Sin seguro,,Sanitas,Precio asequible,No lo necesito,Agente / corredor,Joven Saludable,45
+25-34,Andalucía,Si,Otra,4.5,Sanitas,Tiempo de espera corto,Precio demasiado alto,Empresa / colectivo,Preventivo Digital,100
+25-34,Otros,No,Sin seguro,,Adeslas,Cobertura dental,Precio demasiado alto,Agente / corredor,Senior Dependiente,60
+35-44,Madrid,Si,Adeslas,3.9,Adeslas,Reputación de marca,Precio demasiado alto,Banco / caja,Joven Saludable,45
+35-44,Madrid,No,Sin seguro,,Sanitas,Red médica amplia,Trámites complicados,Banco / caja,Familiar Tradicional,80
+25-34,Otros,Si,Adeslas,3.9,DKV,Precio asequible,No lo necesito,Empresa / colectivo,Joven Saludable,35
+35-44,C. Valenciana,Si,Adeslas,2.7,Adeslas,Red médica amplia,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,80
+35-44,Madrid,Si,Adeslas,3.5,Mapfre,Precio asequible,Precio demasiado alto,Web del asegurador,Ejecutivo Exigente,25
+25-34,Aragón,No,Sin seguro,,Asisa,Precio asequible,Ya tengo Seg. Social,Agente / corredor,Ejecutivo Exigente,60
+35-44,Aragón,Si,DKV,4.8,DKV,Red médica amplia,Precio demasiado alto,Empresa / colectivo,Ejecutivo Exigente,100
+45-54,Andalucía,Si,Adeslas,3.7,Sanitas,App / gestión digital,Ya tengo Seg. Social,Agente / corredor,Familiar Tradicional,80
+25-34,C. Valenciana,No,Sin seguro,,Asisa,Precio asequible,Ya tengo Seg. Social,Agente / corredor,Joven Saludable,80
+55+,Cataluña,No,Sin seguro,,Asisa,Cobertura dental,Trámites complicados,Web del asegurador,Senior Dependiente,45
+55+,Madrid,Si,Mapfre Salud,2.3,No sé,Red médica amplia,Precio demasiado alto,Agente / corredor,Senior Dependiente,80
+35-44,C. Valenciana,Si,Asisa,3.3,Asisa,Red médica amplia,No lo necesito,Web del asegurador,Joven Saludable,45
+25-34,Cataluña,Si,Sanitas,4.0,Asisa,Precio asequible,Precio demasiado alto,Empresa / colectivo,Joven Saludable,60
+35-44,C. Valenciana,No,Sin seguro,,Asisa,Red médica amplia,Mala experiencia previa,Comparador online,Familiar Tradicional,25
+55+,Castilla y León,Si,Sanitas,1.8,DKV,Red médica amplia,Mala experiencia previa,Empresa / colectivo,Joven Saludable,35
+45-54,Madrid,No,Sin seguro,,Adeslas,Reputación de marca,No lo necesito,Comparador online,Joven Saludable,45
+45-54,C. Valenciana,Si,Adeslas,3.4,Asisa,Red médica amplia,Ya tengo Seg. Social,Web del asegurador,Familiar Tradicional,25
+35-44,Madrid,Si,AXA Salud,3.1,Sanitas,Red médica amplia,Precio demasiado alto,Comparador online,Familiar Tradicional,60
+45-54,Murcia,Si,DKV,4.6,No sé,Tiempo de espera corto,Desconfianza en privado,Web del asegurador,Preventivo Digital,80
+25-34,Cataluña,Si,AXA Salud,3.3,Asisa,Precio asequible,No lo necesito,Agente / corredor,Joven Saludable,100
+45-54,C. Valenciana,No,Sin seguro,,Sanitas,Tiempo de espera corto,Precio demasiado alto,Banco / caja,Ejecutivo Exigente,35
+25-34,Andalucía,Si,Adeslas,3.7,No sé,Precio asequible,Ya tengo Seg. Social,Agente / corredor,Joven Saludable,100
+45-54,Cataluña,Si,Adeslas,3.5,Sanitas,Atención personalizada,Ya tengo Seg. Social,Agente / corredor,Ejecutivo Exigente,25
+55+,País Vasco,No,Sin seguro,,Adeslas,Red médica amplia,Desconfianza en privado,Agente / corredor,Ejecutivo Exigente,45
+25-34,País Vasco,No,Sin seguro,,Adeslas,Precio asequible,No lo necesito,Web del asegurador,Familiar Tradicional,80
+45-54,Andalucía,No,Sin seguro,,Adeslas,App / gestión digital,No lo necesito,Web del asegurador,Ejecutivo Exigente,25
+18-24,Galicia,Si,Adeslas,3.2,Adeslas,Atención personalizada,No lo necesito,Web del asegurador,Joven Saludable,25
+45-54,Asturias,Si,Sanitas,4.9,Sanitas,Precio asequible,Precio demasiado alto,Comparador online,Familiar Tradicional,25
+18-24,Cataluña,No,Sin seguro,,DKV,Tiempo de espera corto,Precio demasiado alto,Web del asegurador,Senior Dependiente,45
+55+,Andalucía,Si,Asisa,3.0,DKV,Red médica amplia,Precio demasiado alto,Web del asegurador,Familiar Tradicional,80
+25-34,Madrid,Si,DKV,4.1,Adeslas,Red médica amplia,Desconfianza en privado,Web del asegurador,Joven Saludable,35
+55+,Galicia,No,Sin seguro,,Asisa,Red médica amplia,Ya tengo Seg. Social,Comparador online,Joven Saludable,35
+45-54,Andalucía,Si,DKV,4.1,Adeslas,App / gestión digital,Ya tengo Seg. Social,Agente / corredor,Joven Saludable,60
+45-54,Cataluña,Si,Asisa,3.4,No sé,Precio asequible,Precio demasiado alto,Agente / corredor,Joven Saludable,35
+45-54,Madrid,No,Sin seguro,,Adeslas,App / gestión digital,Precio demasiado alto,Web del asegurador,Preventivo Digital,60
+45-54,Aragón,Si,Adeslas,4.6,Asisa,Red médica amplia,Ya tengo Seg. Social,Empresa / colectivo,Ejecutivo Exigente,100
+55+,Cataluña,Si,Asisa,3.6,Sanitas,Atención personalizada,Precio demasiado alto,Comparador online,Joven Saludable,60
+25-34,País Vasco,Si,Mapfre Salud,2.9,Asisa,Atención personalizada,Precio demasiado alto,Empresa / colectivo,Joven Saludable,80
+45-54,Madrid,Si,Asisa,4.2,Sanitas,Red médica amplia,Desconfianza en privado,Comparador online,Familiar Tradicional,45
+18-24,Navarra,Si,Adeslas,4.0,DKV,Red médica amplia,Precio demasiado alto,Web del asegurador,Familiar Tradicional,80
+45-54,Madrid,No,Sin seguro,,Adeslas,Red médica amplia,Ya tengo Seg. Social,Agente / corredor,Ejecutivo Exigente,35
+25-34,Madrid,No,Sin seguro,,AXA,Atención personalizada,Ya tengo Seg. Social,Agente / corredor,Familiar Tradicional,25
+35-44,Murcia,Si,Asisa,3.0,Asisa,Red médica amplia,Desconfianza en privado,Agente / corredor,Ejecutivo Exigente,60
+35-44,Canarias,Si,Asisa,4.1,DKV,Tiempo de espera corto,Precio demasiado alto,Web del asegurador,Ejecutivo Exigente,25
+35-44,Madrid,No,Sin seguro,,Mapfre,Precio asequible,Desconfianza en privado,Web del asegurador,Joven Saludable,80
+35-44,Andalucía,Si,Sanitas,2.9,No sé,App / gestión digital,Mala experiencia previa,Web del asegurador,Familiar Tradicional,60
+45-54,País Vasco,Si,Sanitas,3.0,Adeslas,Precio asequible,No lo necesito,Empresa / colectivo,Senior Dependiente,100
+45-54,Murcia,Si,Sanitas,2.7,Sanitas,Tiempo de espera corto,Ya tengo Seg. Social,Web del asegurador,Ejecutivo Exigente,45
+35-44,Cataluña,No,Sin seguro,,Adeslas,Reputación de marca,No lo necesito,Empresa / colectivo,Joven Saludable,45
+45-54,Andalucía,Si,Mapfre Salud,2.0,Adeslas,Red médica amplia,Ya tengo Seg. Social,Empresa / colectivo,Familiar Tradicional,60
+55+,Galicia,No,Sin seguro,,Asisa,Atención personalizada,Ya tengo Seg. Social,Web del asegurador,Ejecutivo Exigente,35
+18-24,País Vasco,Si,Adeslas,4.2,No sé,Red médica amplia,Ya tengo Seg. Social,Web del asegurador,Familiar Tradicional,45
+18-24,Galicia,Si,Sanitas,3.8,No sé,Precio asequible,Precio demasiado alto,Empresa / colectivo,Joven Saludable,60
+18-24,Andalucía,Si,Adeslas,2.6,Asisa,Cobertura dental,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,150
+45-54,Madrid,Si,Sanitas,3.7,Asisa,Tiempo de espera corto,Ya tengo Seg. Social,Web del asegurador,Preventivo Digital,60
+35-44,Aragón,Si,Adeslas,4.0,Mapfre,App / gestión digital,Precio demasiado alto,Web del asegurador,Familiar Tradicional,35
+45-54,Murcia,Si,Sanitas,3.3,No sé,Red médica amplia,Ya tengo Seg. Social,Empresa / colectivo,Joven Saludable,45
+45-54,Galicia,Si,Asisa,3.1,Adeslas,Precio asequible,Ya tengo Seg. Social,Empresa / colectivo,Familiar Tradicional,60
+25-34,Madrid,Si,Adeslas,4.7,Asisa,Precio asequible,Mala experiencia previa,Agente / corredor,Joven Saludable,35
+55+,Madrid,Si,Asisa,3.2,Mapfre,Tiempo de espera corto,Precio demasiado alto,Web del asegurador,Ejecutivo Exigente,45
+45-54,Galicia,Si,Adeslas,2.6,Sanitas,Precio asequible,No lo necesito,Comparador online,Ejecutivo Exigente,45
+25-34,Madrid,No,Sin seguro,,Sanitas,Precio asequible,Ya tengo Seg. Social,Agente / corredor,Familiar Tradicional,35
+35-44,Cantabria,Si,DKV,3.8,No sé,Precio asequible,Precio demasiado alto,Comparador online,Familiar Tradicional,45
+25-34,Cataluña,No,Sin seguro,,No sé,Red médica amplia,Precio demasiado alto,Agente / corredor,Familiar Tradicional,35
+25-34,País Vasco,No,Sin seguro,,AXA,Precio asequible,Precio demasiado alto,Web del asegurador,Preventivo Digital,60
+25-34,Aragón,Si,AXA Salud,2.6,Mapfre,Red médica amplia,Precio demasiado alto,Web del asegurador,Ejecutivo Exigente,35
+55+,Cataluña,No,Sin seguro,,Adeslas,Atención personalizada,Precio demasiado alto,Agente / corredor,Familiar Tradicional,60
+35-44,Cataluña,No,Sin seguro,,Sanitas,Tiempo de espera corto,Ya tengo Seg. Social,Comparador online,Preventivo Digital,35
+35-44,C. Valenciana,No,Sin seguro,,Asisa,Red médica amplia,Ya tengo Seg. Social,Web del asegurador,Familiar Tradicional,80
+45-54,C. Valenciana,Si,Adeslas,3.9,Asisa,App / gestión digital,Precio demasiado alto,Banco / caja,Ejecutivo Exigente,25
+35-44,Cataluña,Si,Adeslas,3.0,Asisa,Atención personalizada,Precio demasiado alto,Web del asegurador,Joven Saludable,45
+55+,C. Valenciana,Si,Asisa,2.8,Asisa,Red médica amplia,Precio demasiado alto,Comparador online,Preventivo Digital,45
+45-54,Canarias,Si,AXA Salud,4.9,Sanitas,Red médica amplia,Ya tengo Seg. Social,Comparador online,Joven Saludable,35
+35-44,Andalucía,No,Sin seguro,,DKV,Red médica amplia,Precio demasiado alto,Empresa / colectivo,Ejecutivo Exigente,45
+35-44,Madrid,No,Sin seguro,,Sanitas,Red médica amplia,Ya tengo Seg. Social,Agente / corredor,Preventivo Digital,80
+55+,Cataluña,Si,Sanitas,3.0,Sanitas,App / gestión digital,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,100
+45-54,Cataluña,No,Sin seguro,,Adeslas,Reputación de marca,Precio demasiado alto,Empresa / colectivo,Preventivo Digital,45
+55+,Madrid,Si,Asisa,2.5,Adeslas,Red médica amplia,Mala experiencia previa,Banco / caja,Senior Dependiente,35
+18-24,Madrid,No,Sin seguro,,Mapfre,App / gestión digital,Precio demasiado alto,Web del asegurador,Preventivo Digital,60
+55+,País Vasco,Si,Asisa,2.7,Sanitas,Red médica amplia,Precio demasiado alto,Agente / corredor,Familiar Tradicional,60
+45-54,Cataluña,No,Sin seguro,,Adeslas,Tiempo de espera corto,Precio demasiado alto,Agente / corredor,Familiar Tradicional,35
+25-34,Baleares,No,Sin seguro,,DKV,App / gestión digital,Mala experiencia previa,Empresa / colectivo,Joven Saludable,60
+35-44,Madrid,Si,Sanitas,4.3,Asisa,Precio asequible,No lo necesito,Banco / caja,Ejecutivo Exigente,45
+45-54,Madrid,Si,Adeslas,3.8,Adeslas,Red médica amplia,No lo necesito,Agente / corredor,Ejecutivo Exigente,60
+18-24,Galicia,No,Sin seguro,,Sanitas,Tiempo de espera corto,Mala experiencia previa,Empresa / colectivo,Preventivo Digital,45
+35-44,Aragón,Si,Sanitas,3.4,Adeslas,Reputación de marca,Precio demasiado alto,Comparador online,Joven Saludable,45
+55+,Cataluña,Si,DKV,3.7,DKV,Red médica amplia,Mala experiencia previa,Agente / corredor,Familiar Tradicional,35
+25-34,Madrid,No,Sin seguro,,Sanitas,Red médica amplia,Precio demasiado alto,Agente / corredor,Ejecutivo Exigente,60
+35-44,Madrid,Si,Sanitas,4.0,Adeslas,Red médica amplia,No lo necesito,Empresa / colectivo,Familiar Tradicional,35
+35-44,Andalucía,Si,DKV,4.2,Adeslas,Tiempo de espera corto,Ya tengo Seg. Social,Empresa / colectivo,Familiar Tradicional,60
+25-34,Andalucía,Si,Asisa,3.2,Asisa,Tiempo de espera corto,Ya tengo Seg. Social,Agente / corredor,Familiar Tradicional,80
+55+,Cataluña,Si,Sanitas,4.0,Adeslas,App / gestión digital,Mala experiencia previa,Comparador online,Senior Dependiente,60
+45-54,Madrid,No,Sin seguro,,Mapfre,App / gestión digital,Precio demasiado alto,Web del asegurador,Joven Saludable,25
+18-24,Andalucía,Si,Sanitas,3.0,Adeslas,Cobertura dental,Mala experiencia previa,Comparador online,Joven Saludable,35
+55+,Baleares,Si,Sanitas,3.2,Asisa,Atención personalizada,Precio demasiado alto,Comparador online,Ejecutivo Exigente,45
+55+,C. Valenciana,Si,Adeslas,3.9,Sanitas,Red médica amplia,No lo necesito,Comparador online,Joven Saludable,60
+25-34,Andalucía,No,Sin seguro,,Sanitas,Tiempo de espera corto,Mala experiencia previa,Web del asegurador,Senior Dependiente,100
+55+,Madrid,Si,Asisa,3.5,Adeslas,Precio asequible,Precio demasiado alto,Agente / corredor,Senior Dependiente,45
+18-24,Cataluña,No,Sin seguro,,Mapfre,Precio asequible,Trámites complicados,Web del asegurador,Joven Saludable,80
+55+,Cataluña,No,Sin seguro,,AXA,Cobertura dental,Ya tengo Seg. Social,Agente / corredor,Senior Dependiente,35
+45-54,Galicia,No,Sin seguro,,Adeslas,App / gestión digital,No lo necesito,Empresa / colectivo,Ejecutivo Exigente,45
+45-54,Murcia,No,Sin seguro,,Adeslas,Sin copagos,Precio demasiado alto,Agente / corredor,Ejecutivo Exigente,25
+18-24,Aragón,No,Sin seguro,,AXA,Precio asequible,Ya tengo Seg. Social,Web del asegurador,Senior Dependiente,60
+55+,Asturias,No,Sin seguro,,Asisa,Tiempo de espera corto,No lo necesito,Agente / corredor,Ejecutivo Exigente,35
+18-24,Asturias,Si,AXA Salud,2.4,Adeslas,Precio asequible,Ya tengo Seg. Social,Web del asegurador,Ejecutivo Exigente,35
+25-34,Baleares,No,Sin seguro,,Adeslas,Red médica amplia,Precio demasiado alto,Agente / corredor,Familiar Tradicional,60
+25-34,Madrid,Si,Mapfre Salud,3.2,DKV,Red médica amplia,Precio demasiado alto,Empresa / colectivo,Ejecutivo Exigente,45
+45-54,Madrid,Si,Asisa,4.6,DKV,Tiempo de espera corto,Trámites complicados,Comparador online,Joven Saludable,25
+25-34,Cataluña,No,Sin seguro,,Asisa,Red médica amplia,Precio demasiado alto,Agente / corredor,Joven Saludable,25
+55+,Andalucía,No,Sin seguro,,No sé,Cobertura dental,No lo necesito,Comparador online,Ejecutivo Exigente,45
+45-54,Madrid,No,Sin seguro,,Asisa,Red médica amplia,Mala experiencia previa,Comparador online,Familiar Tradicional,45
+18-24,Castilla y León,Si,Adeslas,4.0,Sanitas,Red médica amplia,Precio demasiado alto,Web del asegurador,Senior Dependiente,35
+18-24,C. Valenciana,Si,Asisa,3.0,Sanitas,App / gestión digital,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,60
+18-24,Andalucía,Si,Sanitas,3.2,Sanitas,Red médica amplia,No lo necesito,Web del asegurador,Preventivo Digital,35
+45-54,Madrid,Si,Sanitas,3.9,Adeslas,Cobertura dental,Precio demasiado alto,Agente / corredor,Familiar Tradicional,60
+45-54,Cataluña,Si,Asisa,4.0,Adeslas,App / gestión digital,Ya tengo Seg. Social,Web del asegurador,Joven Saludable,45
+25-34,Madrid,Si,Mapfre Salud,2.2,Sanitas,Red médica amplia,No lo necesito,Agente / corredor,Joven Saludable,35
+55+,Murcia,Si,Mapfre Salud,3.4,DKV,App / gestión digital,Ya tengo Seg. Social,Comparador online,Senior Dependiente,35
+18-24,C. Valenciana,No,Sin seguro,,Adeslas,Tiempo de espera corto,Precio demasiado alto,Comparador online,Familiar Tradicional,35
+45-54,País Vasco,Si,Adeslas,3.3,Sanitas,App / gestión digital,No lo necesito,Comparador online,Preventivo Digital,25
+55+,Cataluña,No,Sin seguro,,Asisa,Atención personalizada,Ya tengo Seg. Social,Empresa / colectivo,Joven Saludable,45
+45-54,Cataluña,Si,Adeslas,3.6,Asisa,App / gestión digital,Precio demasiado alto,Empresa / colectivo,Joven Saludable,100
+45-54,Cataluña,Si,Adeslas,2.7,DKV,Tiempo de espera corto,Ya tengo Seg. Social,Banco / caja,Ejecutivo Exigente,80
+55+,Galicia,Si,Sanitas,4.4,Mapfre,Precio asequible,Trámites complicados,Agente / corredor,Familiar Tradicional,45
+18-24,Galicia,Si,Sanitas,4.6,DKV,App / gestión digital,No lo necesito,Agente / corredor,Ejecutivo Exigente,60
+25-34,Madrid,No,Sin seguro,,Adeslas,Sin copagos,Ya tengo Seg. Social,Empresa / colectivo,Familiar Tradicional,60
+25-34,Baleares,Si,Sanitas,4.1,Sanitas,Tiempo de espera corto,Precio demasiado alto,Web del asegurador,Familiar Tradicional,80
+35-44,Madrid,Si,Asisa,4.3,Asisa,Tiempo de espera corto,Precio demasiado alto,Web del asegurador,Joven Saludable,35
+45-54,Aragón,No,Sin seguro,,Adeslas,Precio asequible,Precio demasiado alto,Agente / corredor,Ejecutivo Exigente,45
+45-54,Madrid,No,Sin seguro,,Adeslas,App / gestión digital,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,45
+55+,Cataluña,Si,DKV,3.9,Adeslas,Reputación de marca,Mala experiencia previa,Agente / corredor,Familiar Tradicional,25
+25-34,Castilla y León,Si,Asisa,3.5,Sanitas,Red médica amplia,Precio demasiado alto,Agente / corredor,Familiar Tradicional,45
+45-54,Madrid,Si,Asisa,3.7,Sanitas,Red médica amplia,Desconfianza en privado,Agente / corredor,Familiar Tradicional,80
+25-34,Cataluña,Si,Sanitas,3.9,Adeslas,Tiempo de espera corto,Precio demasiado alto,Web del asegurador,Joven Saludable,100
+25-34,Andalucía,Si,Adeslas,3.3,Mapfre,Precio asequible,Precio demasiado alto,Comparador online,Familiar Tradicional,35
+45-54,Madrid,Si,AXA Salud,3.5,No sé,Tiempo de espera corto,Ya tengo Seg. Social,Web del asegurador,Senior Dependiente,45
+55+,País Vasco,No,Sin seguro,,Adeslas,Red médica amplia,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,45
+45-54,Murcia,Si,Asisa,4.1,No sé,Precio asequible,Desconfianza en privado,Comparador online,Familiar Tradicional,45
+18-24,Murcia,No,Sin seguro,,Adeslas,Tiempo de espera corto,Mala experiencia previa,Web del asegurador,Senior Dependiente,45
+45-54,Cataluña,Si,Adeslas,3.5,No sé,Tiempo de espera corto,Trámites complicados,Comparador online,Familiar Tradicional,25
+18-24,Andalucía,No,Sin seguro,,No sé,Tiempo de espera corto,Precio demasiado alto,Empresa / colectivo,Ejecutivo Exigente,80
+55+,Madrid,Si,Adeslas,4.2,Adeslas,App / gestión digital,Desconfianza en privado,Empresa / colectivo,Preventivo Digital,150
+45-54,Madrid,No,Sin seguro,,DKV,Tiempo de espera corto,Precio demasiado alto,Agente / corredor,Preventivo Digital,60
+25-34,Madrid,No,Sin seguro,,No sé,App / gestión digital,Trámites complicados,Agente / corredor,Joven Saludable,60
+18-24,Baleares,Si,Adeslas,3.5,AXA,Tiempo de espera corto,Ya tengo Seg. Social,Banco / caja,Familiar Tradicional,45
+25-34,Aragón,Si,Otra,4.1,No sé,Tiempo de espera corto,Precio demasiado alto,Comparador online,Joven Saludable,45
+55+,Galicia,Si,Adeslas,3.5,Asisa,Tiempo de espera corto,Precio demasiado alto,Banco / caja,Preventivo Digital,35
+35-44,Andalucía,Si,Adeslas,3.9,Adeslas,Red médica amplia,Precio demasiado alto,Comparador online,Preventivo Digital,60
+45-54,Andalucía,No,Sin seguro,,Mapfre,Red médica amplia,Precio demasiado alto,Agente / corredor,Familiar Tradicional,25
+45-54,Andalucía,Si,Sanitas,3.3,Asisa,Tiempo de espera corto,Trámites complicados,Comparador online,Ejecutivo Exigente,80
+35-44,Andalucía,No,Sin seguro,,Asisa,Atención personalizada,Desconfianza en privado,Web del asegurador,Familiar Tradicional,45
+25-34,Andalucía,Si,Adeslas,3.7,Sanitas,Tiempo de espera corto,Mala experiencia previa,Comparador online,Familiar Tradicional,45
+55+,Madrid,Si,AXA Salud,3.2,Asisa,Red médica amplia,Precio demasiado alto,Agente / corredor,Joven Saludable,45
+25-34,Madrid,Si,DKV,3.9,Adeslas,Tiempo de espera corto,Ya tengo Seg. Social,Web del asegurador,Familiar Tradicional,100
+35-44,Baleares,No,Sin seguro,,DKV,Red médica amplia,Precio demasiado alto,Comparador online,Familiar Tradicional,35
+45-54,Andalucía,No,Sin seguro,,Adeslas,App / gestión digital,Ya tengo Seg. Social,Comparador online,Familiar Tradicional,35
+45-54,Baleares,Si,AXA Salud,3.4,DKV,Atención personalizada,Precio demasiado alto,Empresa / colectivo,Ejecutivo Exigente,35
+55+,Madrid,Si,Adeslas,3.4,Mapfre,Tiempo de espera corto,Precio demasiado alto,Web del asegurador,Familiar Tradicional,60
+25-34,Andalucía,No,Sin seguro,,Sanitas,Tiempo de espera corto,Ya tengo Seg. Social,Web del asegurador,Ejecutivo Exigente,150
+35-44,Madrid,Si,Adeslas,4.1,Asisa,Precio asequible,Precio demasiado alto,Banco / caja,Familiar Tradicional,35
+35-44,Cataluña,No,Sin seguro,,Sanitas,Precio asequible,Ya tengo Seg. Social,Web del asegurador,Preventivo Digital,100
+35-44,Madrid,Si,Otra,3.1,No sé,Atención personalizada,No lo necesito,Web del asegurador,Familiar Tradicional,35
+18-24,Madrid,Si,Asisa,3.4,DKV,App / gestión digital,Precio demasiado alto,Empresa / colectivo,Ejecutivo Exigente,60
+25-34,Canarias,Si,Mapfre Salud,3.9,Sanitas,Tiempo de espera corto,Mala experiencia previa,Web del asegurador,Familiar Tradicional,25
+25-34,Cataluña,Si,Asisa,3.7,Adeslas,Precio asequible,Ya tengo Seg. Social,Empresa / colectivo,Familiar Tradicional,45
+25-34,C. Valenciana,Si,Sanitas,2.7,Adeslas,Red médica amplia,Desconfianza en privado,Web del asegurador,Familiar Tradicional,60
+35-44,Andalucía,Si,Mapfre Salud,2.3,Sanitas,Red médica amplia,No lo necesito,Comparador online,Familiar Tradicional,45
+45-54,Cataluña,No,Sin seguro,,No sé,Red médica amplia,No lo necesito,Comparador online,Familiar Tradicional,35
+45-54,Andalucía,Si,Sanitas,3.9,DKV,Precio asequible,No lo necesito,Banco / caja,Ejecutivo Exigente,80
+35-44,Madrid,Si,Adeslas,3.2,Adeslas,Sin copagos,Trámites complicados,Empresa / colectivo,Joven Saludable,150
+35-44,Asturias,Si,Sanitas,2.8,Mapfre,Tiempo de espera corto,No lo necesito,Web del asegurador,Familiar Tradicional,45
+25-34,Castilla y León,Si,DKV,3.8,Sanitas,Red médica amplia,Precio demasiado alto,Empresa / colectivo,Ejecutivo Exigente,60
+35-44,Galicia,Si,Sanitas,4.0,Mapfre,Red médica amplia,Precio demasiado alto,Comparador online,Joven Saludable,80
+25-34,Andalucía,Si,Asisa,3.1,Adeslas,Precio asequible,No lo necesito,Empresa / colectivo,Familiar Tradicional,35
+18-24,Madrid,No,Sin seguro,,Asisa,Atención personalizada,Precio demasiado alto,Empresa / colectivo,Ejecutivo Exigente,80
+35-44,Canarias,Si,Sanitas,3.7,No sé,Precio asequible,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,45
+35-44,Cataluña,No,Sin seguro,,Adeslas,App / gestión digital,Precio demasiado alto,Empresa / colectivo,Familiar Tradicional,60
+25-34,Madrid,Si,Asisa,3.1,DKV,Atención personalizada,Ya tengo Seg. Social,Empresa / colectivo,Ejecutivo Exigente,35
+35-44,Cataluña,No,Sin seguro,,No sé,Red médica amplia,Precio demasiado alto,Agente / corredor,Preventivo Digital,45
+35-44,Galicia,Si,Adeslas,3.1,Adeslas,Tiempo de espera corto,No lo necesito,Web del asegurador,Preventivo Digital,45
+45-54,C. Valenciana,Si,Asisa,3.4,Adeslas,Sin copagos,Desconfianza en privado,Empresa / colectivo,Preventivo Digital,45
+45-54,Galicia,No,Sin seguro,,DKV,Precio asequible,Desconfianza en privado,Agente / corredor,Ejecutivo Exigente,80
+45-54,Galicia,No,Sin seguro,,Sanitas,Red médica amplia,Precio demasiado alto,Comparador online,Familiar Tradicional,150
+25-34,Madrid,No,Sin seguro,,Adeslas,Cobertura dental,Ya tengo Seg. Social,Empresa / colectivo,Familiar Tradicional,35
+45-54,Canarias,Si,Adeslas,2.5,Sanitas,Cobertura dental,Ya tengo Seg. Social,Agente / corredor,Familiar Tradicional,35
+35-44,Andalucía,No,Sin seguro,,DKV,Tiempo de espera corto,Ya tengo Seg. Social,Comparador online,Familiar Tradicional,45
+35-44,C. Valenciana,No,Sin seguro,,Sanitas,Tiempo de espera corto,No lo necesito,Empresa / colectivo,Familiar Tradicional,45
+45-54,Madrid,No,Sin seguro,,Sanitas,Red médica amplia,Precio demasiado alto,Comparador online,Ejecutivo Exigente,45
+35-44,Otros,Si,AXA Salud,3.1,Mapfre,Atención personalizada,Mala experiencia previa,Web del asegurador,Familiar Tradicional,80
+35-44,Cataluña,No,Sin seguro,,Asisa,Precio asequible,Precio demasiado alto,Comparador online,Familiar Tradicional,60

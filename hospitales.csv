@@ -1,0 +1,31 @@
+﻿marca,nombre,ciudad,provincia,lat,lon,num_especialidades,rating_google,num_reviews,precio_consulta_esp,precio_cirugia_mayor_est,tiene_robot_quirurgico,acreditacion_jci
+Sanitas,Hospital Universitario Sanitas La Moraleja,Madrid,Madrid,40.4916,-3.6771,32,4.3,1240,55,320,True,True
+Sanitas,Hospital Sanitas La Zarzuela,Madrid,Madrid,40.445,-3.762,28,4.1,980,50,290,True,True
+Sanitas,Hospital Sanitas CIMA,Barcelona,Barcelona,41.3934,2.132,30,4.4,1560,55,310,True,True
+Sanitas,Hospital Sanitas Milenium Madrid,Madrid,Madrid,40.423,-3.689,22,4.0,720,48,270,False,False
+Sanitas,Clínica Sanitas Bilbao,Bilbao,Vizcaya,43.263,-2.934,18,4.2,540,45,240,False,False
+Sanitas,Clínica Sanitas Valencia,Valencia,Valencia,39.4699,-0.3763,20,4.1,680,46,255,False,False
+Sanitas,Clínica Sanitas Málaga,Málaga,Málaga,36.7213,-4.4214,16,3.9,420,44,235,False,False
+Quirónsalud,Hospital Quirónsalud Madrid,Madrid,Madrid,40.45,-3.72,45,4.5,3200,60,380,True,True
+Quirónsalud,Hospital Quirónsalud Barcelona,Barcelona,Barcelona,41.39,2.16,42,4.4,2800,58,365,True,True
+Quirónsalud,Hospital Quirónsalud Sevilla,Sevilla,Sevilla,37.3891,-5.9845,35,4.3,1850,55,340,True,False
+Quirónsalud,Hospital Quirónsalud Valencia,Valencia,Valencia,39.485,-0.36,32,4.2,1420,54,325,True,False
+Quirónsalud,Hospital Quirónsalud Bilbao,Bilbao,Vizcaya,43.258,-2.928,28,4.3,1100,52,305,False,True
+Quirónsalud,Hospital Quirónsalud Málaga,Málaga,Málaga,36.71,-4.435,25,4.1,880,50,290,False,False
+Quirónsalud,Hospital Quirónsalud Zaragoza,Zaragoza,Zaragoza,41.6488,-0.8891,22,4.0,720,48,275,False,False
+Quirónsalud,Hospital Quirónsalud A Coruña,A Coruña,A Coruña,43.3623,-8.4115,20,4.1,650,48,270,False,False
+Quirónsalud,Hospital Quirónsalud Palma,Palma,Baleares,39.5696,2.6502,24,4.2,780,50,285,False,False
+HM Hospitales,HM Montepríncipe,Madrid,Madrid,40.368,-3.789,40,4.6,2100,62,390,True,True
+HM Hospitales,HM Puerta del Sur,Madrid,Madrid,40.342,-3.876,35,4.4,1680,58,360,True,False
+HM Hospitales,HM Universitario Madrid,Madrid,Madrid,40.47,-3.598,38,4.3,1450,56,345,True,True
+HM Hospitales,HM Nuevo Belén,Madrid,Madrid,40.482,-3.632,28,4.2,980,52,310,False,False
+HM Hospitales,HM Delfos,Barcelona,Barcelona,41.412,2.189,30,4.3,1120,54,325,False,True
+Vithas,Hospital Vithas Valencia Consuelo,Valencia,Valencia,39.472,-0.368,24,4.1,860,50,295,False,False
+Vithas,Hospital Vithas Málaga,Málaga,Málaga,36.718,-4.428,22,4.0,720,48,280,False,False
+Vithas,Hospital Vithas Almería,Almería,Almería,36.834,-2.4637,18,3.9,480,45,260,False,False
+Vithas,Hospital Vithas Las Palmas,Las Palmas,Las Palmas,28.1248,-15.43,20,4.2,640,47,275,False,False
+Vithas,Hospital Vithas Granada,Granada,Granada,37.1773,-3.5986,20,4.0,560,46,265,False,False
+Vithas,Hospital Vithas Lleida,Lleida,Lleida,41.6176,0.62,16,3.8,380,44,250,False,False
+IMQ,IMQ Zorrotzaurre,Bilbao,Vizcaya,43.268,-2.94,22,4.4,820,52,305,False,False
+IMQ,IMQ Amara,San Sebastián,Guipúzcoa,43.3128,-1.9752,20,4.3,680,50,290,False,False
+IMQ,IMQ Gasteiz,Vitoria,Álava,42.85,-2.6727,18,4.2,520,48,275,False,False

@@ -1,0 +1,19 @@
+﻿marca,tipo_poliza,prima_adulto,prima_familia,prima_senior
+Sanitas,Básica,42,108,78
+Sanitas,Completa,67,172,118
+Sanitas,Premium,98,245,168
+Adeslas,Básica,38,102,72
+Adeslas,Completa,59,155,105
+Adeslas,Premium,84,218,148
+Asisa,Básica,35,95,68
+Asisa,Completa,55,145,98
+Asisa,Premium,78,205,138
+DKV,Básica,33,89,62
+DKV,Completa,52,138,92
+DKV,Premium,74,192,128
+Mapfre Salud,Básica,36,98,70
+Mapfre Salud,Completa,57,148,102
+Mapfre Salud,Premium,82,212,142
+AXA Salud,Básica,40,105,75
+AXA Salud,Completa,63,162,112
+AXA Salud,Premium,91,232,158
