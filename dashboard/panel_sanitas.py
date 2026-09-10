@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Sanitas — Panel de Conocimiento del Consumidor
 python -m streamlit run panel_sanitas.py
@@ -1444,7 +1444,7 @@ elif st.session_state["page"] == "mapa":
             "Hospital propio":16, "Clínica propia":10, "Centro cuadro médico":7
         }).fillna(7)
 
-        fig_map = px.scatter_mapbox(
+        fig_map = px.scatter_map(
             df_m, lat="lat", lon="lon",
             color="marca", color_discrete_map=COMP_C,
             hover_name="nombre",
@@ -1455,7 +1455,7 @@ elif st.session_state["page"] == "mapa":
             height=520,
         )
         fig_map.update_layout(
-            mapbox_style="open-street-map",
+            map_style="open-street-map",
             paper_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Inter", size=11, color=FONT),
             legend=dict(orientation="h", y=-0.07, font=dict(size=10)),
@@ -1481,7 +1481,7 @@ elif st.session_state["page"] == "mapa":
     # TAB 2 — Nivel de renta
     # ────────────────────────────────────────────────────────
     with mt2:
-        fig_renta = px.scatter_mapbox(
+        fig_renta = px.scatter_map(
             df_ccaa, lat="lat", lon="lon",
             color="renta_media",
             color_continuous_scale=[[0,"#EEF4FF"],[0.5,"#0057A8"],[1,"#001A5C"]],
@@ -1493,7 +1493,7 @@ elif st.session_state["page"] == "mapa":
             labels={"renta_media":"Renta media (€/año)","indice_renta":"Índice renta (España=100)"},
         )
         fig_renta.update_layout(
-            mapbox_style="open-street-map",
+            map_style="open-street-map",
             paper_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Inter", size=11, color=FONT),
             coloraxis_colorbar=dict(title="€/año", tickfont=dict(size=9)),
@@ -1555,7 +1555,7 @@ elif st.session_state["page"] == "mapa":
         with c1t:
             st.markdown('<div class="chart-label">Turistas internacionales (millones/año) por CCAA</div>',
                         unsafe_allow_html=True)
-            fig_tur = px.scatter_mapbox(
+            fig_tur = px.scatter_map(
                 df_ccaa, lat="lat", lon="lon",
                 color="turistas_M",
                 color_continuous_scale=[[0,"#EEF4FF"],[0.5,"#0099D6"],[1,"#003087"]],
@@ -1567,7 +1567,7 @@ elif st.session_state["page"] == "mapa":
                 labels={"turistas_M":"Turistas (M)","temp_media_C":"Temp media (°C)"},
             )
             fig_tur.update_layout(
-                mapbox_style="open-street-map",
+                map_style="open-street-map",
                 paper_bgcolor="rgba(0,0,0,0)",
                 font=dict(family="Inter", size=11, color=FONT),
                 coloraxis_colorbar=dict(title="Turistas M", tickfont=dict(size=9)),
@@ -1635,7 +1635,7 @@ elif st.session_state["page"] == "mapa":
         col_enf = {"Cardiovascular":"enf_cardio_100k","Respiratoria":"enf_resp_100k","Oncológica":"enf_oncol_100k"}[enf_tipo]
         label_enf = f"Casos registrados por 100.000 habitantes — {enf_tipo}"
 
-        fig_enf_map = px.scatter_mapbox(
+        fig_enf_map = px.scatter_map(
             df_ccaa, lat="lat", lon="lon",
             color=col_enf,
             color_continuous_scale=[[0,"#FEF3C7"],[0.5,"#F97316"],[1,"#7F1D1D"]],
@@ -1647,7 +1647,7 @@ elif st.session_state["page"] == "mapa":
             labels={col_enf:f"Casos/{enf_tipo}"},
         )
         fig_enf_map.update_layout(
-            mapbox_style="open-street-map",
+            map_style="open-street-map",
             paper_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Inter", size=11, color=FONT),
             coloraxis_colorbar=dict(title="Casos/100K", tickfont=dict(size=9)),
@@ -1713,7 +1713,7 @@ elif st.session_state["page"] == "mapa":
     # TAB 5 — Penetración seguro privado
     # ────────────────────────────────────────────────────────
     with mt5:
-        fig_seg_map = px.scatter_mapbox(
+        fig_seg_map = px.scatter_map(
             df_ccaa, lat="lat", lon="lon",
             color="pct_seg_privado",
             color_continuous_scale=[[0,"#EEF4FF"],[0.5,"#0057A8"],[1,"#001A5C"]],
@@ -1725,7 +1725,7 @@ elif st.session_state["page"] == "mapa":
             labels={"pct_seg_privado":"% con seguro privado"},
         )
         fig_seg_map.update_layout(
-            mapbox_style="open-street-map",
+            map_style="open-street-map",
             paper_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Inter", size=11, color=FONT),
             coloraxis_colorbar=dict(title="% pob.", tickfont=dict(size=9)),
@@ -1899,7 +1899,7 @@ elif st.session_state["page"] == "mapa":
         )
         st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
 
-        fig_mun_map = px.scatter_mapbox(
+        fig_mun_map = px.scatter_map(
             mun_sin_acceso, lat="lat", lon="lon",
             color="dist_min_km",
             color_continuous_scale=[[0,"#FEF3C7"],[0.5,"#F97316"],[1,"#7F1D1D"]],
@@ -1912,7 +1912,7 @@ elif st.session_state["page"] == "mapa":
             labels={"dist_min_km":"Dist. mín. (km)","poblacion":"Población"},
         )
         fig_mun_map.update_layout(
-            mapbox_style="open-street-map",
+            map_style="open-street-map",
             paper_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Inter", size=11, color=FONT),
             coloraxis_colorbar=dict(title="km al centro", tickfont=dict(size=9)),
@@ -2592,3 +2592,4 @@ elif st.session_state["page"] == "acciones":
                     f'<strong style="color:{FONT}">Inversión/esfuerzo:</strong> {acc["inversion"]}<br>'
                     f'<strong style="color:{color}">Métrica de éxito:</strong> {acc["metrica"]}'
                     f'</div>', unsafe_allow_html=True)
+
