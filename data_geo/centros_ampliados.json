@@ -1,0 +1,912 @@
+[
+  {
+    "marca": "Sanitas",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Univ. Sanitas La Moraleja",
+    "ciudad": "Madrid",
+    "lat": 40.4916,
+    "lon": -3.6771,
+    "rating": 4.3,
+    "especialidades": 32
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Sanitas La Zarzuela",
+    "ciudad": "Madrid",
+    "lat": 40.445,
+    "lon": -3.762,
+    "rating": 4.1,
+    "especialidades": 28
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Sanitas CIMA",
+    "ciudad": "Barcelona",
+    "lat": 41.3934,
+    "lon": 2.132,
+    "rating": 4.4,
+    "especialidades": 30
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Hospital propio",
+    "nombre": "Clínica Sanitas Bilbao",
+    "ciudad": "Bilbao",
+    "lat": 43.263,
+    "lon": -2.934,
+    "rating": 4.2,
+    "especialidades": 18
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Hospital propio",
+    "nombre": "Clínica Sanitas Valencia",
+    "ciudad": "Valencia",
+    "lat": 39.4699,
+    "lon": -0.3763,
+    "rating": 4.1,
+    "especialidades": 20
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Hospital propio",
+    "nombre": "Clínica Sanitas Málaga",
+    "ciudad": "Málaga",
+    "lat": 36.7213,
+    "lon": -4.4214,
+    "rating": 3.9,
+    "especialidades": 16
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Hospital propio",
+    "nombre": "Centro Médico Sanitas Sevilla",
+    "ciudad": "Sevilla",
+    "lat": 37.3891,
+    "lon": -5.9845,
+    "rating": 4.0,
+    "especialidades": 14
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Princesa",
+    "ciudad": "Madrid",
+    "lat": 40.432,
+    "lon": -3.705,
+    "rating": 4.0,
+    "especialidades": 12
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Alcobendas",
+    "ciudad": "Alcobendas",
+    "lat": 40.534,
+    "lon": -3.638,
+    "rating": 4.1,
+    "especialidades": 10
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Pozuelo",
+    "ciudad": "Pozuelo de Alarcón",
+    "lat": 40.435,
+    "lon": -3.814,
+    "rating": 4.2,
+    "especialidades": 11
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Boadilla",
+    "ciudad": "Boadilla del Monte",
+    "lat": 40.403,
+    "lon": -3.878,
+    "rating": 4.0,
+    "especialidades": 9
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Diagonal",
+    "ciudad": "Barcelona",
+    "lat": 41.395,
+    "lon": 2.153,
+    "rating": 4.2,
+    "especialidades": 12
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Sarriá",
+    "ciudad": "Barcelona",
+    "lat": 41.401,
+    "lon": 2.121,
+    "rating": 4.1,
+    "especialidades": 10
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Zaragoza",
+    "ciudad": "Zaragoza",
+    "lat": 41.642,
+    "lon": -0.896,
+    "rating": 3.9,
+    "especialidades": 8
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Valladolid",
+    "ciudad": "Valladolid",
+    "lat": 41.652,
+    "lon": -4.724,
+    "rating": 4.0,
+    "especialidades": 8
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Alicante",
+    "ciudad": "Alicante",
+    "lat": 38.3452,
+    "lon": -0.481,
+    "rating": 4.1,
+    "especialidades": 9
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Pamplona",
+    "ciudad": "Pamplona",
+    "lat": 42.8169,
+    "lon": -1.6432,
+    "rating": 4.0,
+    "especialidades": 8
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Murcia",
+    "ciudad": "Murcia",
+    "lat": 37.9922,
+    "lon": -1.1307,
+    "rating": 3.9,
+    "especialidades": 7
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Las Palmas",
+    "ciudad": "Las Palmas",
+    "lat": 28.1248,
+    "lon": -15.43,
+    "rating": 4.1,
+    "especialidades": 9
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Milenium Palma",
+    "ciudad": "Palma",
+    "lat": 39.5696,
+    "lon": 2.6502,
+    "rating": 4.0,
+    "especialidades": 8
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro Médico Concertado Norte Madrid",
+    "ciudad": "Madrid",
+    "lat": 40.472,
+    "lon": -3.703,
+    "rating": 3.8,
+    "especialidades": 6
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Clínica Concertada Chamberí",
+    "ciudad": "Madrid",
+    "lat": 40.438,
+    "lon": -3.701,
+    "rating": 3.9,
+    "especialidades": 5
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro Médico Getafe",
+    "ciudad": "Getafe",
+    "lat": 40.305,
+    "lon": -3.732,
+    "rating": 3.7,
+    "especialidades": 5
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Policlínica Concertada Leganés",
+    "ciudad": "Leganés",
+    "lat": 40.329,
+    "lon": -3.763,
+    "rating": 3.8,
+    "especialidades": 4
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro Cuadro Médico L'Hospitalet",
+    "ciudad": "L'Hospitalet",
+    "lat": 41.3594,
+    "lon": 2.1001,
+    "rating": 3.9,
+    "especialidades": 6
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Clínica Concertada Sabadell",
+    "ciudad": "Sabadell",
+    "lat": 41.5473,
+    "lon": 2.1074,
+    "rating": 3.8,
+    "especialidades": 5
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro Médico Terrassa",
+    "ciudad": "Terrassa",
+    "lat": 41.5631,
+    "lon": 2.0086,
+    "rating": 3.7,
+    "especialidades": 4
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Clínica Cuadro Médico Córdoba",
+    "ciudad": "Córdoba",
+    "lat": 37.8847,
+    "lon": -4.7792,
+    "rating": 3.8,
+    "especialidades": 5
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro Médico Granada",
+    "ciudad": "Granada",
+    "lat": 37.1773,
+    "lon": -3.5986,
+    "rating": 3.9,
+    "especialidades": 6
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Policlínica Concertada Cádiz",
+    "ciudad": "Cádiz",
+    "lat": 36.5298,
+    "lon": -6.2925,
+    "rating": 3.7,
+    "especialidades": 4
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro Médico San Sebastián",
+    "ciudad": "San Sebastián",
+    "lat": 43.3128,
+    "lon": -1.9752,
+    "rating": 4.0,
+    "especialidades": 6
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Clínica Concertada Santander",
+    "ciudad": "Santander",
+    "lat": 43.4623,
+    "lon": -3.8099,
+    "rating": 3.8,
+    "especialidades": 5
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro Médico Oviedo",
+    "ciudad": "Oviedo",
+    "lat": 43.3603,
+    "lon": -5.8448,
+    "rating": 3.9,
+    "especialidades": 5
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Clínica Concertada Burgos",
+    "ciudad": "Burgos",
+    "lat": 42.344,
+    "lon": -3.6969,
+    "rating": 3.8,
+    "especialidades": 4
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro Médico Salamanca",
+    "ciudad": "Salamanca",
+    "lat": 40.9688,
+    "lon": -5.6636,
+    "rating": 3.9,
+    "especialidades": 5
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Clínica Concertada Toledo",
+    "ciudad": "Toledo",
+    "lat": 39.8628,
+    "lon": -4.0273,
+    "rating": 3.7,
+    "especialidades": 4
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro Médico Badajoz",
+    "ciudad": "Badajoz",
+    "lat": 38.8794,
+    "lon": -6.9706,
+    "rating": 3.7,
+    "especialidades": 4
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Clínica Cuadro Médico Tenerife",
+    "ciudad": "Tenerife",
+    "lat": 28.4636,
+    "lon": -16.2518,
+    "rating": 3.9,
+    "especialidades": 5
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro Médico Ibiza",
+    "ciudad": "Ibiza",
+    "lat": 38.9067,
+    "lon": 1.4206,
+    "rating": 4.0,
+    "especialidades": 4
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Clínica Concertada Vigo",
+    "ciudad": "Vigo",
+    "lat": 42.2328,
+    "lon": -8.7226,
+    "rating": 3.8,
+    "especialidades": 5
+  },
+  {
+    "marca": "Sanitas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro Médico A Coruña",
+    "ciudad": "A Coruña",
+    "lat": 43.3623,
+    "lon": -8.4115,
+    "rating": 3.9,
+    "especialidades": 5
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Quirónsalud Madrid",
+    "ciudad": "Madrid",
+    "lat": 40.45,
+    "lon": -3.72,
+    "rating": 4.5,
+    "especialidades": 45
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Quirónsalud Barcelona",
+    "ciudad": "Barcelona",
+    "lat": 41.39,
+    "lon": 2.16,
+    "rating": 4.4,
+    "especialidades": 42
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Quirónsalud Sevilla",
+    "ciudad": "Sevilla",
+    "lat": 37.405,
+    "lon": -5.99,
+    "rating": 4.3,
+    "especialidades": 35
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Quirónsalud Valencia",
+    "ciudad": "Valencia",
+    "lat": 39.485,
+    "lon": -0.36,
+    "rating": 4.2,
+    "especialidades": 32
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Quirónsalud Bilbao",
+    "ciudad": "Bilbao",
+    "lat": 43.258,
+    "lon": -2.928,
+    "rating": 4.3,
+    "especialidades": 28
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Quirónsalud Zaragoza",
+    "ciudad": "Zaragoza",
+    "lat": 41.6488,
+    "lon": -0.8891,
+    "rating": 4.0,
+    "especialidades": 22
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Quirónsalud A Coruña",
+    "ciudad": "A Coruña",
+    "lat": 43.3623,
+    "lon": -8.4115,
+    "rating": 4.1,
+    "especialidades": 20
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Quirónsalud Málaga",
+    "ciudad": "Málaga",
+    "lat": 36.71,
+    "lon": -4.435,
+    "rating": 4.1,
+    "especialidades": 25
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Quirónsalud Palma",
+    "ciudad": "Palma",
+    "lat": 39.5696,
+    "lon": 2.6502,
+    "rating": 4.2,
+    "especialidades": 24
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Quirónsalud Las Palmas",
+    "ciudad": "Las Palmas",
+    "lat": 28.14,
+    "lon": -15.415,
+    "rating": 4.1,
+    "especialidades": 22
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Quirónsalud Marbella",
+    "ciudad": "Marbella",
+    "lat": 36.5101,
+    "lon": -4.8825,
+    "rating": 4.3,
+    "especialidades": 16
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Quirónsalud Murcia",
+    "ciudad": "Murcia",
+    "lat": 37.99,
+    "lon": -1.132,
+    "rating": 4.0,
+    "especialidades": 14
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Quirónsalud Toledo",
+    "ciudad": "Toledo",
+    "lat": 39.86,
+    "lon": -4.029,
+    "rating": 3.9,
+    "especialidades": 12
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Quirónsalud Vitoria",
+    "ciudad": "Vitoria",
+    "lat": 42.85,
+    "lon": -2.6727,
+    "rating": 4.1,
+    "especialidades": 14
+  },
+  {
+    "marca": "Quirónsalud",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Quirónsalud Pamplona",
+    "ciudad": "Pamplona",
+    "lat": 42.82,
+    "lon": -1.65,
+    "rating": 4.0,
+    "especialidades": 12
+  },
+  {
+    "marca": "HM Hospitales",
+    "tipo": "Hospital propio",
+    "nombre": "HM Montepríncipe",
+    "ciudad": "Madrid",
+    "lat": 40.368,
+    "lon": -3.789,
+    "rating": 4.6,
+    "especialidades": 40
+  },
+  {
+    "marca": "HM Hospitales",
+    "tipo": "Hospital propio",
+    "nombre": "HM Puerta del Sur",
+    "ciudad": "Móstoles",
+    "lat": 40.342,
+    "lon": -3.876,
+    "rating": 4.4,
+    "especialidades": 35
+  },
+  {
+    "marca": "HM Hospitales",
+    "tipo": "Hospital propio",
+    "nombre": "HM Universitario Madrid",
+    "ciudad": "Madrid",
+    "lat": 40.47,
+    "lon": -3.598,
+    "rating": 4.3,
+    "especialidades": 38
+  },
+  {
+    "marca": "HM Hospitales",
+    "tipo": "Hospital propio",
+    "nombre": "HM Nuevo Belén",
+    "ciudad": "Madrid",
+    "lat": 40.482,
+    "lon": -3.632,
+    "rating": 4.2,
+    "especialidades": 28
+  },
+  {
+    "marca": "HM Hospitales",
+    "tipo": "Hospital propio",
+    "nombre": "HM Delfos Barcelona",
+    "ciudad": "Barcelona",
+    "lat": 41.412,
+    "lon": 2.189,
+    "rating": 4.3,
+    "especialidades": 30
+  },
+  {
+    "marca": "HM Hospitales",
+    "tipo": "Clínica propia",
+    "nombre": "HM Ciudad Valdeluz",
+    "ciudad": "Guadalajara",
+    "lat": 40.69,
+    "lon": -3.125,
+    "rating": 4.0,
+    "especialidades": 16
+  },
+  {
+    "marca": "Vithas",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Vithas Valencia Consuelo",
+    "ciudad": "Valencia",
+    "lat": 39.472,
+    "lon": -0.368,
+    "rating": 4.1,
+    "especialidades": 24
+  },
+  {
+    "marca": "Vithas",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Vithas Málaga",
+    "ciudad": "Málaga",
+    "lat": 36.718,
+    "lon": -4.428,
+    "rating": 4.0,
+    "especialidades": 22
+  },
+  {
+    "marca": "Vithas",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Vithas Las Palmas",
+    "ciudad": "Las Palmas",
+    "lat": 28.1248,
+    "lon": -15.43,
+    "rating": 4.2,
+    "especialidades": 20
+  },
+  {
+    "marca": "Vithas",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Vithas Granada",
+    "ciudad": "Granada",
+    "lat": 37.1773,
+    "lon": -3.5986,
+    "rating": 4.0,
+    "especialidades": 20
+  },
+  {
+    "marca": "Vithas",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Vithas Almería",
+    "ciudad": "Almería",
+    "lat": 36.834,
+    "lon": -2.4637,
+    "rating": 3.9,
+    "especialidades": 18
+  },
+  {
+    "marca": "Vithas",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Vithas Lleida",
+    "ciudad": "Lleida",
+    "lat": 41.6176,
+    "lon": 0.62,
+    "rating": 3.8,
+    "especialidades": 16
+  },
+  {
+    "marca": "Vithas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Vithas Alicante",
+    "ciudad": "Alicante",
+    "lat": 38.3452,
+    "lon": -0.481,
+    "rating": 4.0,
+    "especialidades": 12
+  },
+  {
+    "marca": "Vithas",
+    "tipo": "Clínica propia",
+    "nombre": "Clínica Vithas Murcia",
+    "ciudad": "Murcia",
+    "lat": 37.985,
+    "lon": -1.14,
+    "rating": 3.9,
+    "especialidades": 10
+  },
+  {
+    "marca": "IMQ",
+    "tipo": "Hospital propio",
+    "nombre": "IMQ Zorrotzaurre",
+    "ciudad": "Bilbao",
+    "lat": 43.268,
+    "lon": -2.94,
+    "rating": 4.4,
+    "especialidades": 22
+  },
+  {
+    "marca": "IMQ",
+    "tipo": "Hospital propio",
+    "nombre": "IMQ Amara",
+    "ciudad": "San Sebastián",
+    "lat": 43.3128,
+    "lon": -1.9752,
+    "rating": 4.3,
+    "especialidades": 20
+  },
+  {
+    "marca": "IMQ",
+    "tipo": "Hospital propio",
+    "nombre": "IMQ Gasteiz",
+    "ciudad": "Vitoria",
+    "lat": 42.85,
+    "lon": -2.6727,
+    "rating": 4.2,
+    "especialidades": 18
+  },
+  {
+    "marca": "IMQ",
+    "tipo": "Clínica propia",
+    "nombre": "IMQ Txagorritxu",
+    "ciudad": "Vitoria",
+    "lat": 42.84,
+    "lon": -2.681,
+    "rating": 4.1,
+    "especialidades": 12
+  },
+  {
+    "marca": "IMQ",
+    "tipo": "Clínica propia",
+    "nombre": "IMQ Donostia",
+    "ciudad": "San Sebastián",
+    "lat": 43.32,
+    "lon": -1.981,
+    "rating": 4.2,
+    "especialidades": 10
+  },
+  {
+    "marca": "Adeslas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "OMC Adeslas Madrid Centro",
+    "ciudad": "Madrid",
+    "lat": 40.42,
+    "lon": -3.692,
+    "rating": 3.9,
+    "especialidades": 8
+  },
+  {
+    "marca": "Adeslas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "OMC Adeslas Retiro",
+    "ciudad": "Madrid",
+    "lat": 40.41,
+    "lon": -3.678,
+    "rating": 4.0,
+    "especialidades": 8
+  },
+  {
+    "marca": "Adeslas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "OMC Adeslas Alcalá",
+    "ciudad": "Madrid",
+    "lat": 40.435,
+    "lon": -3.655,
+    "rating": 3.8,
+    "especialidades": 6
+  },
+  {
+    "marca": "Adeslas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "OMC Adeslas Barcelona Eixample",
+    "ciudad": "Barcelona",
+    "lat": 41.387,
+    "lon": 2.159,
+    "rating": 4.0,
+    "especialidades": 8
+  },
+  {
+    "marca": "Adeslas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "OMC Adeslas Gracia",
+    "ciudad": "Barcelona",
+    "lat": 41.405,
+    "lon": 2.155,
+    "rating": 3.9,
+    "especialidades": 7
+  },
+  {
+    "marca": "Adeslas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "OMC Adeslas Valencia Norte",
+    "ciudad": "Valencia",
+    "lat": 39.485,
+    "lon": -0.37,
+    "rating": 3.8,
+    "especialidades": 6
+  },
+  {
+    "marca": "Adeslas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "OMC Adeslas Sevilla",
+    "ciudad": "Sevilla",
+    "lat": 37.4,
+    "lon": -5.982,
+    "rating": 3.9,
+    "especialidades": 7
+  },
+  {
+    "marca": "Adeslas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "OMC Adeslas Bilbao",
+    "ciudad": "Bilbao",
+    "lat": 43.265,
+    "lon": -2.935,
+    "rating": 4.0,
+    "especialidades": 6
+  },
+  {
+    "marca": "Adeslas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "OMC Adeslas Zaragoza",
+    "ciudad": "Zaragoza",
+    "lat": 41.65,
+    "lon": -0.89,
+    "rating": 3.8,
+    "especialidades": 6
+  },
+  {
+    "marca": "Adeslas",
+    "tipo": "Centro cuadro médico",
+    "nombre": "OMC Adeslas Málaga",
+    "ciudad": "Málaga",
+    "lat": 36.725,
+    "lon": -4.415,
+    "rating": 3.9,
+    "especialidades": 6
+  },
+  {
+    "marca": "Adeslas",
+    "tipo": "Hospital propio",
+    "nombre": "Hospital Quirón-Adeslas Toledo",
+    "ciudad": "Toledo",
+    "lat": 39.87,
+    "lon": -4.02,
+    "rating": 4.1,
+    "especialidades": 20
+  },
+  {
+    "marca": "DKV",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro DKV Salud Madrid",
+    "ciudad": "Madrid",
+    "lat": 40.428,
+    "lon": -3.684,
+    "rating": 4.1,
+    "especialidades": 7
+  },
+  {
+    "marca": "DKV",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro DKV Salud Barcelona",
+    "ciudad": "Barcelona",
+    "lat": 41.394,
+    "lon": 2.165,
+    "rating": 4.2,
+    "especialidades": 7
+  },
+  {
+    "marca": "DKV",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro DKV Salud Zaragoza",
+    "ciudad": "Zaragoza",
+    "lat": 41.646,
+    "lon": -0.887,
+    "rating": 4.0,
+    "especialidades": 6
+  },
+  {
+    "marca": "DKV",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro DKV Salud Valencia",
+    "ciudad": "Valencia",
+    "lat": 39.478,
+    "lon": -0.372,
+    "rating": 4.1,
+    "especialidades": 6
+  },
+  {
+    "marca": "DKV",
+    "tipo": "Centro cuadro médico",
+    "nombre": "Centro DKV Salud Bilbao",
+    "ciudad": "Bilbao",
+    "lat": 43.261,
+    "lon": -2.936,
+    "rating": 4.2,
+    "especialidades": 6
+  }
+]
