@@ -2669,7 +2669,7 @@ elif st.session_state["page"] == "experiencia":
             dims_d   = ["citas_online","telemedicina","claims_online"]
             labels_d = ["Citas online %","Telemedicina %","Gestión online %"]
             fig_rad_d = go.Figure()
-            d_colors = [A3, ACCENT, S_BORDER, "#C26A0A", "#6B3FAE", "#2A7A52"]
+            d_colors = [A3, ACCENT, "#9CA3AF", "#C26A0A", "#6B3FAE", "#2A7A52"]
             for i, (_, row) in enumerate(df_digital.iterrows()):
                 c = d_colors[i]
                 r, g, b = int(c[1:3],16), int(c[3:5],16), int(c[5:7],16)
