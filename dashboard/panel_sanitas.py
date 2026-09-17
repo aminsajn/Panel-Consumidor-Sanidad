@@ -2481,13 +2481,13 @@ elif st.session_state["page"] == "mapa":
 
         def cuadrante(row):
             if row["score_oportunidad"] >= med_op and row["score_rentabilidad"] >= med_ren:
-                return "🏆 Prioridad máxima"
+                return "Prioridad máxima"
             elif row["score_oportunidad"] >= med_op and row["score_rentabilidad"] < med_ren:
-                return "📈 Crecer con cautela"
+                return "Crecer con cautela"
             elif row["score_oportunidad"] < med_op and row["score_rentabilidad"] >= med_ren:
-                return "💎 Consolidar y rentabilizar"
+                return "Consolidar y rentabilizar"
             else:
-                return "⚠️ Revisar estrategia"
+                return "Revisar estrategia"
 
         VEC["cuadrante"] = VEC.apply(cuadrante, axis=1)
 
@@ -2495,7 +2495,7 @@ elif st.session_state["page"] == "mapa":
         top1 = VEC.nlargest(1, "score_global").iloc[0]
         top_ren = VEC.nlargest(1, "score_rentabilidad").iloc[0]
         top_gap = VEC.nlargest(1, "score_gap").iloc[0]
-        n_prio  = len(VEC[VEC["cuadrante"] == "🏆 Prioridad máxima"])
+        n_prio  = len(VEC[VEC["cuadrante"] == "Prioridad máxima"])
 
         vk1, vk2, vk3, vk4 = st.columns(4)
         kpi_card(vk1, "CCAA score global más alto", top1["ccaa"],
@@ -2556,10 +2556,10 @@ elif st.session_state["page"] == "mapa":
             st.markdown('<div class="chart-label">Matriz estratégica — Oportunidad de mercado vs Rentabilidad potencial</div>',
                         unsafe_allow_html=True)
             COLOR_Q = {
-                "🏆 Prioridad máxima":       ACCENT,
-                "📈 Crecer con cautela":     "#E65100",
-                "💎 Consolidar y rentabilizar": "#2E7D32",
-                "⚠️ Revisar estrategia":     S_MUTED,
+                "Prioridad máxima":       ACCENT,
+                "Crecer con cautela":     "#E65100",
+                "Consolidar y rentabilizar": "#2E7D32",
+                "Revisar estrategia":     S_MUTED,
             }
             fig_quad = px.scatter(
                 VEC,
@@ -2682,10 +2682,10 @@ elif st.session_state["page"] == "mapa":
                     f'<span style="font-size:11px;font-weight:600;color:{color}">{v}%</span></div>')
 
         CUAD_COLOR = {
-            "🏆 Prioridad máxima":        f"background:{ACCENT}22;color:{ACCENT}",
-            "📈 Crecer con cautela":       "background:#E6510022;color:#E65100",
-            "💎 Consolidar y rentabilizar":"background:#2E7D3222;color:#2E7D32",
-            "⚠️ Revisar estrategia":       f"background:{S_MUTED}22;color:{S_MUTED}",
+            "Prioridad máxima":        f"background:{ACCENT}22;color:{ACCENT}",
+            "Crecer con cautela":       "background:#E6510022;color:#E65100",
+            "Consolidar y rentabilizar":"background:#2E7D3222;color:#2E7D32",
+            "Revisar estrategia":       f"background:{S_MUTED}22;color:{S_MUTED}",
         }
 
         rows_vec = ""
@@ -2727,17 +2727,17 @@ elif st.session_state["page"] == "mapa":
 
         ac1, ac2 = st.columns(2)
 
-        ccaa_prio  = ", ".join(VEC[VEC["cuadrante"]=="🏆 Prioridad máxima"]["ccaa"].tolist())
-        ccaa_crece = ", ".join(VEC[VEC["cuadrante"]=="📈 Crecer con cautela"]["ccaa"].tolist())
-        ccaa_cons  = ", ".join(VEC[VEC["cuadrante"]=="💎 Consolidar y rentabilizar"]["ccaa"].tolist())
-        ccaa_rev   = ", ".join(VEC[VEC["cuadrante"]=="⚠️ Revisar estrategia"]["ccaa"].tolist())
+        ccaa_prio  = ", ".join(VEC[VEC["cuadrante"]=="Prioridad máxima"]["ccaa"].tolist())
+        ccaa_crece = ", ".join(VEC[VEC["cuadrante"]=="Crecer con cautela"]["ccaa"].tolist())
+        ccaa_cons  = ", ".join(VEC[VEC["cuadrante"]=="Consolidar y rentabilizar"]["ccaa"].tolist())
+        ccaa_rev   = ", ".join(VEC[VEC["cuadrante"]=="Revisar estrategia"]["ccaa"].tolist())
 
         with ac1:
             st.markdown(f"""
             <div style="background:{ACCENT}12;border-left:4px solid {ACCENT};border-radius:12px;
                         padding:18px 20px;margin-bottom:14px">
               <div style="font-size:.72rem;font-weight:700;color:{ACCENT};letter-spacing:.08em;
-                          text-transform:uppercase;margin-bottom:8px">🏆 Prioridad máxima</div>
+                          text-transform:uppercase;margin-bottom:8px">Prioridad máxima</div>
               <div style="font-size:.82rem;font-weight:600;color:{FONT};margin-bottom:6px">{ccaa_prio}</div>
               <div style="font-size:.78rem;color:#3A3A3C;line-height:1.6">
                 Alta oportunidad de mercado <strong>y</strong> alta rentabilidad potencial.
@@ -2748,7 +2748,7 @@ elif st.session_state["page"] == "mapa":
             <div style="background:#2E7D3212;border-left:4px solid #2E7D32;border-radius:12px;
                         padding:18px 20px;margin-bottom:14px">
               <div style="font-size:.72rem;font-weight:700;color:#2E7D32;letter-spacing:.08em;
-                          text-transform:uppercase;margin-bottom:8px">💎 Consolidar y rentabilizar</div>
+                          text-transform:uppercase;margin-bottom:8px">Consolidar y rentabilizar</div>
               <div style="font-size:.82rem;font-weight:600;color:{FONT};margin-bottom:6px">{ccaa_cons}</div>
               <div style="font-size:.78rem;color:#3A3A3C;line-height:1.6">
                 Asegurados de alta calidad y baja siniestralidad. Objetivo: retener cartera actual,
@@ -2762,7 +2762,7 @@ elif st.session_state["page"] == "mapa":
             <div style="background:#E6510012;border-left:4px solid #E65100;border-radius:12px;
                         padding:18px 20px;margin-bottom:14px">
               <div style="font-size:.72rem;font-weight:700;color:#E65100;letter-spacing:.08em;
-                          text-transform:uppercase;margin-bottom:8px">📈 Crecer con cautela</div>
+                          text-transform:uppercase;margin-bottom:8px">Crecer con cautela</div>
               <div style="font-size:.82rem;font-weight:600;color:{FONT};margin-bottom:6px">{ccaa_crece}</div>
               <div style="font-size:.78rem;color:#3A3A3C;line-height:1.6">
                 Gran mercado potencial pero perfil de asegurado con mayor riesgo actuarial
@@ -2773,7 +2773,7 @@ elif st.session_state["page"] == "mapa":
             <div style="background:{S_MUTED}12;border-left:4px solid {S_MUTED};border-radius:12px;
                         padding:18px 20px;margin-bottom:14px">
               <div style="font-size:.72rem;font-weight:700;color:{S_MUTED};letter-spacing:.08em;
-                          text-transform:uppercase;margin-bottom:8px">⚠️ Revisar estrategia</div>
+                          text-transform:uppercase;margin-bottom:8px">Revisar estrategia</div>
               <div style="font-size:.82rem;font-weight:600;color:{FONT};margin-bottom:6px">{ccaa_rev}</div>
               <div style="font-size:.78rem;color:#3A3A3C;line-height:1.6">
                 Baja oportunidad y baja rentabilidad. Mantener presencia mínima por obligación
