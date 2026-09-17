@@ -73,23 +73,23 @@ st.markdown(f"""
 .stApp{{background:#F5F5F7;color:#1D1D1F}}
 html,body,[class*="css"]{{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif}}
 
-/* ── Sidebar ── */
+/* ── Sidebar — azul claro Sanitas ── */
 [data-testid="stSidebar"]{{
   display:block!important;visibility:visible!important;transform:none!important;
   width:17rem!important;
-  background:#FFFFFF!important;
-  border-right:1px solid rgba(0,0,0,.06)!important;
-  box-shadow:2px 0 12px rgba(0,0,0,.04)!important}}
+  background:#EEF4FF!important;
+  border-right:1px solid #C0D5F0!important;
+  box-shadow:2px 0 12px rgba(0,48,135,.06)!important}}
 [data-testid="stSidebar"] *{{color:#1D1D1F!important;font-family:'Inter',sans-serif!important}}
 [data-testid="stSidebar"] label{{
-  color:#86868B!important;font-size:.62rem!important;
+  color:{ACCENT}!important;font-size:.62rem!important;
   letter-spacing:.08em;text-transform:uppercase;font-weight:600!important;margin-bottom:4px!important}}
 [data-testid="stSidebar"] [data-baseweb="select"]{{
-  background:#F5F5F7!important;border:1px solid rgba(0,0,0,.1)!important;
+  background:#DEEAF8!important;border:1px solid #A8C4E0!important;
   border-radius:8px!important}}
 [data-testid="stSidebar"] [data-baseweb="select"] *{{
-  background:#F5F5F7!important;color:#1D1D1F!important;font-size:.84rem!important}}
-[data-testid="stSidebar"] hr{{border-color:rgba(0,0,0,.06)!important;margin:0!important}}
+  background:#DEEAF8!important;color:#1D1D1F!important;font-size:.84rem!important}}
+[data-testid="stSidebar"] hr{{border-color:#C0D5F0!important;margin:0!important}}
 [data-testid="stSidebarCollapsedControl"]{{display:none!important}}
 button[kind="header"]{{display:none!important}}
 
@@ -142,25 +142,27 @@ button[kind="header"]{{display:none!important}}
 .kpi-sub{{font-size:.72rem;color:{ACCENT};margin-top:8px;font-weight:500}}
 .kpi-neg{{font-size:.72rem;color:#FF3B30;margin-top:8px;font-weight:500}}
 
-/* ── Tabs ── */
+/* ── Tabs — fondo transparente + subrayado azul Sanitas ── */
 .stTabs [data-baseweb="tab-list"]{{
-  gap:2px;border-bottom:none;
-  background:#EBEBEB;
-  border-radius:10px;
-  padding:3px;
-  width:fit-content;margin-bottom:1.6rem}}
+  gap:0;
+  border-bottom:1px solid #C0D5F0;
+  background:transparent;
+  padding:0 2px;
+  margin-bottom:1.6rem}}
 .stTabs [data-baseweb="tab"]{{
   font-size:.78rem;color:#86868B;
-  padding:7px 16px;border:none;
-  border-radius:8px;
+  padding:10px 18px;border:none;
+  border-bottom:2px solid transparent;
   background:transparent!important;font-weight:500;
-  letter-spacing:.01em;transition:all .15s}}
+  letter-spacing:.01em;transition:color .15s,border-color .15s;
+  margin-bottom:-1px}}
 .stTabs [aria-selected="true"]{{
-  color:#1D1D1F!important;
-  background:#FFFFFF!important;
+  color:{ACCENT}!important;
+  background:transparent!important;
   font-weight:600!important;
-  box-shadow:0 1px 4px rgba(0,0,0,.12)!important}}
-.stTabs [data-baseweb="tab-panel"]{{padding-top:0}}
+  border-bottom:2px solid {ACCENT}!important;
+  box-shadow:none!important}}
+.stTabs [data-baseweb="tab-panel"]{{padding-top:1.4rem}}
 
 /* ── Expander ── */
 [data-testid="stExpander"]{{
@@ -177,9 +179,10 @@ button[kind="header"]{{display:none!important}}
   font-size:.64rem;letter-spacing:.07em;text-transform:uppercase;
   color:#86868B;margin-bottom:8px;font-weight:600}}
 .callout{{
-  background:#FFFFFF;border-radius:12px;
+  background:#EEF4FF;border-radius:12px;
+  border-left:3px solid {ACCENT};
   padding:14px 18px;margin:14px 0 4px;
-  font-size:.79rem;color:#3A3A3C;line-height:1.65;
+  font-size:.79rem;color:#1D1D1F;line-height:1.65;
   box-shadow:0 1px 6px rgba(0,0,0,.06),0 0 0 0.5px rgba(0,0,0,.04)}}
 .callout strong{{color:#1D1D1F}}
 
