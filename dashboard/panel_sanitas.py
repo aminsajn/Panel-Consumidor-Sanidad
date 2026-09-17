@@ -1718,32 +1718,34 @@ elif st.session_state["page"] == "mapa":
     # TAB 3 — Turismo & temperatura
     # ────────────────────────────────────────────────────────
     with mt3:
+        # ── Mapa a ancho completo ─────────────────────────────
+        st.markdown('<div class="chart-label">Turistas internacionales (millones/año) por CCAA</div>',
+                    unsafe_allow_html=True)
+        fig_tur = px.scatter_map(
+            df_ccaa, lat="lat", lon="lon",
+            color="turistas_M",
+            color_continuous_scale=[[0,"#EEF4FF"],[0.5,"#0099D6"],[1,"#003087"]],
+            size="turistas_M", size_max=45,
+            hover_name="ccaa",
+            hover_data={"turistas_M":True,"temp_media_C":True,"lat":False,"lon":False},
+            zoom=4.5, center={"lat":40.2,"lon":-3.5},
+            height=420,
+            labels={"turistas_M":"Turistas (M)","temp_media_C":"Temp media (°C)"},
+        )
+        fig_tur.update_layout(
+            map_style="open-street-map",
+            paper_bgcolor="rgba(0,0,0,0)",
+            font=dict(family="Inter", size=11, color=FONT),
+            coloraxis_colorbar=dict(title="Turistas M", tickfont=dict(size=9)),
+            margin=dict(l=0,r=0,t=0,b=0),
+        )
+        st.plotly_chart(fig_tur, use_container_width=True, config={"scrollZoom": True})
+
+        st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
+
+        # ── Gráficos debajo del mapa ──────────────────────────
         c1t, c2t = st.columns(2)
         with c1t:
-            st.markdown('<div class="chart-label">Turistas internacionales (millones/año) por CCAA</div>',
-                        unsafe_allow_html=True)
-            fig_tur = px.scatter_map(
-                df_ccaa, lat="lat", lon="lon",
-                color="turistas_M",
-                color_continuous_scale=[[0,"#EEF4FF"],[0.5,"#0099D6"],[1,"#003087"]],
-                size="turistas_M", size_max=45,
-                hover_name="ccaa",
-                hover_data={"turistas_M":True,"temp_media_C":True,"lat":False,"lon":False},
-                zoom=4.5, center={"lat":40.2,"lon":-3.5},
-                height=360,
-                labels={"turistas_M":"Turistas (M)","temp_media_C":"Temp media (°C)"},
-            )
-            fig_tur.update_layout(
-                map_style="open-street-map",
-                paper_bgcolor="rgba(0,0,0,0)",
-                font=dict(family="Inter", size=11, color=FONT),
-                coloraxis_colorbar=dict(title="Turistas M", tickfont=dict(size=9)),
-                margin=dict(l=0,r=0,t=0,b=0),
-            )
-            st.plotly_chart(fig_tur, use_container_width=True,
-                            config={"scrollZoom": True})
-
-        with c2t:
             st.markdown('<div class="chart-label">Temperatura media anual (°C)</div>',
                         unsafe_allow_html=True)
             df_ts = df_ccaa.sort_values("temp_media_C", ascending=True)
@@ -1756,12 +1758,11 @@ elif st.session_state["page"] == "mapa":
                 text=[f"{v}°C" for v in df_ts["temp_media_C"]],
                 textposition="outside", textfont=dict(size=9),
             ))
-            fig_temp.update_layout(**lay(h=340, margin=dict(t=10,b=10,l=8,r=50)))
+            fig_temp.update_layout(**lay(h=380, margin=dict(t=10,b=10,l=8,r=50)))
             fig_temp.update_xaxes(showgrid=True, gridcolor=GRID)
             st.plotly_chart(fig_temp, use_container_width=True)
 
-        c3t, c4t = st.columns(2)
-        with c3t:
+        with c2t:
             st.markdown('<div class="chart-label">Turistas vs. temperatura media — potencial asistencia turistas</div>',
                         unsafe_allow_html=True)
             fig_sc = px.scatter(
@@ -1771,24 +1772,26 @@ elif st.session_state["page"] == "mapa":
                 labels={"temp_media_C":"Temperatura media (°C)","turistas_M":"Turistas (M)"},
             )
             fig_sc.update_traces(textposition="top center", textfont=dict(size=8))
-            fig_sc.update_layout(**lay(h=300, showlegend=False,
+            fig_sc.update_layout(**lay(h=380, showlegend=False,
                 margin=dict(t=10,b=10,l=8,r=8)))
             fig_sc.update_xaxes(showgrid=True, gridcolor=GRID)
             fig_sc.update_yaxes(showgrid=True, gridcolor=GRID)
             st.plotly_chart(fig_sc, use_container_width=True)
 
-        with c4t:
-            callout(
-                "<strong>Cataluña (15.8M turistas) y Canarias (13.2M)</strong> son los principales "
-                "destinos de turistas internacionales. Junto con Baleares (12.9M) y Andalucía (11.4M), "
-                "estas cuatro CCAA concentran el 80% del flujo turístico. "
-                "<strong>Oportunidad Sanitas:</strong> seguros de viajero y asistencia sanitaria "
-                "para turistas que contratan en origen. Temperatura media ≥ 18°C correlaciona "
-                "con alta demanda asistencial en traumatología (accidentes de playa, deporte extremo) "
-                "y enfermedades gastrointestinales estivales. "
-                "Canarias, con 22°C de media anual, representa el mayor potencial de "
-                "asistencia sanitaria a turistas fuera de la temporada estival."
-            )
+        st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
+
+        # ── Callout al fondo ──────────────────────────────────
+        callout(
+            "<strong>Cataluña (15.8M turistas) y Canarias (13.2M)</strong> son los principales "
+            "destinos de turistas internacionales. Junto con Baleares (12.9M) y Andalucía (11.4M), "
+            "estas cuatro CCAA concentran el 80% del flujo turístico. "
+            "<strong>Oportunidad Sanitas:</strong> seguros de viajero y asistencia sanitaria "
+            "para turistas que contratan en origen. Temperatura media ≥ 18°C correlaciona "
+            "con alta demanda asistencial en traumatología (accidentes de playa, deporte extremo) "
+            "y enfermedades gastrointestinales estivales. "
+            "Canarias, con 22°C de media anual, representa el mayor potencial de "
+            "asistencia sanitaria a turistas fuera de la temporada estival."
+        )
 
     # ────────────────────────────────────────────────────────
     # TAB 4 — Histórico enfermedades
