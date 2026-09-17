@@ -1514,10 +1514,10 @@ elif st.session_state["page"] == "mapa":
             f'text-transform:uppercase;font-weight:700;color:#374151">Filtros</div>',
             unsafe_allow_html=True)
         marcas_m = sorted(df_centros["marca"].unique().tolist())
-        m_sel = st.multiselect("Cadena", marcas_m, default=marcas_m)
+        m_sel = st.selectbox("Cadena", ["Todas"] + marcas_m)
         st.markdown('<hr style="margin:12px 0">', unsafe_allow_html=True)
         tipos_m = sorted(df_centros["tipo"].unique().tolist())
-        t_sel = st.multiselect("Tipo de centro", tipos_m, default=tipos_m)
+        t_sel = st.selectbox("Tipo de centro", ["Todos"] + tipos_m)
         st.markdown('<hr style="margin:12px 0">', unsafe_allow_html=True)
         st.markdown(
             f'<div style="font-size:.62rem;color:#9CA3AF;line-height:1.6">'
@@ -1604,8 +1604,8 @@ elif st.session_state["page"] == "mapa":
     # ────────────────────────────────────────────────────────
     with mt1:
         df_m = df_centros[
-            df_centros["marca"].isin(m_sel) &
-            df_centros["tipo"].isin(t_sel)
+            (df_centros["marca"] == m_sel if m_sel != "Todas" else pd.Series([True]*len(df_centros), index=df_centros.index)) &
+            (df_centros["tipo"] == t_sel if t_sel != "Todos" else pd.Series([True]*len(df_centros), index=df_centros.index))
         ].copy()
         df_m["_sz"] = df_m["tipo"].map({
             "Hospital propio":16, "Clínica propia":10, "Centro cuadro médico":7
