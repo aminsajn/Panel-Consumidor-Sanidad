@@ -23,16 +23,16 @@ GEO  = BASE / "data_geo"
 # ══════════════════════════════════════════════════════════════════
 # PALETA — Sanitas
 # ══════════════════════════════════════════════════════════════════
-ACCENT  = "#003087"
+ACCENT  = "#003087"   # Sanitas blue — brand color
 A2      = "#0057A8"
 A3      = "#0099D6"
-BG      = "#F8F9FA"
-FONT    = "#111827"
-GRID    = "#F3F4F6"
+BG      = "#F5F5F7"   # Apple page background
+FONT    = "#1D1D1F"   # Apple near-black
+GRID    = "#E8E8ED"   # Apple subtle grid
 PAPER   = "#FFFFFF"
-S_BORDER= "#E5E7EB"
-S_MUTED = "#6B7280"
-S_LIGHT = "#EEF4FF"
+S_BORDER= "rgba(0,0,0,0.08)"
+S_MUTED = "#86868B"   # Apple secondary text
+S_LIGHT = "#F5F5F7"
 
 COMP_C = {
     "Sanitas":       ACCENT,
@@ -58,79 +58,136 @@ st.set_page_config(
 )
 
 # ══════════════════════════════════════════════════════════════════
-# CSS
+# CSS — Apple HIG aesthetic
 # ══════════════════════════════════════════════════════════════════
 st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── Reset & base ── */
 #MainMenu,footer,header{{visibility:hidden}}
 [data-testid="stToolbar"]{{display:none}}
 [data-testid="column"]{{overflow:visible!important}}
 [data-testid="stHorizontalBlock"]{{overflow:visible!important}}
-.block-container{{padding:0 2.5rem 3rem!important;max-width:1440px}}
-.stApp{{background:{BG};color:{FONT}}}
-html,body,[class*="css"]{{font-family:'Inter',sans-serif}}
+.block-container{{padding:0 2.8rem 4rem!important;max-width:1400px}}
+.stApp{{background:#F5F5F7;color:#1D1D1F}}
+html,body,[class*="css"]{{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif}}
 
-/* Sidebar */
+/* ── Sidebar ── */
 [data-testid="stSidebar"]{{
-  display:block!important;visibility:visible!important;
-  transform:none!important;width:18rem!important;
-  background:{S_LIGHT}!important;border-right:1px solid #C0D5F0!important}}
-[data-testid="stSidebar"] *{{color:{FONT}!important;font-family:'Inter',sans-serif!important}}
+  display:block!important;visibility:visible!important;transform:none!important;
+  width:17rem!important;
+  background:#FFFFFF!important;
+  border-right:1px solid rgba(0,0,0,.06)!important;
+  box-shadow:2px 0 12px rgba(0,0,0,.04)!important}}
+[data-testid="stSidebar"] *{{color:#1D1D1F!important;font-family:'Inter',sans-serif!important}}
 [data-testid="stSidebar"] label{{
-  color:{ACCENT}!important;font-size:.65rem!important;
-  letter-spacing:.1em;text-transform:uppercase;
-  font-weight:600!important;margin-bottom:4px!important}}
+  color:#86868B!important;font-size:.62rem!important;
+  letter-spacing:.08em;text-transform:uppercase;font-weight:600!important;margin-bottom:4px!important}}
 [data-testid="stSidebar"] [data-baseweb="select"]{{
-  background:#F0F7FF!important;border:1px solid #90B8DE!important;border-radius:6px!important}}
+  background:#F5F5F7!important;border:1px solid rgba(0,0,0,.1)!important;
+  border-radius:8px!important}}
 [data-testid="stSidebar"] [data-baseweb="select"] *{{
-  background:#F0F7FF!important;color:{FONT}!important;font-size:.84rem!important}}
-[data-testid="stSidebar"] hr{{border-color:#C0D5F0!important;margin:0!important}}
+  background:#F5F5F7!important;color:#1D1D1F!important;font-size:.84rem!important}}
+[data-testid="stSidebar"] hr{{border-color:rgba(0,0,0,.06)!important;margin:0!important}}
 [data-testid="stSidebarCollapsedControl"]{{display:none!important}}
 button[kind="header"]{{display:none!important}}
 
-/* Top bar */
+/* ── Botones Streamlit ── */
+.stButton>button{{
+  background:#FFFFFF;color:#1D1D1F;
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:980px;
+  padding:9px 20px;
+  font-size:.8rem;font-weight:500;letter-spacing:.01em;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  transition:all .18s ease}}
+.stButton>button:hover{{
+  background:#F5F5F7;
+  box-shadow:0 3px 8px rgba(0,0,0,.1);
+  border-color:rgba(0,0,0,.18)}}
+.stButton>button:active{{transform:scale(.98)}}
+
+/* ── Top bar ── */
 .top-bar{{
-  background:transparent;padding:18px 0 0 0;
+  background:transparent;padding:20px 0 0;
   display:flex;align-items:baseline;justify-content:space-between;
-  border-bottom:1px solid {S_BORDER};margin-bottom:2rem}}
-.top-title{{font-size:1rem;font-weight:700;color:{FONT};letter-spacing:-.01em}}
-.top-sub{{font-size:.72rem;color:{S_MUTED};letter-spacing:.04em}}
+  border-bottom:1px solid rgba(0,0,0,.06);margin-bottom:2.4rem}}
+.top-title{{font-size:.95rem;font-weight:600;color:#1D1D1F;letter-spacing:-.01em}}
+.top-sub{{font-size:.72rem;color:#86868B;letter-spacing:.02em}}
 
-/* Secciones */
-.section-title{{font-size:1rem;font-weight:700;color:{FONT};font-family:'Inter',sans-serif;letter-spacing:-.01em;margin-bottom:2px}}
-.section-rule{{width:28px;height:2px;background:{ACCENT};border-radius:2px;margin:5px 0 16px 0}}
+/* ── Secciones ── */
+.section-title{{
+  font-size:.68rem;font-weight:600;color:#86868B;
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;margin-top:4px}}
+.section-rule{{display:none}}
 
-/* KPI cards */
+/* ── KPI cards — Apple card style ── */
 .kpi-card{{
-  background:{PAPER};border:1px solid {S_BORDER};
-  border-radius:10px;padding:20px 24px;
-  box-shadow:0 1px 4px rgba(0,0,0,.05);transition:box-shadow .15s}}
-.kpi-card:hover{{box-shadow:0 4px 12px rgba(0,0,0,.08)}}
-.kpi-label{{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:#9CA3AF;margin-bottom:8px;font-weight:500}}
-.kpi-value{{font-size:2rem;font-weight:700;color:{FONT};line-height:1;letter-spacing:-.02em}}
-.kpi-sub{{font-size:.7rem;color:{ACCENT};margin-top:6px;font-weight:500}}
-.kpi-neg{{font-size:.7rem;color:#B71C1C;margin-top:6px;font-weight:500}}
+  background:#FFFFFF;
+  border:none;
+  border-radius:16px;
+  padding:22px 24px;
+  box-shadow:0 2px 12px rgba(0,0,0,.07),0 0 0 0.5px rgba(0,0,0,.04);
+  transition:box-shadow .2s ease,transform .2s ease}}
+.kpi-card:hover{{
+  box-shadow:0 6px 20px rgba(0,0,0,.1),0 0 0 0.5px rgba(0,0,0,.04);
+  transform:translateY(-1px)}}
+.kpi-label{{
+  font-size:.62rem;letter-spacing:.07em;text-transform:uppercase;
+  color:#86868B;margin-bottom:10px;font-weight:500}}
+.kpi-value{{
+  font-size:2.1rem;font-weight:700;color:#1D1D1F;
+  line-height:1;letter-spacing:-.03em}}
+.kpi-sub{{font-size:.72rem;color:{ACCENT};margin-top:8px;font-weight:500}}
+.kpi-neg{{font-size:.72rem;color:#FF3B30;margin-top:8px;font-weight:500}}
 
-/* Tabs */
-.stTabs [data-baseweb="tab-list"]{{gap:4px;border-bottom:1px solid {S_BORDER};background:transparent;padding:0 2px}}
+/* ── Tabs ── */
+.stTabs [data-baseweb="tab-list"]{{
+  gap:2px;border-bottom:none;
+  background:#EBEBEB;
+  border-radius:10px;
+  padding:3px;
+  width:fit-content;margin-bottom:1.6rem}}
 .stTabs [data-baseweb="tab"]{{
-  font-size:.78rem;letter-spacing:.04em;color:{S_MUTED};
-  padding:10px 18px;border:none;border-bottom:2px solid transparent;
-  background:transparent!important;font-weight:500}}
-.stTabs [aria-selected="true"]{{color:{FONT}!important;border-bottom:2px solid {ACCENT}!important;font-weight:600!important}}
-.stTabs [data-baseweb="tab-panel"]{{padding-top:1.6rem}}
+  font-size:.78rem;color:#86868B;
+  padding:7px 16px;border:none;
+  border-radius:8px;
+  background:transparent!important;font-weight:500;
+  letter-spacing:.01em;transition:all .15s}}
+.stTabs [aria-selected="true"]{{
+  color:#1D1D1F!important;
+  background:#FFFFFF!important;
+  font-weight:600!important;
+  box-shadow:0 1px 4px rgba(0,0,0,.12)!important}}
+.stTabs [data-baseweb="tab-panel"]{{padding-top:0}}
 
-/* Expander */
+/* ── Expander ── */
 [data-testid="stExpander"]{{
-  border:1px solid {S_BORDER}!important;border-radius:8px!important;
-  background:{PAPER}!important;box-shadow:0 1px 3px rgba(0,0,0,.04)!important}}
+  border:none!important;
+  border-radius:14px!important;
+  background:#FFFFFF!important;
+  box-shadow:0 2px 10px rgba(0,0,0,.06),0 0 0 0.5px rgba(0,0,0,.04)!important;
+  margin-bottom:10px!important}}
+[data-testid="stExpander"] summary{{
+  font-size:.85rem;font-weight:500;color:#1D1D1F;padding:14px 18px}}
 
-/* Chart label */
-.chart-label{{font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:#6B7280;margin-bottom:8px;font-weight:700}}
-.callout{{font-size:.78rem;color:{S_MUTED};line-height:1.6;padding:12px 0 0 0}}
-.callout strong{{color:{FONT}}}
-hr{{border:none;border-top:1px solid {GRID};margin:2rem 0}}
+/* ── Chart label & callout ── */
+.chart-label{{
+  font-size:.64rem;letter-spacing:.07em;text-transform:uppercase;
+  color:#86868B;margin-bottom:8px;font-weight:600}}
+.callout{{
+  background:#FFFFFF;border-radius:12px;
+  padding:14px 18px;margin:14px 0 4px;
+  font-size:.79rem;color:#3A3A3C;line-height:1.65;
+  box-shadow:0 1px 6px rgba(0,0,0,.06),0 0 0 0.5px rgba(0,0,0,.04)}}
+.callout strong{{color:#1D1D1F}}
+
+/* ── Divider ── */
+hr{{border:none;border-top:1px solid rgba(0,0,0,.06);margin:2rem 0}}
+
+/* ── Inputs (multiselect, selectbox) ── */
+[data-baseweb="select"] [data-baseweb="input"]{{border-radius:10px!important}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -175,7 +232,7 @@ def lay(h=None, showlegend=False, legend=None, margin=None, xgrid=True, ygrid=Fa
     d = dict(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(family="Inter,sans-serif", color=FONT, size=11),
+        font=dict(family="Inter,-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif", color=FONT, size=11),
         margin=margin or dict(t=28, b=18, l=8, r=36),
         showlegend=showlegend,
         xaxis=dict(showgrid=xgrid, gridcolor=GRID, zeroline=False, linecolor=S_BORDER),
