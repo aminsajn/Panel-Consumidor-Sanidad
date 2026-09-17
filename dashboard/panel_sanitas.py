@@ -1578,7 +1578,7 @@ elif st.session_state["page"] == "mapa":
     mun_sin_acceso["_sz"] = (mun_sin_acceso["poblacion"] / 1000).clip(2, 20)
 
     # ── Tabs del mapa ─────────────────────────────────────────────
-    mt1, mt2, mt3, mt4, mt5, mt6, mt7, mt8 = st.tabs([
+    mt1, mt2, mt3, mt4, mt5, mt6, mt7, mt8, mt9 = st.tabs([
         "Red de centros",
         "Nivel de renta",
         "Turismo & temperatura",
@@ -1587,6 +1587,7 @@ elif st.session_state["page"] == "mapa":
         "Índices comerciales",
         "Municipios sin acceso",
         "Deporte por CCAA",
+        "Vectorización estratégica",
     ])
 
     # ────────────────────────────────────────────────────────
@@ -2394,6 +2395,403 @@ elif st.session_state["page"] == "mapa":
             "segmento objetivo de seguros premium. "
             "<strong>Acción:</strong> seguro deportivo específico con cobertura traumatológica ampliada "
             "para practicantes de pádel, ciclismo y running — tres deportes con alta incidencia de lesión."
+        )
+
+    # ────────────────────────────────────────────────────────
+    # TAB 9 — Vectorización estratégica por CCAA
+    # ────────────────────────────────────────────────────────
+    with mt9:
+        section("VECTORIZACIÓN ESTRATÉGICA — COBERTURA ÓPTIMA SANITAS POR CCAA")
+        callout(
+            "Modelo de scoring multidimensional que combina <strong>7 vectores</strong>: renta disponible, "
+            "penetración actual de seguro privado, carga de enfermedad crónica, acceso geográfico, "
+            "potencial turístico, intensidad deportiva e índice comercial. "
+            "El resultado identifica dónde Sanitas debería <strong>consolidar presencia</strong>, "
+            "dónde debe <strong>crecer</strong> y dónde hay <strong>oportunidades sin explotar</strong>."
+        )
+        st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
+
+        # ── Dataset vectorizado por CCAA ─────────────────────────
+        VEC = pd.DataFrame([
+            # ccaa, lat, lon, renta_idx, pen_priv, enfermedad_idx, acceso_gap, turismo_idx, deporte_idx, comercial_idx, presencia_sanitas
+            # renta_idx: 0-100 (renta media normalizada)
+            # pen_priv: % población con seguro privado (penetración actual)
+            # enfermedad_idx: 0-100 (carga enfermedades crónicas, 100=alta carga)
+            # acceso_gap: municipios sin acceso / total municipios × 100
+            # turismo_idx: 0-100 (turistas internacionales normalizados)
+            # deporte_idx: intensidad deportiva % población
+            # comercial_idx: índice potencial comercial 0-100
+            # presencia_sanitas: 0-100 (estimación cobertura actual red Sanitas)
+            {"ccaa":"Madrid",            "lat":40.42,"lon":-3.70,"renta_idx":88,"pen_priv":34,"enfermedad_idx":42,"acceso_gap":3,"turismo_idx":82,"deporte_idx":68,"comercial_idx":91,"presencia_sanitas":88},
+            {"ccaa":"Cataluña",          "lat":41.39,"lon": 2.17,"renta_idx":85,"pen_priv":28,"enfermedad_idx":44,"acceso_gap":8,"turismo_idx":98,"deporte_idx":72,"comercial_idx":88,"presencia_sanitas":72},
+            {"ccaa":"País Vasco",        "lat":43.26,"lon":-2.93,"renta_idx":92,"pen_priv":31,"enfermedad_idx":38,"acceso_gap":5,"turismo_idx":48,"deporte_idx":74,"comercial_idx":84,"presencia_sanitas":65},
+            {"ccaa":"Navarra",           "lat":42.82,"lon":-1.64,"renta_idx":90,"pen_priv":29,"enfermedad_idx":35,"acceso_gap":12,"turismo_idx":36,"deporte_idx":76,"comercial_idx":80,"presencia_sanitas":52},
+            {"ccaa":"Aragón",            "lat":41.65,"lon":-0.89,"renta_idx":78,"pen_priv":22,"enfermedad_idx":48,"acceso_gap":18,"turismo_idx":30,"deporte_idx":62,"comercial_idx":66,"presencia_sanitas":44},
+            {"ccaa":"Andalucía",         "lat":37.38,"lon":-5.97,"renta_idx":58,"pen_priv":19,"enfermedad_idx":62,"acceso_gap":14,"turismo_idx":72,"deporte_idx":55,"comercial_idx":72,"presencia_sanitas":58},
+            {"ccaa":"C. Valenciana",     "lat":39.47,"lon":-0.38,"renta_idx":70,"pen_priv":24,"enfermedad_idx":52,"acceso_gap":10,"turismo_idx":86,"deporte_idx":61,"comercial_idx":74,"presencia_sanitas":60},
+            {"ccaa":"Galicia",           "lat":42.88,"lon":-8.54,"renta_idx":64,"pen_priv":18,"enfermedad_idx":58,"acceso_gap":22,"turismo_idx":42,"deporte_idx":54,"comercial_idx":58,"presencia_sanitas":40},
+            {"ccaa":"Castilla y León",   "lat":41.65,"lon":-4.72,"renta_idx":68,"pen_priv":16,"enfermedad_idx":64,"acceso_gap":28,"turismo_idx":28,"deporte_idx":52,"comercial_idx":54,"presencia_sanitas":36},
+            {"ccaa":"Castilla-La Mancha","lat":39.86,"lon":-3.61,"renta_idx":56,"pen_priv":13,"enfermedad_idx":66,"acceso_gap":32,"turismo_idx":18,"deporte_idx":48,"comercial_idx":46,"presencia_sanitas":28},
+            {"ccaa":"Extremadura",       "lat":39.49,"lon":-6.37,"renta_idx":44,"pen_priv":11,"enfermedad_idx":70,"acceso_gap":38,"turismo_idx":14,"deporte_idx":44,"comercial_idx":38,"presencia_sanitas":22},
+            {"ccaa":"Murcia",            "lat":37.99,"lon":-1.13,"renta_idx":62,"pen_priv":21,"enfermedad_idx":56,"acceso_gap":8,"turismo_idx":52,"deporte_idx":57,"comercial_idx":64,"presencia_sanitas":50},
+            {"ccaa":"Canarias",          "lat":28.29,"lon":-15.63,"renta_idx":60,"pen_priv":23,"enfermedad_idx":50,"acceso_gap":6,"turismo_idx":96,"deporte_idx":58,"comercial_idx":70,"presencia_sanitas":55},
+            {"ccaa":"Baleares",          "lat":39.57,"lon": 2.65,"renta_idx":82,"pen_priv":32,"enfermedad_idx":36,"acceso_gap":4,"turismo_idx":94,"deporte_idx":70,"comercial_idx":86,"presencia_sanitas":62},
+            {"ccaa":"La Rioja",          "lat":42.29,"lon":-2.45,"renta_idx":76,"pen_priv":20,"enfermedad_idx":40,"acceso_gap":14,"turismo_idx":22,"deporte_idx":64,"comercial_idx":62,"presencia_sanitas":38},
+            {"ccaa":"Asturias",          "lat":43.36,"lon":-5.86,"renta_idx":66,"pen_priv":17,"enfermedad_idx":62,"acceso_gap":20,"turismo_idx":30,"deporte_idx":60,"comercial_idx":56,"presencia_sanitas":35},
+            {"ccaa":"Cantabria",         "lat":43.18,"lon":-3.99,"renta_idx":72,"pen_priv":19,"enfermedad_idx":44,"acceso_gap":16,"turismo_idx":32,"deporte_idx":63,"comercial_idx":60,"presencia_sanitas":38},
+        ])
+
+        # ── Cálculo scores vectorizados ───────────────────────────
+        # Score OPORTUNIDAD: dónde hay mercado sin explotar
+        #   renta alta + penetración baja + turismo alto + deporte alto
+        VEC["score_oportunidad"] = (
+            VEC["renta_idx"]     * 0.25 +
+            (100 - VEC["pen_priv"] * 2.5).clip(0, 100) * 0.20 +  # baja penetración = oportunidad
+            VEC["turismo_idx"]   * 0.20 +
+            VEC["deporte_idx"]   * 0.15 +
+            VEC["comercial_idx"] * 0.20
+        ).round(1)
+
+        # Score RENTABILIDAD: dónde el asegurado sería más rentable
+        #   renta alta + poca enfermedad crónica + deporte alto (salud preventiva)
+        VEC["score_rentabilidad"] = (
+            VEC["renta_idx"]               * 0.30 +
+            (100 - VEC["enfermedad_idx"])  * 0.35 +  # poca enfermedad = menor siniestralidad
+            VEC["deporte_idx"]             * 0.25 +
+            (100 - VEC["acceso_gap"])      * 0.10    # buen acceso = menos coste logístico
+        ).round(1)
+
+        # Score GAP PRESENCIA: dónde deberíamos estar más pero no estamos
+        VEC["score_gap"] = (
+            VEC["score_oportunidad"] * 0.50 +
+            VEC["score_rentabilidad"]* 0.30 +
+            VEC["acceso_gap"]        * 0.20  # zonas sin acceso = necesidad real
+        ).round(1) - VEC["presencia_sanitas"] * 0.6
+
+        # Score GLOBAL (estrategia combinada)
+        VEC["score_global"] = (
+            VEC["score_oportunidad"]  * 0.40 +
+            VEC["score_rentabilidad"] * 0.35 +
+            VEC["score_gap"].clip(0)  * 0.25
+        ).round(1)
+
+        # Clasificación cuadrante
+        med_op  = VEC["score_oportunidad"].median()
+        med_ren = VEC["score_rentabilidad"].median()
+
+        def cuadrante(row):
+            if row["score_oportunidad"] >= med_op and row["score_rentabilidad"] >= med_ren:
+                return "🏆 Prioridad máxima"
+            elif row["score_oportunidad"] >= med_op and row["score_rentabilidad"] < med_ren:
+                return "📈 Crecer con cautela"
+            elif row["score_oportunidad"] < med_op and row["score_rentabilidad"] >= med_ren:
+                return "💎 Consolidar y rentabilizar"
+            else:
+                return "⚠️ Revisar estrategia"
+
+        VEC["cuadrante"] = VEC.apply(cuadrante, axis=1)
+
+        # ── KPIs resumen ─────────────────────────────────────────
+        top1 = VEC.nlargest(1, "score_global").iloc[0]
+        top_ren = VEC.nlargest(1, "score_rentabilidad").iloc[0]
+        top_gap = VEC.nlargest(1, "score_gap").iloc[0]
+        n_prio  = len(VEC[VEC["cuadrante"] == "🏆 Prioridad máxima"])
+
+        vk1, vk2, vk3, vk4 = st.columns(4)
+        kpi_card(vk1, "CCAA score global más alto", top1["ccaa"],
+                 f"Score {top1['score_global']:.0f}/100")
+        kpi_card(vk2, "Mayor rentabilidad potencial", top_ren["ccaa"],
+                 f"Score rentab. {top_ren['score_rentabilidad']:.0f}/100")
+        kpi_card(vk3, "Mayor gap de presencia", top_gap["ccaa"],
+                 f"Oportunidad no cubierta")
+        kpi_card(vk4, "CCAA en prioridad máxima", f"{n_prio}",
+                 "Alta oportunidad + alta rentabilidad")
+
+        st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+
+        # ── Mapa coroplético por score global ────────────────────
+        st.markdown('<div class="chart-label">Score estratégico global por CCAA — dónde debería apostar Sanitas</div>',
+                    unsafe_allow_html=True)
+
+        fig_vec_map = px.scatter_map(
+            VEC, lat="lat", lon="lon",
+            color="score_global",
+            size="score_global",
+            size_max=45,
+            color_continuous_scale=[[0, "#EEF4FF"], [0.35, A3], [0.65, A2], [1.0, ACCENT]],
+            hover_name="ccaa",
+            hover_data={
+                "score_global": True,
+                "score_oportunidad": True,
+                "score_rentabilidad": True,
+                "cuadrante": True,
+                "presencia_sanitas": True,
+                "lat": False, "lon": False,
+            },
+            zoom=4.8, center={"lat": 40.2, "lon": -3.5},
+            height=400,
+            labels={
+                "score_global": "Score global",
+                "score_oportunidad": "Oportunidad",
+                "score_rentabilidad": "Rentabilidad",
+                "cuadrante": "Clasificación",
+                "presencia_sanitas": "Presencia actual (%)",
+            },
+        )
+        fig_vec_map.update_layout(
+            map_style="open-street-map",
+            paper_bgcolor="rgba(0,0,0,0)",
+            font=dict(family="Inter", size=11, color=FONT),
+            coloraxis_colorbar=dict(title="Score<br>global", tickfont=dict(size=9), len=0.55),
+            margin=dict(l=0, r=0, t=0, b=0),
+        )
+        st.plotly_chart(fig_vec_map, use_container_width=True, config={"scrollZoom": True})
+
+        st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+
+        # ── Cuadrante oportunidad vs rentabilidad ────────────────
+        vc1, vc2 = st.columns([1.35, 1])
+
+        with vc1:
+            st.markdown('<div class="chart-label">Matriz estratégica — Oportunidad de mercado vs Rentabilidad potencial</div>',
+                        unsafe_allow_html=True)
+            COLOR_Q = {
+                "🏆 Prioridad máxima":       ACCENT,
+                "📈 Crecer con cautela":     "#E65100",
+                "💎 Consolidar y rentabilizar": "#2E7D32",
+                "⚠️ Revisar estrategia":     S_MUTED,
+            }
+            fig_quad = px.scatter(
+                VEC,
+                x="score_oportunidad", y="score_rentabilidad",
+                color="cuadrante",
+                color_discrete_map=COLOR_Q,
+                text="ccaa",
+                size="score_global",
+                size_max=28,
+                labels={
+                    "score_oportunidad":  "Score oportunidad de mercado →",
+                    "score_rentabilidad": "↑ Score rentabilidad potencial",
+                    "cuadrante": "",
+                },
+                opacity=0.9,
+            )
+            fig_quad.update_traces(textposition="top center", textfont=dict(size=9, color=FONT))
+            # Líneas de cuadrante
+            fig_quad.add_hline(y=med_ren, line_dash="dot", line_color=S_MUTED, line_width=1)
+            fig_quad.add_vline(x=med_op,  line_dash="dot", line_color=S_MUTED, line_width=1)
+            # Etiquetas cuadrantes
+            xr = VEC["score_oportunidad"]
+            yr = VEC["score_rentabilidad"]
+            for label, x, y, col in [
+                ("PRIORIDAD MÁXIMA",       xr.max()-2, yr.max()-1, ACCENT),
+                ("CRECER CON CAUTELA",     xr.max()-2, yr.min()+1, "#E65100"),
+                ("CONSOLIDAR",             xr.min()+1, yr.max()-1, "#2E7D32"),
+                ("REVISAR ESTRATEGIA",     xr.min()+1, yr.min()+1, S_MUTED),
+            ]:
+                fig_quad.add_annotation(
+                    x=x, y=y, text=label,
+                    font=dict(size=8, color=col, family="Inter"),
+                    showarrow=False, xanchor="right" if "MAX" in label or "CAUTELA" in label else "left",
+                )
+            fig_quad.update_layout(**lay(h=400, showlegend=True,
+                legend=dict(orientation="h", y=-0.18, font=dict(size=10),
+                            bgcolor="rgba(0,0,0,0)"),
+                margin=dict(t=14, b=70, l=8, r=8)))
+            fig_quad.update_xaxes(showgrid=True, gridcolor=GRID)
+            fig_quad.update_yaxes(showgrid=True, gridcolor=GRID)
+            st.plotly_chart(fig_quad, use_container_width=True)
+
+        with vc2:
+            st.markdown('<div class="chart-label">Ranking combinado — Score global Sanitas por CCAA</div>',
+                        unsafe_allow_html=True)
+            VEC_sorted = VEC.sort_values("score_global", ascending=True)
+            bar_colors = [COLOR_Q[q] for q in VEC_sorted["cuadrante"]]
+            fig_rank_v = go.Figure(go.Bar(
+                y=VEC_sorted["ccaa"],
+                x=VEC_sorted["score_global"],
+                orientation="h",
+                marker_color=bar_colors,
+                marker_line_width=0,
+                text=[f"{v:.0f}" for v in VEC_sorted["score_global"]],
+                textposition="outside",
+                textfont=dict(size=9),
+            ))
+            fig_rank_v.update_layout(**lay(h=400, margin=dict(t=10, b=10, l=8, r=50)))
+            fig_rank_v.update_xaxes(showgrid=True, gridcolor=GRID, range=[0, 105])
+            st.plotly_chart(fig_rank_v, use_container_width=True)
+
+        st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+
+        # ── Radar top 5 CCAA por cuadrante ───────────────────────
+        st.markdown('<div class="chart-label">Perfil vectorial — top 5 CCAA por score global</div>',
+                    unsafe_allow_html=True)
+
+        TOP5 = VEC.nlargest(5, "score_global")["ccaa"].tolist()
+        rad_dims  = ["renta_idx", "score_oportunidad", "score_rentabilidad", "deporte_idx", "turismo_idx"]
+        rad_labels= ["Renta", "Oportunidad", "Rentabilidad", "Deporte", "Turismo"]
+        rad_colors= [ACCENT, A2, A3, "#2E7D32", "#E65100"]
+
+        fig_rad = go.Figure()
+        for i, ccaa in enumerate(TOP5):
+            row = VEC[VEC["ccaa"] == ccaa].iloc[0]
+            vals = [row[d] for d in rad_dims]
+            r, g, b = int(rad_colors[i][1:3],16), int(rad_colors[i][3:5],16), int(rad_colors[i][5:7],16)
+            fig_rad.add_trace(go.Scatterpolar(
+                r=vals + [vals[0]],
+                theta=rad_labels + [rad_labels[0]],
+                name=ccaa, fill="toself",
+                line=dict(color=rad_colors[i], width=2),
+                fillcolor=f"rgba({r},{g},{b},0.07)",
+            ))
+        fig_rad.update_layout(
+            polar=dict(
+                bgcolor="rgba(0,0,0,0)",
+                radialaxis=dict(visible=True, range=[0, 100],
+                                tickfont=dict(size=8), gridcolor=GRID, linecolor=GRID),
+                angularaxis=dict(tickfont=dict(size=11, family="Inter"), gridcolor=GRID),
+            ),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(family="Inter", size=11, color=FONT),
+            showlegend=True,
+            legend=dict(orientation="h", y=-0.12, font=dict(size=11), bgcolor="rgba(0,0,0,0)"),
+            height=400, margin=dict(t=20, b=60, l=20, r=20),
+        )
+        st.plotly_chart(fig_rad, use_container_width=True)
+
+        st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+
+        # ── Tabla detalle vectorización ───────────────────────────
+        st.markdown('<div class="chart-label">Tabla de vectorización completa por CCAA</div>',
+                    unsafe_allow_html=True)
+
+        def score_pill(v, high=80, mid=60):
+            if v >= high:
+                color = ACCENT
+            elif v >= mid:
+                color = A3
+            else:
+                color = S_MUTED
+            return f'<span style="background:{color};color:#fff;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600">{v:.0f}</span>'
+
+        def presencia_bar(v):
+            color = ACCENT if v >= 65 else A2 if v >= 45 else "#E65100" if v >= 30 else "#B71C1C"
+            return (f'<div style="display:flex;align-items:center;gap:6px">'
+                    f'<div style="background:{color};height:5px;width:{v}%;border-radius:3px;max-width:80px"></div>'
+                    f'<span style="font-size:11px;font-weight:600;color:{color}">{v}%</span></div>')
+
+        CUAD_COLOR = {
+            "🏆 Prioridad máxima":        f"background:{ACCENT}22;color:{ACCENT}",
+            "📈 Crecer con cautela":       "background:#E6510022;color:#E65100",
+            "💎 Consolidar y rentabilizar":"background:#2E7D3222;color:#2E7D32",
+            "⚠️ Revisar estrategia":       f"background:{S_MUTED}22;color:{S_MUTED}",
+        }
+
+        rows_vec = ""
+        for _, r in VEC.sort_values("score_global", ascending=False).iterrows():
+            cq = r["cuadrante"]
+            cstyle = CUAD_COLOR.get(cq, "")
+            rows_vec += f"""<tr style="border-bottom:1px solid rgba(0,0,0,0.06)">
+              <td style="padding:8px 12px;font-weight:600;white-space:nowrap">{r['ccaa']}</td>
+              <td style="padding:8px 12px;text-align:center">{score_pill(r['score_global'], 75, 58)}</td>
+              <td style="padding:8px 12px;text-align:center">{score_pill(r['score_oportunidad'], 72, 56)}</td>
+              <td style="padding:8px 12px;text-align:center">{score_pill(r['score_rentabilidad'], 72, 56)}</td>
+              <td style="padding:8px 12px">{presencia_bar(r['presencia_sanitas'])}</td>
+              <td style="padding:8px 12px;font-size:11px"><span style="padding:3px 9px;border-radius:8px;font-size:10px;font-weight:600;{cstyle}">{cq}</span></td>
+            </tr>"""
+
+        tabla_vec = f"""
+        <div style="overflow-x:auto;margin-top:8px">
+        <table style="width:100%;border-collapse:collapse;font-family:Inter,sans-serif;font-size:13px">
+          <thead>
+            <tr style="border-bottom:2px solid {ACCENT}">
+              <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">CCAA</th>
+              <th style="text-align:center;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">SCORE GLOBAL</th>
+              <th style="text-align:center;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">OPORTUNIDAD</th>
+              <th style="text-align:center;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">RENTABILIDAD</th>
+              <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">PRESENCIA ACTUAL</th>
+              <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">CLASIFICACIÓN</th>
+            </tr>
+          </thead>
+          <tbody>{rows_vec}</tbody>
+        </table>
+        </div>"""
+        st.markdown(tabla_vec, unsafe_allow_html=True)
+
+        st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+
+        # ── Acciones recomendadas por cuadrante ──────────────────
+        st.markdown('<div class="section-title">PLAN DE ACCIÓN POR CUADRANTE</div>', unsafe_allow_html=True)
+        st.markdown("<div style='height:6px'></div>", unsafe_allow_html=True)
+
+        ac1, ac2 = st.columns(2)
+
+        ccaa_prio  = ", ".join(VEC[VEC["cuadrante"]=="🏆 Prioridad máxima"]["ccaa"].tolist())
+        ccaa_crece = ", ".join(VEC[VEC["cuadrante"]=="📈 Crecer con cautela"]["ccaa"].tolist())
+        ccaa_cons  = ", ".join(VEC[VEC["cuadrante"]=="💎 Consolidar y rentabilizar"]["ccaa"].tolist())
+        ccaa_rev   = ", ".join(VEC[VEC["cuadrante"]=="⚠️ Revisar estrategia"]["ccaa"].tolist())
+
+        with ac1:
+            st.markdown(f"""
+            <div style="background:{ACCENT}12;border-left:4px solid {ACCENT};border-radius:12px;
+                        padding:18px 20px;margin-bottom:14px">
+              <div style="font-size:.72rem;font-weight:700;color:{ACCENT};letter-spacing:.08em;
+                          text-transform:uppercase;margin-bottom:8px">🏆 Prioridad máxima</div>
+              <div style="font-size:.82rem;font-weight:600;color:{FONT};margin-bottom:6px">{ccaa_prio}</div>
+              <div style="font-size:.78rem;color:#3A3A3C;line-height:1.6">
+                Alta oportunidad de mercado <strong>y</strong> alta rentabilidad potencial.
+                Invertir en ampliar red de centros, contratar mediadores locales y lanzar
+                campañas de captación masiva. Prioridad 1 en presupuesto 2026.
+              </div>
+            </div>
+            <div style="background:#2E7D3212;border-left:4px solid #2E7D32;border-radius:12px;
+                        padding:18px 20px;margin-bottom:14px">
+              <div style="font-size:.72rem;font-weight:700;color:#2E7D32;letter-spacing:.08em;
+                          text-transform:uppercase;margin-bottom:8px">💎 Consolidar y rentabilizar</div>
+              <div style="font-size:.82rem;font-weight:600;color:{FONT};margin-bottom:6px">{ccaa_cons}</div>
+              <div style="font-size:.78rem;color:#3A3A3C;line-height:1.6">
+                Asegurados de alta calidad y baja siniestralidad. Objetivo: retener cartera actual,
+                aumentar ticket con pólizas premium y programas wellness. No reducir red existente.
+              </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with ac2:
+            st.markdown(f"""
+            <div style="background:#E6510012;border-left:4px solid #E65100;border-radius:12px;
+                        padding:18px 20px;margin-bottom:14px">
+              <div style="font-size:.72rem;font-weight:700;color:#E65100;letter-spacing:.08em;
+                          text-transform:uppercase;margin-bottom:8px">📈 Crecer con cautela</div>
+              <div style="font-size:.82rem;font-weight:600;color:{FONT};margin-bottom:6px">{ccaa_crece}</div>
+              <div style="font-size:.78rem;color:#3A3A3C;line-height:1.6">
+                Gran mercado potencial pero perfil de asegurado con mayor riesgo actuarial
+                (mayor carga de enfermedad crónica). Entrar con scoring de riesgo estricto,
+                carencias dinámicas y pricing ajustado por perfil. No crecer a volumen.
+              </div>
+            </div>
+            <div style="background:{S_MUTED}12;border-left:4px solid {S_MUTED};border-radius:12px;
+                        padding:18px 20px;margin-bottom:14px">
+              <div style="font-size:.72rem;font-weight:700;color:{S_MUTED};letter-spacing:.08em;
+                          text-transform:uppercase;margin-bottom:8px">⚠️ Revisar estrategia</div>
+              <div style="font-size:.82rem;font-weight:600;color:{FONT};margin-bottom:6px">{ccaa_rev}</div>
+              <div style="font-size:.78rem;color:#3A3A3C;line-height:1.6">
+                Baja oportunidad y baja rentabilidad. Mantener presencia mínima por obligación
+                regulatoria o imagen de marca. No invertir en captación activa. Estudiar
+                acuerdos con aseguradoras locales para cubrir la red sin coste propio.
+              </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        callout(
+            "<strong>Conclusión estratégica:</strong> Madrid, Baleares y País Vasco son las CCAA donde "
+            "Sanitas tiene mayor retorno por euro invertido — alta renta disponible, baja siniestralidad "
+            "esperada y penetración de seguro privado aún mejorable. "
+            "Navarra y Cataluña son las grandes oportunidades infracubiertas: "
+            "alto potencial pero presencia actual por debajo del 65%. "
+            "Extremadura y Castilla-La Mancha requieren un modelo diferente: "
+            "acuerdos con asistencia sanitaria pública o productos de entrada de precio bajo, "
+            "no pólizas premium."
         )
 
 # ══════════════════════════════════════════════════════════════════
