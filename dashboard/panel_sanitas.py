@@ -2635,6 +2635,7 @@ elif st.session_state["page"] == "experiencia":
             ))
             fig_fun.update_layout(
                 paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(0,0,0,0)",
                 font=dict(family="Inter", size=10, color=FONT),
                 margin=dict(t=10,b=10,l=8,r=8), height=260,
             )
