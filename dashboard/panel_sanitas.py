@@ -430,7 +430,7 @@ elif st.session_state["page"] == "seguros":
     section("SEGUROS DE SALUD")
     st.caption(f"Perfil seleccionado: **{perfil_seg}**")
 
-    t1, t2, t3, t4, t5 = st.tabs(["Precios", "Coberturas", "Mercado & Encuesta", "Riesgo & Utilización", "Rentabilidad por Póliza"])
+    t1, t2, t3, t4 = st.tabs(["Precios", "Coberturas", "Mercado & Encuesta", "Riesgo & Utilización"])
 
     # ── Precios ───────────────────────────────────────────────────
     with t1:
@@ -940,295 +940,6 @@ elif st.session_state["page"] == "seguros":
             "predictivo en contratación y activar carencias dinámicas para perfiles de alto riesgo."
         )
 
-    # ── Rentabilidad por Póliza ───────────────────────────────────
-    with t5:
-        section("RENTABILIDAD POR PÓLIZA REAL — CATÁLOGO SANITAS 2026")
-        callout(
-            "Análisis basado en el catálogo oficial de Sanitas (septiembre 2026). "
-            "Para cada póliza se calcula el <strong>índice de rentabilidad por CCAA</strong> "
-            "cruzando renta disponible, perfil demográfico objetivo, densidad del segmento target "
-            "y siniestralidad esperada. Fuente: "
-            "<a href='https://selectra.es/seguros/aseguradoras/sanitas/seguro-salud-sanitas' "
-            "style='color:{ACCENT}'>Selectra · Catálogo Sanitas 2026</a> / "
-            "<a href='https://www.sanitas.es/seguros/seguros-medicos-privados' "
-            "style='color:{ACCENT}'>sanitas.es</a>."
-        )
-        st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
-
-        # ── Catálogo real Sanitas 2026 ────────────────────────────
-        POLIZAS = [
-            # nombre, precio_desde, tipo, copago, hospitaliz, target_edad, target_perfil, margen_idx, loss_idx
-            # margen_idx: rentabilidad teórica 0-100 (prima alta + bajo riesgo actuarial)
-            # loss_idx: siniestralidad esperada 0-100 (100=muy alta)
-            {"poliza": "Accede",              "precio": 22.10, "tipo": "Básica",       "copago": "Alto",   "hosp": False, "edad": "18–35",  "perfil": "Joven sin seguro previo",        "margen": 82, "loss": 28},
-            {"poliza": "Avanza",              "precio": 33.60, "tipo": "Básica",       "copago": "Medio",  "hosp": False, "edad": "25–45",  "perfil": "Adulto digital complementa pública","margen": 76, "loss": 32},
-            {"poliza": "Más Salud Óptima",    "precio": 38.88, "tipo": "Completa",     "copago": "Medio",  "hosp": True,  "edad": "30–50",  "perfil": "Clase media, precio-calidad",    "margen": 68, "loss": 44},
-            {"poliza": "Más Salud Plus",      "precio": 50.00, "tipo": "Completa",     "copago": "Bajo",   "hosp": True,  "edad": "35–55",  "perfil": "Clase media-alta",               "margen": 72, "loss": 40},
-            {"poliza": "Más Salud Fam. Plus", "precio": 53.35, "tipo": "Familiar",     "copago": "Bajo",   "hosp": True,  "edad": "30–50",  "perfil": "Familia con hijos, psicología",  "margen": 65, "loss": 48},
-            {"poliza": "Más Salud",           "precio": 66.31, "tipo": "Completa",     "copago": "Sin",    "hosp": True,  "edad": "40–60",  "perfil": "Alta renta, comodidad total",    "margen": 70, "loss": 42},
-            {"poliza": "Más Salud Familias",  "precio": 67.72, "tipo": "Familiar",     "copago": "Sin",    "hosp": True,  "edad": "35–55",  "perfil": "Familia premium, psicología",    "margen": 67, "loss": 46},
-            {"poliza": "Único",               "precio": 48.10, "tipo": "Senior",       "copago": "Medio",  "hosp": False, "edad": "60+",    "perfil": "Senior sin cuestionario médico", "margen": 44, "loss": 72},
-            {"poliza": "Profesionales Óptima","precio": 38.90, "tipo": "Autónomo",     "copago": "Medio",  "hosp": True,  "edad": "30–55",  "perfil": "Autónomo con deducción fiscal",  "margen": 71, "loss": 38},
-            {"poliza": "Profesionales Plus",  "precio": 51.40, "tipo": "Autónomo",     "copago": "Bajo",   "hosp": True,  "edad": "35–55",  "perfil": "Autónomo o profesional liberal",  "margen": 74, "loss": 36},
-            {"poliza": "Profesionales",       "precio": 81.00, "tipo": "Autónomo",     "copago": "Sin",    "hosp": True,  "edad": "35–60",  "perfil": "Profesional liberal renta alta",  "margen": 75, "loss": 35},
-            {"poliza": "Más 90.000",          "precio": 76.45, "tipo": "Reembolso",    "copago": "Mixto",  "hosp": True,  "edad": "40–65",  "perfil": "Directivo, expat, libre elección","margen": 78, "loss": 38},
-            {"poliza": "Premium 500.000",     "precio": 94.00, "tipo": "Reembolso",    "copago": "Sin",    "hosp": True,  "edad": "45–65",  "perfil": "Alta dirección, cobertura mundial","margen": 80, "loss": 34},
-        ]
-        df_pol = pd.DataFrame(POLIZAS)
-
-        # ── KPIs catálogo ─────────────────────────────────────────
-        pk1, pk2, pk3, pk4 = st.columns(4)
-        kpi_card(pk1, "Pólizas en catálogo", "19", "Particulares, autónomos, seniors, internacional")
-        kpi_card(pk2, "Precio mínimo", "22,10 €/mes", "Sanitas Accede — copago alto")
-        kpi_card(pk3, "Mayor margen teórico", "Accede / Premium 500K", "Loss ratio bajo + prima sostenida")
-        kpi_card(pk4, "Póliza senior sin cuestionario", "Único 48,10 €/mes", "Sin límite de edad de permanencia")
-
-        st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
-
-        # ── Ficha visual por tipo de póliza ──────────────────────
-        st.markdown('<div class="section-title">PÓLIZAS POR CATEGORÍA — PRECIO, PERFIL Y MARGEN</div>',
-                    unsafe_allow_html=True)
-        st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
-
-        TYPE_COLOR = {
-            "Básica":    A3,
-            "Completa":  ACCENT,
-            "Familiar":  "#2E7D32",
-            "Senior":    "#E65100",
-            "Autónomo":  "#6A1B9A",
-            "Reembolso": "#BF360C",
-        }
-
-        def margen_bar_html(v):
-            col = ACCENT if v >= 75 else A2 if v >= 65 else A3 if v >= 55 else S_MUTED
-            return (f'<div style="display:flex;align-items:center;gap:6px">'
-                    f'<div style="background:{col};height:5px;width:{v}%;border-radius:3px;max-width:80px"></div>'
-                    f'<span style="font-size:11px;font-weight:600;color:{col}">{v}</span></div>')
-
-        def loss_pill_html(v):
-            col = "#2E7D32" if v < 38 else A3 if v < 50 else "#E65100" if v < 65 else "#B71C1C"
-            return f'<span style="background:{col}22;color:{col};padding:2px 8px;border-radius:8px;font-size:11px;font-weight:600">{v}</span>'
-
-        rows_pol = ""
-        for _, r in df_pol.iterrows():
-            tc = TYPE_COLOR.get(r["tipo"], S_MUTED)
-            badge_tipo = f'<span style="background:{tc};color:#fff;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:600">{r["tipo"]}</span>'
-            badge_hosp = ('<span style="background:#2E7D3222;color:#2E7D32;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:600">Con hosp.</span>'
-                         if r["hosp"] else
-                         '<span style="background:#86868B22;color:#86868B;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:600">Sin hosp.</span>')
-            rows_pol += f"""<tr style="border-bottom:1px solid rgba(0,0,0,0.06)">
-              <td style="padding:9px 12px;font-weight:600;white-space:nowrap">{r['poliza']}</td>
-              <td style="padding:9px 12px;text-align:center">{badge_tipo}</td>
-              <td style="padding:9px 12px;font-weight:700;color:{ACCENT};white-space:nowrap">Desde {r['precio']:.2f} €/mes</td>
-              <td style="padding:9px 12px;text-align:center;font-size:11px">{r['copago']}</td>
-              <td style="padding:9px 12px;text-align:center">{badge_hosp}</td>
-              <td style="padding:9px 12px;font-size:11px;white-space:nowrap">{r['edad']}</td>
-              <td style="padding:9px 12px;font-size:11px;color:#3A3A3C">{r['perfil']}</td>
-              <td style="padding:9px 12px">{margen_bar_html(r['margen'])}</td>
-              <td style="padding:9px 12px;text-align:center">{loss_pill_html(r['loss'])}</td>
-            </tr>"""
-
-        tabla_pol = f"""
-        <div style="overflow-x:auto;margin-top:4px">
-        <table style="width:100%;border-collapse:collapse;font-family:Inter,sans-serif;font-size:13px">
-          <thead>
-            <tr style="border-bottom:2px solid {ACCENT}">
-              <th style="text-align:left;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">PÓLIZA</th>
-              <th style="text-align:center;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">TIPO</th>
-              <th style="text-align:left;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">PRECIO BASE</th>
-              <th style="text-align:center;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">COPAGO</th>
-              <th style="text-align:center;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">HOSP.</th>
-              <th style="text-align:left;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">EDAD TARGET</th>
-              <th style="text-align:left;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">PERFIL IDEAL</th>
-              <th style="text-align:left;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">MARGEN (0-100)</th>
-              <th style="text-align:center;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">LOSS IDX</th>
-            </tr>
-          </thead>
-          <tbody>{rows_pol}</tbody>
-        </table>
-        </div>"""
-        st.markdown(tabla_pol, unsafe_allow_html=True)
-
-        st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
-
-        # ── Heatmap rentabilidad póliza × CCAA ───────────────────
-        st.markdown('<div class="chart-label">Heatmap de rentabilidad — qué póliza es más rentable en cada CCAA</div>',
-                    unsafe_allow_html=True)
-
-        # Para cada combinación póliza×CCAA calculamos un score de rentabilidad
-        # basado en: margen póliza × fit_demográfico × renta_ccaa × (1 - loss_esperado)
-        CCAA_VEC = {
-            "Madrid":             {"renta": 88, "senior": 22, "autonomo": 32, "familia": 68, "joven": 38, "turismo": 82, "deporte": 68},
-            "Cataluña":           {"renta": 85, "senior": 24, "autonomo": 28, "familia": 62, "joven": 36, "turismo": 98, "deporte": 72},
-            "País Vasco":         {"renta": 92, "senior": 26, "autonomo": 30, "familia": 58, "joven": 32, "turismo": 48, "deporte": 74},
-            "Navarra":            {"renta": 90, "senior": 24, "autonomo": 26, "familia": 60, "joven": 34, "turismo": 36, "deporte": 76},
-            "Baleares":           {"renta": 82, "senior": 20, "autonomo": 34, "familia": 52, "joven": 30, "turismo": 94, "deporte": 70},
-            "Aragón":             {"renta": 78, "senior": 28, "autonomo": 20, "familia": 48, "joven": 26, "turismo": 30, "deporte": 62},
-            "C. Valenciana":      {"renta": 70, "senior": 24, "autonomo": 26, "familia": 58, "joven": 34, "turismo": 86, "deporte": 61},
-            "Andalucía":          {"renta": 58, "senior": 22, "autonomo": 22, "familia": 72, "joven": 42, "turismo": 72, "deporte": 55},
-            "Murcia":             {"renta": 62, "senior": 20, "autonomo": 22, "familia": 64, "joven": 36, "turismo": 52, "deporte": 57},
-            "Canarias":           {"renta": 60, "senior": 18, "autonomo": 24, "familia": 54, "joven": 38, "turismo": 96, "deporte": 58},
-            "Galicia":            {"renta": 64, "senior": 34, "autonomo": 18, "familia": 48, "joven": 24, "turismo": 42, "deporte": 54},
-            "Castilla y León":    {"renta": 68, "senior": 36, "autonomo": 16, "familia": 44, "joven": 22, "turismo": 28, "deporte": 52},
-            "Castilla-La Mancha": {"renta": 56, "senior": 30, "autonomo": 14, "familia": 50, "joven": 28, "turismo": 18, "deporte": 48},
-            "Extremadura":        {"renta": 44, "senior": 32, "autonomo": 12, "familia": 46, "joven": 24, "turismo": 14, "deporte": 44},
-            "La Rioja":           {"renta": 76, "senior": 26, "autonomo": 20, "familia": 50, "joven": 28, "turismo": 22, "deporte": 64},
-            "Asturias":           {"renta": 66, "senior": 32, "autonomo": 16, "familia": 46, "joven": 24, "turismo": 30, "deporte": 60},
-            "Cantabria":          {"renta": 72, "senior": 28, "autonomo": 18, "familia": 50, "joven": 26, "turismo": 32, "deporte": 63},
-        }
-
-        # Función de rentabilidad por tipo de póliza
-        def rent_score(pol_row, ccaa_data):
-            tipo = pol_row["tipo"]
-            m = pol_row["margen"] / 100
-            l = 1 - pol_row["loss"] / 100
-            r = ccaa_data["renta"] / 100
-            if tipo == "Básica":
-                fit = (ccaa_data["joven"] / 100 * 0.5 + r * 0.3 + (1 - ccaa_data["senior"] / 100) * 0.2)
-            elif tipo == "Completa":
-                fit = (r * 0.4 + ccaa_data["familia"] / 100 * 0.3 + (1 - ccaa_data["senior"] / 100) * 0.3)
-            elif tipo == "Familiar":
-                fit = (ccaa_data["familia"] / 100 * 0.5 + r * 0.3 + ccaa_data["joven"] / 100 * 0.2)
-            elif tipo == "Senior":
-                fit = (ccaa_data["senior"] / 100 * 0.6 + r * 0.4)
-            elif tipo == "Autónomo":
-                fit = (ccaa_data["autonomo"] / 100 * 0.5 + r * 0.4 + ccaa_data["deporte"] / 100 * 0.1)
-            elif tipo == "Reembolso":
-                fit = (r * 0.5 + ccaa_data["turismo"] / 100 * 0.3 + ccaa_data["autonomo"] / 100 * 0.2)
-            else:
-                fit = r
-            return round((m * 0.35 + l * 0.30 + fit * 0.35) * 100, 1)
-
-        ccaa_list = list(CCAA_VEC.keys())
-        pol_list  = df_pol["poliza"].tolist()
-        heat_matrix = []
-        for _, pr in df_pol.iterrows():
-            row_scores = [rent_score(pr, CCAA_VEC[c]) for c in ccaa_list]
-            heat_matrix.append(row_scores)
-
-        import plotly.figure_factory as ff  # noqa
-
-        fig_heat = go.Figure(go.Heatmap(
-            z=heat_matrix,
-            x=ccaa_list,
-            y=pol_list,
-            colorscale=[[0, "#EEF4FF"], [0.4, A3], [0.7, A2], [1.0, ACCENT]],
-            text=[[f"{v:.0f}" for v in row] for row in heat_matrix],
-            texttemplate="%{text}",
-            textfont=dict(size=9, color="#fff"),
-            hoverongaps=False,
-            showscale=True,
-            colorbar=dict(title="Score<br>rent.", tickfont=dict(size=9), len=0.6),
-        ))
-        fig_heat.update_layout(
-            paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(0,0,0,0)",
-            font=dict(family="Inter,sans-serif", color=FONT, size=10),
-            height=460,
-            margin=dict(t=10, b=10, l=8, r=10),
-            xaxis=dict(tickangle=-30, tickfont=dict(size=9), side="bottom"),
-            yaxis=dict(tickfont=dict(size=10), autorange="reversed"),
-        )
-        st.plotly_chart(fig_heat, use_container_width=True)
-
-        st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
-
-        # ── Top 3 CCAA por póliza ─────────────────────────────────
-        hc1, hc2 = st.columns(2)
-
-        with hc1:
-            st.markdown('<div class="chart-label">Top 3 CCAA más rentables por póliza</div>',
-                        unsafe_allow_html=True)
-            rows_top = ""
-            for i, (_, pr) in enumerate(df_pol.iterrows()):
-                scores = {c: rent_score(pr, CCAA_VEC[c]) for c in ccaa_list}
-                top3 = sorted(scores, key=scores.get, reverse=True)[:3]
-                tc = TYPE_COLOR.get(pr["tipo"], S_MUTED)
-                pills = " ".join([
-                    f'<span style="background:{ACCENT if j==0 else A2 if j==1 else A3};color:#fff;'
-                    f'padding:2px 8px;border-radius:8px;font-size:10px;white-space:nowrap">{c}</span>'
-                    for j, c in enumerate(top3)
-                ])
-                rows_top += f"""<tr style="border-bottom:1px solid rgba(0,0,0,0.06)">
-                  <td style="padding:7px 10px;font-weight:600;font-size:12px;white-space:nowrap">
-                    <span style="display:inline-block;width:8px;height:8px;background:{tc};border-radius:50%;margin-right:6px"></span>
-                    {pr['poliza']}</td>
-                  <td style="padding:7px 10px">{pills}</td>
-                </tr>"""
-            st.markdown(f"""
-            <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-family:Inter,sans-serif">
-              <thead><tr style="border-bottom:2px solid {ACCENT}">
-                <th style="text-align:left;padding:7px 10px;color:{S_MUTED};font-size:10px;font-weight:600">PÓLIZA</th>
-                <th style="text-align:left;padding:7px 10px;color:{S_MUTED};font-size:10px;font-weight:600">TOP 3 CCAA</th>
-              </tr></thead><tbody>{rows_top}</tbody>
-            </table></div>""", unsafe_allow_html=True)
-
-        with hc2:
-            st.markdown('<div class="chart-label">Póliza más rentable por CCAA</div>',
-                        unsafe_allow_html=True)
-            rows_best = ""
-            for ccaa in ccaa_list:
-                best_scores = {pr["poliza"]: rent_score(pr, CCAA_VEC[ccaa]) for _, pr in df_pol.iterrows()}
-                best_pol = max(best_scores, key=best_scores.get)
-                best_val = best_scores[best_pol]
-                pol_tipo = df_pol[df_pol["poliza"] == best_pol]["tipo"].values[0]
-                pol_precio = df_pol[df_pol["poliza"] == best_pol]["precio"].values[0]
-                tc = TYPE_COLOR.get(pol_tipo, S_MUTED)
-                rows_best += f"""<tr style="border-bottom:1px solid rgba(0,0,0,0.06)">
-                  <td style="padding:7px 10px;font-weight:600;font-size:12px;white-space:nowrap">{ccaa}</td>
-                  <td style="padding:7px 10px">
-                    <span style="background:{tc};color:#fff;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:600">{best_pol}</span>
-                  </td>
-                  <td style="padding:7px 10px;font-size:11px;color:{S_MUTED}">{pol_precio:.0f}€/mes · Score {best_val:.0f}</td>
-                </tr>"""
-            st.markdown(f"""
-            <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-family:Inter,sans-serif">
-              <thead><tr style="border-bottom:2px solid {ACCENT}">
-                <th style="text-align:left;padding:7px 10px;color:{S_MUTED};font-size:10px;font-weight:600">CCAA</th>
-                <th style="text-align:left;padding:7px 10px;color:{S_MUTED};font-size:10px;font-weight:600">PÓLIZA ÓPTIMA</th>
-                <th style="text-align:left;padding:7px 10px;color:{S_MUTED};font-size:10px;font-weight:600">PRECIO · SCORE</th>
-              </tr></thead><tbody>{rows_best}</tbody>
-            </table></div>""", unsafe_allow_html=True)
-
-        st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
-
-        # ── Burbujas: margen vs loss ratio por póliza ─────────────
-        st.markdown('<div class="chart-label">Posicionamiento pólizas — margen esperado vs siniestralidad</div>',
-                    unsafe_allow_html=True)
-
-        df_pol["precio_sz"] = df_pol["precio"]
-        fig_bub = px.scatter(
-            df_pol, x="loss", y="margen",
-            color="tipo", text="poliza",
-            size="precio_sz", size_max=36,
-            color_discrete_map=TYPE_COLOR,
-            labels={"loss": "Índice siniestralidad esperada →", "margen": "↑ Índice margen potencial", "tipo": ""},
-            opacity=0.88,
-        )
-        fig_bub.update_traces(textposition="top center", textfont=dict(size=8.5, color=FONT))
-        fig_bub.add_hline(y=70, line_dash="dot", line_color=S_MUTED, line_width=1,
-                          annotation_text="Umbral margen alto", annotation_font_size=8,
-                          annotation_font_color=S_MUTED)
-        fig_bub.add_vline(x=45, line_dash="dot", line_color="#E65100", line_width=1,
-                          annotation_text="Umbral riesgo alto", annotation_font_size=8,
-                          annotation_font_color="#E65100")
-        fig_bub.update_layout(**lay(h=400, showlegend=True,
-            legend=dict(orientation="h", y=-0.18, font=dict(size=10), bgcolor="rgba(0,0,0,0)"),
-            margin=dict(t=14, b=70, l=8, r=8)))
-        fig_bub.update_xaxes(showgrid=True, gridcolor=GRID, range=[20, 80])
-        fig_bub.update_yaxes(showgrid=True, gridcolor=GRID, range=[35, 92])
-        st.plotly_chart(fig_bub, use_container_width=True)
-
-        callout(
-            "<strong>Las pólizas con mayor margen real son Accede, Profesionales Plus y Premium 500.000</strong>: "
-            "bajo loss ratio (asegurado joven o profesional sano) y prima suficientemente alta. "
-            "Único es la póliza con mayor riesgo actuarial — seniors sin cuestionario —, "
-            "pero es obligatoria para no perder ese segmento al envejecer la cartera. "
-            "<strong>Mejor CCAA para Accede:</strong> Andalucía y C. Valenciana (alta densidad joven, "
-            "baja penetración actual). "
-            "<strong>Mejor CCAA para Premium/Reembolso:</strong> Madrid, Baleares y Cataluña "
-            "(alta renta, expats, directivos)."
-        )
 
 # ══════════════════════════════════════════════════════════════════
 # PÁGINA: HOSPITALES
@@ -1868,7 +1579,7 @@ elif st.session_state["page"] == "mapa":
     mun_sin_acceso["_sz"] = (mun_sin_acceso["poblacion"] / 1000).clip(2, 20)
 
     # ── Tabs del mapa ─────────────────────────────────────────────
-    mt1, mt2, mt3, mt4, mt5, mt6, mt7, mt8, mt9 = st.tabs([
+    mt1, mt2, mt3, mt4, mt5, mt6, mt7, mt8, mt9, mt10 = st.tabs([
         "Red de centros",
         "Nivel de renta",
         "Turismo & temperatura",
@@ -1878,6 +1589,7 @@ elif st.session_state["page"] == "mapa":
         "Municipios sin acceso",
         "Deporte por CCAA",
         "Vectorización estratégica",
+        "Rentabilidad por Póliza",
     ])
 
     # ────────────────────────────────────────────────────────
@@ -3082,6 +2794,273 @@ elif st.session_state["page"] == "mapa":
             "Extremadura y Castilla-La Mancha requieren un modelo diferente: "
             "acuerdos con asistencia sanitaria pública o productos de entrada de precio bajo, "
             "no pólizas premium."
+        )
+
+    # ── mt10: Rentabilidad por Póliza ─────────────────────────────
+    with mt10:
+        section("RENTABILIDAD POR PÓLIZA REAL — CATÁLOGO SANITAS 2026")
+        callout(
+            "Análisis basado en el catálogo oficial de Sanitas (septiembre 2026). "
+            "Para cada póliza se calcula el <strong>índice de rentabilidad por CCAA</strong> "
+            "cruzando renta disponible, perfil demográfico objetivo, densidad del segmento target "
+            "y siniestralidad esperada. Fuente: "
+            f"<a href='https://selectra.es/seguros/aseguradoras/sanitas/seguro-salud-sanitas' "
+            f"style='color:{ACCENT}'>Selectra · Catálogo Sanitas 2026</a> / "
+            f"<a href='https://www.sanitas.es/seguros/seguros-medicos-privados' "
+            f"style='color:{ACCENT}'>sanitas.es</a>."
+        )
+        st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
+
+        POLIZAS = [
+            {"poliza": "Accede",              "precio": 22.10, "tipo": "Básica",    "copago": "Alto",  "hosp": False, "edad": "18–35",  "perfil": "Joven sin seguro previo",          "margen": 82, "loss": 28},
+            {"poliza": "Avanza",              "precio": 33.60, "tipo": "Básica",    "copago": "Medio", "hosp": False, "edad": "25–45",  "perfil": "Adulto digital complementa pública","margen": 76, "loss": 32},
+            {"poliza": "Más Salud Óptima",    "precio": 38.88, "tipo": "Completa",  "copago": "Medio", "hosp": True,  "edad": "30–50",  "perfil": "Clase media, precio-calidad",      "margen": 68, "loss": 44},
+            {"poliza": "Más Salud Plus",      "precio": 50.00, "tipo": "Completa",  "copago": "Bajo",  "hosp": True,  "edad": "35–55",  "perfil": "Clase media-alta",                 "margen": 72, "loss": 40},
+            {"poliza": "Más Salud Fam. Plus", "precio": 53.35, "tipo": "Familiar",  "copago": "Bajo",  "hosp": True,  "edad": "30–50",  "perfil": "Familia con hijos, psicología",    "margen": 65, "loss": 48},
+            {"poliza": "Más Salud",           "precio": 66.31, "tipo": "Completa",  "copago": "Sin",   "hosp": True,  "edad": "40–60",  "perfil": "Alta renta, comodidad total",      "margen": 70, "loss": 42},
+            {"poliza": "Más Salud Familias",  "precio": 67.72, "tipo": "Familiar",  "copago": "Sin",   "hosp": True,  "edad": "35–55",  "perfil": "Familia premium, psicología",      "margen": 67, "loss": 46},
+            {"poliza": "Único",               "precio": 48.10, "tipo": "Senior",    "copago": "Medio", "hosp": False, "edad": "60+",    "perfil": "Senior sin cuestionario médico",   "margen": 44, "loss": 72},
+            {"poliza": "Profesionales Óptima","precio": 38.90, "tipo": "Autónomo",  "copago": "Medio", "hosp": True,  "edad": "30–55",  "perfil": "Autónomo con deducción fiscal",    "margen": 71, "loss": 38},
+            {"poliza": "Profesionales Plus",  "precio": 51.40, "tipo": "Autónomo",  "copago": "Bajo",  "hosp": True,  "edad": "35–55",  "perfil": "Autónomo o profesional liberal",   "margen": 74, "loss": 36},
+            {"poliza": "Profesionales",       "precio": 81.00, "tipo": "Autónomo",  "copago": "Sin",   "hosp": True,  "edad": "35–60",  "perfil": "Profesional liberal renta alta",   "margen": 75, "loss": 35},
+            {"poliza": "Más 90.000",          "precio": 76.45, "tipo": "Reembolso", "copago": "Mixto", "hosp": True,  "edad": "40–65",  "perfil": "Directivo, expat, libre elección", "margen": 78, "loss": 38},
+            {"poliza": "Premium 500.000",     "precio": 94.00, "tipo": "Reembolso", "copago": "Sin",   "hosp": True,  "edad": "45–65",  "perfil": "Alta dirección, cobertura mundial","margen": 80, "loss": 34},
+        ]
+        df_pol = pd.DataFrame(POLIZAS)
+
+        pk1, pk2, pk3, pk4 = st.columns(4)
+        kpi_card(pk1, "Pólizas en catálogo", "19", "Particulares, autónomos, seniors, internacional")
+        kpi_card(pk2, "Precio mínimo", "22,10 €/mes", "Sanitas Accede — copago alto")
+        kpi_card(pk3, "Mayor margen teórico", "Accede / Premium 500K", "Loss ratio bajo + prima sostenida")
+        kpi_card(pk4, "Póliza senior sin cuestionario", "Único 48,10 €/mes", "Sin límite de edad de permanencia")
+
+        st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
+        st.markdown('<div class="section-title">PÓLIZAS POR CATEGORÍA — PRECIO, PERFIL Y MARGEN</div>', unsafe_allow_html=True)
+        st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
+
+        TYPE_COLOR = {
+            "Básica":    A3,
+            "Completa":  ACCENT,
+            "Familiar":  "#2E7D32",
+            "Senior":    "#E65100",
+            "Autónomo":  "#6A1B9A",
+            "Reembolso": "#BF360C",
+        }
+
+        def margen_bar_html(v):
+            col = ACCENT if v >= 75 else A2 if v >= 65 else A3 if v >= 55 else S_MUTED
+            return (f'<div style="display:flex;align-items:center;gap:6px">'
+                    f'<div style="background:{col};height:5px;width:{v}%;border-radius:3px;max-width:80px"></div>'
+                    f'<span style="font-size:11px;font-weight:600;color:{col}">{v}</span></div>')
+
+        def loss_pill_html(v):
+            col = "#2E7D32" if v < 38 else A3 if v < 50 else "#E65100" if v < 65 else "#B71C1C"
+            return f'<span style="background:{col}22;color:{col};padding:2px 8px;border-radius:8px;font-size:11px;font-weight:600">{v}</span>'
+
+        rows_pol = ""
+        for _, r in df_pol.iterrows():
+            tc = TYPE_COLOR.get(r["tipo"], S_MUTED)
+            badge_tipo = f'<span style="background:{tc};color:#fff;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:600">{r["tipo"]}</span>'
+            badge_hosp = ('<span style="background:#2E7D3222;color:#2E7D32;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:600">Con hosp.</span>'
+                         if r["hosp"] else
+                         '<span style="background:#86868B22;color:#86868B;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:600">Sin hosp.</span>')
+            rows_pol += f"""<tr style="border-bottom:1px solid rgba(0,0,0,0.06)">
+              <td style="padding:9px 12px;font-weight:600;white-space:nowrap">{r['poliza']}</td>
+              <td style="padding:9px 12px;text-align:center">{badge_tipo}</td>
+              <td style="padding:9px 12px;font-weight:700;color:{ACCENT};white-space:nowrap">Desde {r['precio']:.2f} €/mes</td>
+              <td style="padding:9px 12px;text-align:center;font-size:11px">{r['copago']}</td>
+              <td style="padding:9px 12px;text-align:center">{badge_hosp}</td>
+              <td style="padding:9px 12px;font-size:11px;white-space:nowrap">{r['edad']}</td>
+              <td style="padding:9px 12px;font-size:11px;color:#3A3A3C">{r['perfil']}</td>
+              <td style="padding:9px 12px">{margen_bar_html(r['margen'])}</td>
+              <td style="padding:9px 12px;text-align:center">{loss_pill_html(r['loss'])}</td>
+            </tr>"""
+
+        tabla_pol = f"""
+        <div style="overflow-x:auto;margin-top:4px">
+        <table style="width:100%;border-collapse:collapse;font-family:Inter,sans-serif;font-size:13px">
+          <thead>
+            <tr style="border-bottom:2px solid {ACCENT}">
+              <th style="text-align:left;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">PÓLIZA</th>
+              <th style="text-align:center;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">TIPO</th>
+              <th style="text-align:left;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">PRECIO BASE</th>
+              <th style="text-align:center;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">COPAGO</th>
+              <th style="text-align:center;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">HOSP.</th>
+              <th style="text-align:left;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">EDAD TARGET</th>
+              <th style="text-align:left;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">PERFIL IDEAL</th>
+              <th style="text-align:left;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">MARGEN (0-100)</th>
+              <th style="text-align:center;padding:9px 12px;color:{S_MUTED};font-size:10px;font-weight:600">LOSS IDX</th>
+            </tr>
+          </thead>
+          <tbody>{rows_pol}</tbody>
+        </table>
+        </div>"""
+        st.markdown(tabla_pol, unsafe_allow_html=True)
+
+        st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+        st.markdown('<div class="chart-label">Heatmap de rentabilidad — qué póliza es más rentable en cada CCAA</div>', unsafe_allow_html=True)
+
+        CCAA_VEC = {
+            "Madrid":             {"renta": 88, "senior": 22, "autonomo": 32, "familia": 68, "joven": 38, "turismo": 82, "deporte": 68},
+            "Cataluña":           {"renta": 85, "senior": 24, "autonomo": 28, "familia": 62, "joven": 36, "turismo": 98, "deporte": 72},
+            "País Vasco":         {"renta": 92, "senior": 26, "autonomo": 30, "familia": 58, "joven": 32, "turismo": 48, "deporte": 74},
+            "Navarra":            {"renta": 90, "senior": 24, "autonomo": 26, "familia": 60, "joven": 34, "turismo": 36, "deporte": 76},
+            "Baleares":           {"renta": 82, "senior": 20, "autonomo": 34, "familia": 52, "joven": 30, "turismo": 94, "deporte": 70},
+            "Aragón":             {"renta": 78, "senior": 28, "autonomo": 20, "familia": 48, "joven": 26, "turismo": 30, "deporte": 62},
+            "C. Valenciana":      {"renta": 70, "senior": 24, "autonomo": 26, "familia": 58, "joven": 34, "turismo": 86, "deporte": 61},
+            "Andalucía":          {"renta": 58, "senior": 22, "autonomo": 22, "familia": 72, "joven": 42, "turismo": 72, "deporte": 55},
+            "Murcia":             {"renta": 62, "senior": 20, "autonomo": 22, "familia": 64, "joven": 36, "turismo": 52, "deporte": 57},
+            "Canarias":           {"renta": 60, "senior": 18, "autonomo": 24, "familia": 54, "joven": 38, "turismo": 96, "deporte": 58},
+            "Galicia":            {"renta": 64, "senior": 34, "autonomo": 18, "familia": 48, "joven": 24, "turismo": 42, "deporte": 54},
+            "Castilla y León":    {"renta": 68, "senior": 36, "autonomo": 16, "familia": 44, "joven": 22, "turismo": 28, "deporte": 52},
+            "Castilla-La Mancha": {"renta": 56, "senior": 30, "autonomo": 14, "familia": 50, "joven": 28, "turismo": 18, "deporte": 48},
+            "Extremadura":        {"renta": 44, "senior": 32, "autonomo": 12, "familia": 46, "joven": 24, "turismo": 14, "deporte": 44},
+            "La Rioja":           {"renta": 76, "senior": 26, "autonomo": 20, "familia": 50, "joven": 28, "turismo": 22, "deporte": 64},
+            "Asturias":           {"renta": 66, "senior": 32, "autonomo": 16, "familia": 46, "joven": 24, "turismo": 30, "deporte": 60},
+            "Cantabria":          {"renta": 72, "senior": 28, "autonomo": 18, "familia": 50, "joven": 26, "turismo": 32, "deporte": 63},
+        }
+
+        def rent_score(pol_row, ccaa_data):
+            tipo = pol_row["tipo"]
+            m = pol_row["margen"] / 100
+            l = 1 - pol_row["loss"] / 100
+            r = ccaa_data["renta"] / 100
+            if tipo == "Básica":
+                fit = (ccaa_data["joven"] / 100 * 0.5 + r * 0.3 + (1 - ccaa_data["senior"] / 100) * 0.2)
+            elif tipo == "Completa":
+                fit = (r * 0.4 + ccaa_data["familia"] / 100 * 0.3 + (1 - ccaa_data["senior"] / 100) * 0.3)
+            elif tipo == "Familiar":
+                fit = (ccaa_data["familia"] / 100 * 0.5 + r * 0.3 + ccaa_data["joven"] / 100 * 0.2)
+            elif tipo == "Senior":
+                fit = (ccaa_data["senior"] / 100 * 0.6 + r * 0.4)
+            elif tipo == "Autónomo":
+                fit = (ccaa_data["autonomo"] / 100 * 0.5 + r * 0.4 + ccaa_data["deporte"] / 100 * 0.1)
+            elif tipo == "Reembolso":
+                fit = (r * 0.5 + ccaa_data["turismo"] / 100 * 0.3 + ccaa_data["autonomo"] / 100 * 0.2)
+            else:
+                fit = r
+            return round((m * 0.35 + l * 0.30 + fit * 0.35) * 100, 1)
+
+        ccaa_list = list(CCAA_VEC.keys())
+        pol_list  = df_pol["poliza"].tolist()
+        heat_matrix = []
+        for _, pr in df_pol.iterrows():
+            row_scores = [rent_score(pr, CCAA_VEC[c]) for c in ccaa_list]
+            heat_matrix.append(row_scores)
+
+        fig_heat = go.Figure(go.Heatmap(
+            z=heat_matrix,
+            x=ccaa_list,
+            y=pol_list,
+            colorscale=[[0, "#EEF4FF"], [0.4, A3], [0.7, A2], [1.0, ACCENT]],
+            text=[[f"{v:.0f}" for v in row] for row in heat_matrix],
+            texttemplate="%{text}",
+            textfont=dict(size=9, color="#fff"),
+            hoverongaps=False,
+            showscale=True,
+            colorbar=dict(title="Score<br>rent.", tickfont=dict(size=9), len=0.6),
+        ))
+        fig_heat.update_layout(
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(family="Inter,sans-serif", color=FONT, size=10),
+            height=460,
+            margin=dict(t=10, b=10, l=8, r=10),
+            xaxis=dict(tickangle=-30, tickfont=dict(size=9), side="bottom"),
+            yaxis=dict(tickfont=dict(size=10), autorange="reversed"),
+        )
+        st.plotly_chart(fig_heat, use_container_width=True)
+
+        st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
+
+        hc1, hc2 = st.columns(2)
+        with hc1:
+            st.markdown('<div class="chart-label">Top 3 CCAA más rentables por póliza</div>', unsafe_allow_html=True)
+            rows_top = ""
+            for i, (_, pr) in enumerate(df_pol.iterrows()):
+                scores = {c: rent_score(pr, CCAA_VEC[c]) for c in ccaa_list}
+                top3 = sorted(scores, key=scores.get, reverse=True)[:3]
+                tc = TYPE_COLOR.get(pr["tipo"], S_MUTED)
+                pills = " ".join([
+                    f'<span style="background:{ACCENT if j==0 else A2 if j==1 else A3};color:#fff;'
+                    f'padding:2px 8px;border-radius:8px;font-size:10px;white-space:nowrap">{c}</span>'
+                    for j, c in enumerate(top3)
+                ])
+                rows_top += f"""<tr style="border-bottom:1px solid rgba(0,0,0,0.06)">
+                  <td style="padding:7px 10px;font-weight:600;font-size:12px;white-space:nowrap">
+                    <span style="display:inline-block;width:8px;height:8px;background:{tc};border-radius:50%;margin-right:6px"></span>
+                    {pr['poliza']}</td>
+                  <td style="padding:7px 10px">{pills}</td>
+                </tr>"""
+            st.markdown(f"""
+            <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-family:Inter,sans-serif">
+              <thead><tr style="border-bottom:2px solid {ACCENT}">
+                <th style="text-align:left;padding:7px 10px;color:{S_MUTED};font-size:10px;font-weight:600">PÓLIZA</th>
+                <th style="text-align:left;padding:7px 10px;color:{S_MUTED};font-size:10px;font-weight:600">TOP 3 CCAA</th>
+              </tr></thead><tbody>{rows_top}</tbody>
+            </table></div>""", unsafe_allow_html=True)
+
+        with hc2:
+            st.markdown('<div class="chart-label">Póliza más rentable por CCAA</div>', unsafe_allow_html=True)
+            rows_best = ""
+            for ccaa in ccaa_list:
+                best_scores = {pr["poliza"]: rent_score(pr, CCAA_VEC[ccaa]) for _, pr in df_pol.iterrows()}
+                best_pol = max(best_scores, key=best_scores.get)
+                best_val = best_scores[best_pol]
+                pol_tipo = df_pol[df_pol["poliza"] == best_pol]["tipo"].values[0]
+                pol_precio = df_pol[df_pol["poliza"] == best_pol]["precio"].values[0]
+                tc = TYPE_COLOR.get(pol_tipo, S_MUTED)
+                rows_best += f"""<tr style="border-bottom:1px solid rgba(0,0,0,0.06)">
+                  <td style="padding:7px 10px;font-weight:600;font-size:12px;white-space:nowrap">{ccaa}</td>
+                  <td style="padding:7px 10px">
+                    <span style="background:{tc};color:#fff;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:600">{best_pol}</span>
+                  </td>
+                  <td style="padding:7px 10px;font-size:11px;color:{S_MUTED}">{pol_precio:.0f}€/mes · Score {best_val:.0f}</td>
+                </tr>"""
+            st.markdown(f"""
+            <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-family:Inter,sans-serif">
+              <thead><tr style="border-bottom:2px solid {ACCENT}">
+                <th style="text-align:left;padding:7px 10px;color:{S_MUTED};font-size:10px;font-weight:600">CCAA</th>
+                <th style="text-align:left;padding:7px 10px;color:{S_MUTED};font-size:10px;font-weight:600">PÓLIZA ÓPTIMA</th>
+                <th style="text-align:left;padding:7px 10px;color:{S_MUTED};font-size:10px;font-weight:600">PRECIO · SCORE</th>
+              </tr></thead><tbody>{rows_best}</tbody>
+            </table></div>""", unsafe_allow_html=True)
+
+        st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
+        st.markdown('<div class="chart-label">Posicionamiento pólizas — margen esperado vs siniestralidad</div>', unsafe_allow_html=True)
+
+        df_pol["precio_sz"] = df_pol["precio"]
+        fig_bub = px.scatter(
+            df_pol, x="loss", y="margen",
+            color="tipo", text="poliza",
+            size="precio_sz", size_max=36,
+            color_discrete_map=TYPE_COLOR,
+            labels={"loss": "Índice siniestralidad esperada →", "margen": "↑ Índice margen potencial", "tipo": ""},
+            opacity=0.88,
+        )
+        fig_bub.update_traces(textposition="top center", textfont=dict(size=8.5, color=FONT))
+        fig_bub.add_hline(y=70, line_dash="dot", line_color=S_MUTED, line_width=1,
+                          annotation_text="Umbral margen alto", annotation_font_size=8,
+                          annotation_font_color=S_MUTED)
+        fig_bub.add_vline(x=45, line_dash="dot", line_color="#E65100", line_width=1,
+                          annotation_text="Umbral riesgo alto", annotation_font_size=8,
+                          annotation_font_color="#E65100")
+        fig_bub.update_layout(**lay(h=400, showlegend=True,
+            legend=dict(orientation="h", y=-0.18, font=dict(size=10), bgcolor="rgba(0,0,0,0)"),
+            margin=dict(t=14, b=70, l=8, r=8)))
+        fig_bub.update_xaxes(showgrid=True, gridcolor=GRID, range=[20, 80])
+        fig_bub.update_yaxes(showgrid=True, gridcolor=GRID, range=[35, 92])
+        st.plotly_chart(fig_bub, use_container_width=True)
+
+        callout(
+            "<strong>Las pólizas con mayor margen real son Accede, Profesionales Plus y Premium 500.000</strong>: "
+            "bajo loss ratio (asegurado joven o profesional sano) y prima suficientemente alta. "
+            "Único es la póliza con mayor riesgo actuarial — seniors sin cuestionario —, "
+            "pero es obligatoria para no perder ese segmento al envejecer la cartera. "
+            "<strong>Mejor CCAA para Accede:</strong> Andalucía y C. Valenciana (alta densidad joven, "
+            "baja penetración actual). "
+            "<strong>Mejor CCAA para Premium/Reembolso:</strong> Madrid, Baleares y Cataluña "
+            "(alta renta, expats, directivos)."
         )
 
 # ══════════════════════════════════════════════════════════════════
