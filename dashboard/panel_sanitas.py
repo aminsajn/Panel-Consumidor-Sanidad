@@ -742,8 +742,9 @@ elif st.session_state["page"] == "seguros":
                 textposition="outside", textfont=dict(size=9),
             ))
             fig_lr.add_hline(y=80, line_dash="dot", line_color="#B71C1C", line_width=1.5,
-                             annotation_text="Umbral sostenible 80%", annotation_position="top left",
-                             annotation_font_size=9)
+                             annotation_text="Umbral sostenible 80%", annotation_position="top right",
+                             annotation_font_size=9, annotation_font_color="#B71C1C",
+                             annotation_bgcolor="rgba(255,255,255,0.85)")
             fig_lr.update_layout(**lay(h=320, showlegend=True,
                 legend=dict(orientation="h", y=-0.2, font=dict(size=10)),
                 margin=dict(t=14, b=60, l=8, r=8)))
@@ -828,14 +829,16 @@ elif st.session_state["page"] == "seguros":
             fig_fraud = go.Figure(go.Pie(
                 labels=df_fraud["tipo"], values=df_fraud["pct"],
                 marker=dict(colors=colors_fraud, line=dict(color=PAPER, width=2)),
-                textinfo="label+percent",
-                textfont=dict(size=9),
+                textinfo="percent",
+                textfont=dict(size=10, color="#fff"),
                 hole=0.45,
             ))
             fig_fraud.update_layout(
                 paper_bgcolor="rgba(0,0,0,0)", font=dict(family="Inter,sans-serif", color=FONT, size=10),
                 height=320, margin=dict(t=14, b=14, l=8, r=8),
-                showlegend=False,
+                showlegend=True,
+                legend=dict(orientation="v", x=1.02, y=0.5, font=dict(size=10),
+                            bgcolor="rgba(0,0,0,0)"),
                 annotations=[dict(text="14.3M€<br>fraude est.", x=0.5, y=0.5,
                                   font=dict(size=10, color=FONT), showarrow=False)]
             )
@@ -845,7 +848,7 @@ elif st.session_state["page"] == "seguros":
 
         # ─ Score de riesgo actuarial en contratación ──────────────
         st.markdown("<div style='height:4px'></div>", unsafe_allow_html=True)
-        rc5, rc6 = st.columns([1.6, 1])
+        rc5, rc6 = st.columns(2)
 
         with rc5:
             np.random.seed(42)
@@ -879,7 +882,7 @@ elif st.session_state["page"] == "seguros":
                              annotation_text="Umbral rentable", annotation_font_size=8)
             fig_sc.add_vline(x=70, line_dash="dot", line_color="#E65100", line_width=1.2,
                              annotation_text="Alto riesgo", annotation_font_size=8)
-            fig_sc.update_layout(**lay(h=340, showlegend=True,
+            fig_sc.update_layout(**lay(h=360, showlegend=True,
                 legend=dict(orientation="h", y=-0.2, font=dict(size=10)),
                 margin=dict(t=14, b=60, l=8, r=8)))
             fig_sc.update_yaxes(showgrid=True, gridcolor=GRID)
@@ -916,7 +919,7 @@ elif st.session_state["page"] == "seguros":
             fig_dist.update_layout(
                 paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
                 font=dict(family="Inter,sans-serif", color=FONT, size=10),
-                height=340, margin=dict(t=14, b=60, l=8, r=50),
+                height=360, margin=dict(t=14, b=60, l=8, r=50),
                 showlegend=True,
                 legend=dict(orientation="h", y=-0.2, font=dict(size=10)),
                 yaxis=dict(title="% cartera", showgrid=True, gridcolor=GRID, zeroline=False),
@@ -2228,23 +2231,23 @@ elif st.session_state["page"] == "mapa":
 
         # ── Datos deportivos por CCAA ─────────────────────────────
         CCAA_DEP = [
-            {"ccaa": "Madrid",            "lat": 40.42, "lon": -3.70, "intensidad": 68, "top1": "Running",       "top2": "Gimnasio/fitness", "top3": "Pádel",       "top4": "Natación",    "top5": "Ciclismo",    "pct_running": 38, "pct_gym": 31, "pct_padel": 24, "pct_nat": 18, "pct_cicl": 15},
-            {"ccaa": "Cataluña",          "lat": 41.39, "lon":  2.17, "intensidad": 72, "top1": "Running",       "top2": "Ciclismo",         "top3": "Natación",    "top4": "Fútbol",      "top5": "Gimnasio/fitness", "pct_running": 41, "pct_gym": 28, "pct_padel": 18, "pct_nat": 26, "pct_cicl": 32},
-            {"ccaa": "País Vasco",        "lat": 43.26, "lon": -2.93, "intensidad": 74, "top1": "Ciclismo",      "top2": "Senderismo",       "top3": "Running",     "top4": "Natación",    "top5": "Fútbol",      "pct_running": 35, "pct_gym": 24, "pct_padel": 14, "pct_nat": 22, "pct_cicl": 42},
-            {"ccaa": "Navarra",           "lat": 42.82, "lon": -1.64, "intensidad": 76, "top1": "Ciclismo",      "top2": "Senderismo",       "top3": "Running",     "top4": "Pelota vasca","top5": "Esquí",       "pct_running": 36, "pct_gym": 22, "pct_padel": 12, "pct_nat": 18, "pct_cicl": 44},
-            {"ccaa": "Aragón",            "lat": 41.65, "lon": -0.89, "intensidad": 62, "top1": "Senderismo",    "top2": "Esquí",            "top3": "Ciclismo",    "top4": "Running",     "top5": "Fútbol",      "pct_running": 28, "pct_gym": 20, "pct_padel": 12, "pct_nat": 15, "pct_cicl": 35},
-            {"ccaa": "Andalucía",         "lat": 37.38, "lon": -5.97, "intensidad": 55, "top1": "Fútbol",        "top2": "Natación",         "top3": "Pádel",       "top4": "Running",     "top5": "Gimnasio/fitness", "pct_running": 26, "pct_gym": 22, "pct_padel": 28, "pct_nat": 30, "pct_cicl": 14},
-            {"ccaa": "C. Valenciana",     "lat": 39.47, "lon": -0.38, "intensidad": 61, "top1": "Natación",      "top2": "Ciclismo",         "top3": "Running",     "top4": "Pádel",       "top5": "Fútbol",      "pct_running": 30, "pct_gym": 24, "pct_padel": 22, "pct_nat": 35, "pct_cicl": 30},
-            {"ccaa": "Galicia",           "lat": 42.88, "lon": -8.54, "intensidad": 54, "top1": "Fútbol",        "top2": "Senderismo",       "top3": "Natación",    "top4": "Ciclismo",    "top5": "Running",     "pct_running": 24, "pct_gym": 18, "pct_padel": 10, "pct_nat": 28, "pct_cicl": 22},
-            {"ccaa": "Castilla y León",   "lat": 41.65, "lon": -4.72, "intensidad": 52, "top1": "Senderismo",    "top2": "Fútbol",           "top3": "Ciclismo",    "top4": "Running",     "top5": "Caza/pesca",  "pct_running": 22, "pct_gym": 16, "pct_padel": 10, "pct_nat": 14, "pct_cicl": 26},
-            {"ccaa": "Castilla-La Mancha","lat": 39.86, "lon": -3.61, "intensidad": 48, "top1": "Fútbol",        "top2": "Senderismo",       "top3": "Caza/pesca",  "top4": "Ciclismo",    "top5": "Pádel",       "pct_running": 18, "pct_gym": 14, "pct_padel": 16, "pct_nat": 12, "pct_cicl": 20},
-            {"ccaa": "Extremadura",       "lat": 39.49, "lon": -6.37, "intensidad": 44, "top1": "Fútbol",        "top2": "Caza/pesca",       "top3": "Senderismo",  "top4": "Natación",    "top5": "Ciclismo",    "pct_running": 16, "pct_gym": 12, "pct_padel": 12, "pct_nat": 18, "pct_cicl": 16},
-            {"ccaa": "Murcia",            "lat": 37.99, "lon": -1.13, "intensidad": 57, "top1": "Natación",      "top2": "Fútbol",           "top3": "Pádel",       "top4": "Running",     "top5": "Ciclismo",    "pct_running": 26, "pct_gym": 20, "pct_padel": 24, "pct_nat": 32, "pct_cicl": 22},
-            {"ccaa": "Canarias",          "lat": 28.29, "lon":-15.63, "intensidad": 58, "top1": "Natación",      "top2": "Surf/windsurf",    "top3": "Running",     "top4": "Fútbol",      "top5": "Senderismo",  "pct_running": 30, "pct_gym": 22, "pct_padel": 14, "pct_nat": 42, "pct_cicl": 16},
-            {"ccaa": "Baleares",          "lat": 39.57, "lon":  2.65, "intensidad": 70, "top1": "Ciclismo",      "top2": "Natación",         "top3": "Running",     "top4": "Vela/náutica","top5": "Senderismo",  "pct_running": 36, "pct_gym": 26, "pct_padel": 16, "pct_nat": 38, "pct_cicl": 48},
-            {"ccaa": "La Rioja",          "lat": 42.29, "lon": -2.45, "intensidad": 64, "top1": "Senderismo",    "top2": "Ciclismo",         "top3": "Running",     "top4": "Fútbol",      "top5": "Gimnasio/fitness","pct_running": 30, "pct_gym": 22, "pct_padel": 14, "pct_nat": 14, "pct_cicl": 36},
-            {"ccaa": "Asturias",          "lat": 43.36, "lon": -5.86, "intensidad": 60, "top1": "Senderismo",    "top2": "Fútbol",           "top3": "Ciclismo",    "top4": "Natación",    "top5": "Running",     "pct_running": 26, "pct_gym": 18, "pct_padel": 10, "pct_nat": 24, "pct_cicl": 28},
-            {"ccaa": "Cantabria",         "lat": 43.18, "lon": -3.99, "intensidad": 63, "top1": "Senderismo",    "top2": "Surf",             "top3": "Ciclismo",    "top4": "Running",     "top5": "Fútbol",      "pct_running": 28, "pct_gym": 20, "pct_padel": 10, "pct_nat": 24, "pct_cicl": 32},
+            {"ccaa": "Madrid",            "lat": 40.42, "lon": -3.70, "intensidad": 68, "top1": "Running",       "top2": "Gimnasio/fitness", "top3": "Pádel",       "top4": "Natación",    "top5": "Ciclismo",    "pct_running": 38, "pct_gym": 31, "pct_padel": 24, "pct_nat": 18, "pct_cicl": 15, "lesiones": "Fascitis plantar · Epicondilitis · Lumbalgia"},
+            {"ccaa": "Cataluña",          "lat": 41.39, "lon":  2.17, "intensidad": 72, "top1": "Running",       "top2": "Ciclismo",         "top3": "Natación",    "top4": "Fútbol",      "top5": "Gimnasio/fitness", "pct_running": 41, "pct_gym": 28, "pct_padel": 18, "pct_nat": 26, "pct_cicl": 32, "lesiones": "Tendinitis rotuliana · Fractura clavícula · Hombro nadador"},
+            {"ccaa": "País Vasco",        "lat": 43.26, "lon": -2.93, "intensidad": 74, "top1": "Ciclismo",      "top2": "Senderismo",       "top3": "Running",     "top4": "Natación",    "top5": "Fútbol",      "pct_running": 35, "pct_gym": 24, "pct_padel": 14, "pct_nat": 22, "pct_cicl": 42, "lesiones": "Fractura clavícula · Esguince tobillo · Rodilla ciclista"},
+            {"ccaa": "Navarra",           "lat": 42.82, "lon": -1.64, "intensidad": 76, "top1": "Ciclismo",      "top2": "Senderismo",       "top3": "Running",     "top4": "Pelota vasca","top5": "Esquí",       "pct_running": 36, "pct_gym": 22, "pct_padel": 12, "pct_nat": 18, "pct_cicl": 44, "lesiones": "LCA · Fractura muñeca (esquí) · Tendinitis Aquiles"},
+            {"ccaa": "Aragón",            "lat": 41.65, "lon": -0.89, "intensidad": 62, "top1": "Senderismo",    "top2": "Esquí",            "top3": "Ciclismo",    "top4": "Running",     "top5": "Fútbol",      "pct_running": 28, "pct_gym": 20, "pct_padel": 12, "pct_nat": 15, "pct_cicl": 35, "lesiones": "LCA · Esguince tobillo · Distensión muscular pierna"},
+            {"ccaa": "Andalucía",         "lat": 37.38, "lon": -5.97, "intensidad": 55, "top1": "Fútbol",        "top2": "Natación",         "top3": "Pádel",       "top4": "Running",     "top5": "Gimnasio/fitness", "pct_running": 26, "pct_gym": 22, "pct_padel": 28, "pct_nat": 30, "pct_cicl": 14, "lesiones": "Esguince tobillo · Epicondilitis · Hombro nadador"},
+            {"ccaa": "C. Valenciana",     "lat": 39.47, "lon": -0.38, "intensidad": 61, "top1": "Natación",      "top2": "Ciclismo",         "top3": "Running",     "top4": "Pádel",       "top5": "Fútbol",      "pct_running": 30, "pct_gym": 24, "pct_padel": 22, "pct_nat": 35, "pct_cicl": 30, "lesiones": "Hombro nadador · Rodilla ciclista · Epicondilitis"},
+            {"ccaa": "Galicia",           "lat": 42.88, "lon": -8.54, "intensidad": 54, "top1": "Fútbol",        "top2": "Senderismo",       "top3": "Natación",    "top4": "Ciclismo",    "top5": "Running",     "pct_running": 24, "pct_gym": 18, "pct_padel": 10, "pct_nat": 28, "pct_cicl": 22, "lesiones": "Esguince tobillo · Rodilla del corredor · Fascitis plantar"},
+            {"ccaa": "Castilla y León",   "lat": 41.65, "lon": -4.72, "intensidad": 52, "top1": "Senderismo",    "top2": "Fútbol",           "top3": "Ciclismo",    "top4": "Running",     "top5": "Caza/pesca",  "pct_running": 22, "pct_gym": 16, "pct_padel": 10, "pct_nat": 14, "pct_cicl": 26, "lesiones": "Esguince tobillo · Lumbalgia · Distensión isquiotibial"},
+            {"ccaa": "Castilla-La Mancha","lat": 39.86, "lon": -3.61, "intensidad": 48, "top1": "Fútbol",        "top2": "Senderismo",       "top3": "Caza/pesca",  "top4": "Ciclismo",    "top5": "Pádel",       "pct_running": 18, "pct_gym": 14, "pct_padel": 16, "pct_nat": 12, "pct_cicl": 20, "lesiones": "Esguince tobillo · Contusión rodilla · Lumbalgia"},
+            {"ccaa": "Extremadura",       "lat": 39.49, "lon": -6.37, "intensidad": 44, "top1": "Fútbol",        "top2": "Caza/pesca",       "top3": "Senderismo",  "top4": "Natación",    "top5": "Ciclismo",    "pct_running": 16, "pct_gym": 12, "pct_padel": 12, "pct_nat": 18, "pct_cicl": 16, "lesiones": "Esguince tobillo · Distensión muscular · Lumbalgia"},
+            {"ccaa": "Murcia",            "lat": 37.99, "lon": -1.13, "intensidad": 57, "top1": "Natación",      "top2": "Fútbol",           "top3": "Pádel",       "top4": "Running",     "top5": "Ciclismo",    "pct_running": 26, "pct_gym": 20, "pct_padel": 24, "pct_nat": 32, "pct_cicl": 22, "lesiones": "Hombro nadador · Epicondilitis · Rodilla del corredor"},
+            {"ccaa": "Canarias",          "lat": 28.29, "lon":-15.63, "intensidad": 58, "top1": "Natación",      "top2": "Surf/windsurf",    "top3": "Running",     "top4": "Fútbol",      "top5": "Senderismo",  "pct_running": 30, "pct_gym": 22, "pct_padel": 14, "pct_nat": 42, "pct_cicl": 16, "lesiones": "Hombro nadador · Lumbalgia surf · Fascitis plantar"},
+            {"ccaa": "Baleares",          "lat": 39.57, "lon":  2.65, "intensidad": 70, "top1": "Ciclismo",      "top2": "Natación",         "top3": "Running",     "top4": "Vela/náutica","top5": "Senderismo",  "pct_running": 36, "pct_gym": 26, "pct_padel": 16, "pct_nat": 38, "pct_cicl": 48, "lesiones": "Fractura clavícula · Hombro nadador · Tendinitis Aquiles"},
+            {"ccaa": "La Rioja",          "lat": 42.29, "lon": -2.45, "intensidad": 64, "top1": "Senderismo",    "top2": "Ciclismo",         "top3": "Running",     "top4": "Fútbol",      "top5": "Gimnasio/fitness","pct_running": 30, "pct_gym": 22, "pct_padel": 14, "pct_nat": 14, "pct_cicl": 36, "lesiones": "Esguince tobillo · Rodilla ciclista · Fascitis plantar"},
+            {"ccaa": "Asturias",          "lat": 43.36, "lon": -5.86, "intensidad": 60, "top1": "Senderismo",    "top2": "Fútbol",           "top3": "Ciclismo",    "top4": "Natación",    "top5": "Running",     "pct_running": 26, "pct_gym": 18, "pct_padel": 10, "pct_nat": 24, "pct_cicl": 28, "lesiones": "Esguince tobillo · Rodilla ciclista · Lumbalgia senderismo"},
+            {"ccaa": "Cantabria",         "lat": 43.18, "lon": -3.99, "intensidad": 63, "top1": "Senderismo",    "top2": "Surf",             "top3": "Ciclismo",    "top4": "Running",     "top5": "Fútbol",      "pct_running": 28, "pct_gym": 20, "pct_padel": 10, "pct_nat": 24, "pct_cicl": 32, "lesiones": "Lumbalgia surf · Rodilla ciclista · Esguince tobillo"},
         ]
         df_dep = pd.DataFrame(CCAA_DEP)
 
@@ -2353,7 +2356,7 @@ elif st.session_state["page"] == "mapa":
 
         rows_html = ""
         for _, r in df_dep.sort_values("intensidad", ascending=False).iterrows():
-            rows_html += f"""<tr style="border-bottom:1px solid {S_BORDER}">
+            rows_html += f"""<tr style="border-bottom:1px solid rgba(0,0,0,0.06)">
               <td style="padding:8px 12px;font-weight:600">{r['ccaa']}</td>
               <td style="padding:8px 12px">{int_bar(r['intensidad'])}</td>
               <td style="padding:8px 12px">{dep_badge(r['top1'])}</td>
@@ -2361,6 +2364,7 @@ elif st.session_state["page"] == "mapa":
               <td style="padding:8px 12px">{dep_badge(r['top3'])}</td>
               <td style="padding:8px 12px">{dep_badge(r['top4'])}</td>
               <td style="padding:8px 12px">{dep_badge(r['top5'])}</td>
+              <td style="padding:8px 12px;font-size:11px;color:#555;white-space:nowrap">{r['lesiones']}</td>
             </tr>"""
 
         tabla_dep = f"""
@@ -2375,6 +2379,7 @@ elif st.session_state["page"] == "mapa":
               <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">DEPORTE #3</th>
               <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">DEPORTE #4</th>
               <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">DEPORTE #5</th>
+              <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">LESIONES FRECUENTES</th>
             </tr>
           </thead>
           <tbody>{rows_html}</tbody>
