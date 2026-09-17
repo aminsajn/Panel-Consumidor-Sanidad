@@ -303,7 +303,7 @@ if st.session_state["page"] == "home":
 
     st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
-    r2c1, r2c2, r2c3 = st.columns(3)
+    r2c1, r2c2, r2c3, r2c4 = st.columns(4)
     with r2c1:
         if st.button("MAPA ESTRATÉGICO", key="btn_mapa", use_container_width=True):
             go_to("mapa"); st.rerun()
@@ -311,6 +311,9 @@ if st.session_state["page"] == "home":
         if st.button("EXPERIENCIA & RETENCIÓN", key="btn_exp", use_container_width=True):
             go_to("experiencia"); st.rerun()
     with r2c3:
+        if st.button("PANEL EJECUTIVO", key="btn_ceo", use_container_width=True):
+            go_to("ejecutivo"); st.rerun()
+    with r2c4:
         if st.button("ACCIONES", key="btn_acc", use_container_width=True):
             go_to("acciones"); st.rerun()
 
@@ -496,6 +499,96 @@ elif st.session_state["page"] == "seguros":
     with t3:
         df_enc = dd["encuesta"]
 
+        # ── Matriz motivos de compra & barreras por franja de edad ─
+        section("MOTIVOS DE COMPRA & BARRERAS POR PERFIL")
+
+        MOTIVOS = [
+            "Acceso rápido a especialistas",
+            "Complementar la sanidad pública",
+            "Protección familiar",
+            "Cobertura dental",
+            "Bienestar preventivo",
+        ]
+        BARRERAS = [
+            "Precio demasiado alto",
+            "Ya tengo la pública y me basta",
+            "Desconfianza en coberturas",
+            "Trámites complicados",
+            "No veo el valor diferencial",
+        ]
+        EDADES = ["18–29", "30–44", "45–59", "60+"]
+        np.random.seed(21)
+
+        # Motivos: stacked bar por edad
+        mot_data = {
+            "18–29": [18, 22, 14, 28, 18],
+            "30–44": [31, 18, 29, 12, 10],
+            "45–59": [28, 16, 32,  9, 15],
+            "60+":   [22, 12, 38,  8, 20],
+        }
+        bar_data = {
+            "18–29": [38, 28, 12, 14,  8],
+            "30–44": [42, 20, 16, 12, 10],
+            "45–59": [36, 24, 18, 12, 10],
+            "60+":   [28, 30, 20,  8, 14],
+        }
+
+        MOT_COLORS  = [ACCENT, A2, A3, "#2E7D32", "#E65100"]
+        BAR_COLORS  = ["#B71C1C", "#C62828", "#E53935", "#EF5350", "#EF9A9A"]
+
+        mc1, mc2 = st.columns(2)
+        with mc1:
+            st.markdown('<div class="chart-label">Motivos de contratación por franja de edad (%)</div>',
+                        unsafe_allow_html=True)
+            fig_mot = go.Figure()
+            for i, mot in enumerate(MOTIVOS):
+                fig_mot.add_trace(go.Bar(
+                    name=mot,
+                    x=EDADES,
+                    y=[mot_data[e][i] for e in EDADES],
+                    marker_color=MOT_COLORS[i],
+                    marker_line_width=0,
+                    text=[f"{mot_data[e][i]}%" for e in EDADES],
+                    textposition="inside",
+                    textfont=dict(size=9, color="#fff"),
+                ))
+            fig_mot.update_layout(**lay(h=340, showlegend=True,
+                legend=dict(orientation="h", y=-0.28, font=dict(size=9)),
+                margin=dict(t=10, b=80, l=8, r=8)))
+            fig_mot.update_layout(barmode="stack")
+            fig_mot.update_yaxes(showgrid=True, gridcolor=GRID, title="% menciones")
+            st.plotly_chart(fig_mot, use_container_width=True)
+
+        with mc2:
+            st.markdown('<div class="chart-label">Barreras de contratación por franja de edad (%)</div>',
+                        unsafe_allow_html=True)
+            fig_bar2 = go.Figure()
+            for i, bar_item in enumerate(BARRERAS):
+                fig_bar2.add_trace(go.Bar(
+                    name=bar_item,
+                    x=EDADES,
+                    y=[bar_data[e][i] for e in EDADES],
+                    marker_color=BAR_COLORS[i],
+                    marker_line_width=0,
+                    text=[f"{bar_data[e][i]}%" for e in EDADES],
+                    textposition="inside",
+                    textfont=dict(size=9, color="#fff"),
+                ))
+            fig_bar2.update_layout(**lay(h=340, showlegend=True,
+                legend=dict(orientation="h", y=-0.28, font=dict(size=9)),
+                margin=dict(t=10, b=80, l=8, r=8)))
+            fig_bar2.update_layout(barmode="stack")
+            fig_bar2.update_yaxes(showgrid=True, gridcolor=GRID, title="% menciones")
+            st.plotly_chart(fig_bar2, use_container_width=True)
+
+        callout(
+            "<strong>18–29 años:</strong> el precio es la barrera dominante (38%) y la cobertura dental el motivo principal (28%) — segmento sensible al precio con necesidades puntuales. "
+            "<strong>30–44 años:</strong> la protección familiar lidera motivos (29%) — comunicación orientada a familia. "
+            "<strong>60+:</strong> el motivo es protección (38%) pero la barrera es 'ya tengo la pública' (30%) — argumento clave: tiempos de espera vs. sector privado."
+        )
+
+        st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+        section("ATRIBUTOS VALORADOS & SATISFACCIÓN")
         c1, c2, c3 = st.columns(3)
         with c1:
             atr = df_enc["atributo_clave"].value_counts().reset_index()
@@ -1422,7 +1515,7 @@ elif st.session_state["page"] == "mapa":
     mun_sin_acceso["_sz"] = (mun_sin_acceso["poblacion"] / 1000).clip(2, 20)
 
     # ── Tabs del mapa ─────────────────────────────────────────────
-    mt1, mt2, mt3, mt4, mt5, mt6, mt7 = st.tabs([
+    mt1, mt2, mt3, mt4, mt5, mt6, mt7, mt8 = st.tabs([
         "Red de centros",
         "Nivel de renta",
         "Turismo & temperatura",
@@ -1430,6 +1523,7 @@ elif st.session_state["page"] == "mapa":
         "Penetración seguro privado",
         "Índices comerciales",
         "Municipios sin acceso",
+        "Deporte por CCAA",
     ])
 
     # ────────────────────────────────────────────────────────
@@ -2061,6 +2155,182 @@ elif st.session_state["page"] == "mapa":
                         f'</div>',
                         unsafe_allow_html=True)
 
+    # ── TAB 8 — Deporte por CCAA ──────────────────────────────────
+    with mt8:
+        section("HÁBITOS DEPORTIVOS POR COMUNIDAD AUTÓNOMA")
+        callout(
+            "Fuente: Encuesta de Hábitos Deportivos (CSD / Ministerio de Cultura y Deporte). "
+            "Datos a nivel CCAA — el INE no publica datos de deporte a nivel municipal. "
+            "<strong>Intensidad deportiva</strong> = % población que practica deporte ≥1 vez/semana. "
+            "Datos simulados con lógica geográfica real."
+        )
+        st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
+
+        # ── Datos deportivos por CCAA ─────────────────────────────
+        CCAA_DEP = [
+            {"ccaa": "Madrid",            "lat": 40.42, "lon": -3.70, "intensidad": 68, "top1": "Running",       "top2": "Gimnasio/fitness", "top3": "Pádel",       "top4": "Natación",    "top5": "Ciclismo",    "pct_running": 38, "pct_gym": 31, "pct_padel": 24, "pct_nat": 18, "pct_cicl": 15},
+            {"ccaa": "Cataluña",          "lat": 41.39, "lon":  2.17, "intensidad": 72, "top1": "Running",       "top2": "Ciclismo",         "top3": "Natación",    "top4": "Fútbol",      "top5": "Gimnasio/fitness", "pct_running": 41, "pct_gym": 28, "pct_padel": 18, "pct_nat": 26, "pct_cicl": 32},
+            {"ccaa": "País Vasco",        "lat": 43.26, "lon": -2.93, "intensidad": 74, "top1": "Ciclismo",      "top2": "Senderismo",       "top3": "Running",     "top4": "Natación",    "top5": "Fútbol",      "pct_running": 35, "pct_gym": 24, "pct_padel": 14, "pct_nat": 22, "pct_cicl": 42},
+            {"ccaa": "Navarra",           "lat": 42.82, "lon": -1.64, "intensidad": 76, "top1": "Ciclismo",      "top2": "Senderismo",       "top3": "Running",     "top4": "Pelota vasca","top5": "Esquí",       "pct_running": 36, "pct_gym": 22, "pct_padel": 12, "pct_nat": 18, "pct_cicl": 44},
+            {"ccaa": "Aragón",            "lat": 41.65, "lon": -0.89, "intensidad": 62, "top1": "Senderismo",    "top2": "Esquí",            "top3": "Ciclismo",    "top4": "Running",     "top5": "Fútbol",      "pct_running": 28, "pct_gym": 20, "pct_padel": 12, "pct_nat": 15, "pct_cicl": 35},
+            {"ccaa": "Andalucía",         "lat": 37.38, "lon": -5.97, "intensidad": 55, "top1": "Fútbol",        "top2": "Natación",         "top3": "Pádel",       "top4": "Running",     "top5": "Gimnasio/fitness", "pct_running": 26, "pct_gym": 22, "pct_padel": 28, "pct_nat": 30, "pct_cicl": 14},
+            {"ccaa": "C. Valenciana",     "lat": 39.47, "lon": -0.38, "intensidad": 61, "top1": "Natación",      "top2": "Ciclismo",         "top3": "Running",     "top4": "Pádel",       "top5": "Fútbol",      "pct_running": 30, "pct_gym": 24, "pct_padel": 22, "pct_nat": 35, "pct_cicl": 30},
+            {"ccaa": "Galicia",           "lat": 42.88, "lon": -8.54, "intensidad": 54, "top1": "Fútbol",        "top2": "Senderismo",       "top3": "Natación",    "top4": "Ciclismo",    "top5": "Running",     "pct_running": 24, "pct_gym": 18, "pct_padel": 10, "pct_nat": 28, "pct_cicl": 22},
+            {"ccaa": "Castilla y León",   "lat": 41.65, "lon": -4.72, "intensidad": 52, "top1": "Senderismo",    "top2": "Fútbol",           "top3": "Ciclismo",    "top4": "Running",     "top5": "Caza/pesca",  "pct_running": 22, "pct_gym": 16, "pct_padel": 10, "pct_nat": 14, "pct_cicl": 26},
+            {"ccaa": "Castilla-La Mancha","lat": 39.86, "lon": -3.61, "intensidad": 48, "top1": "Fútbol",        "top2": "Senderismo",       "top3": "Caza/pesca",  "top4": "Ciclismo",    "top5": "Pádel",       "pct_running": 18, "pct_gym": 14, "pct_padel": 16, "pct_nat": 12, "pct_cicl": 20},
+            {"ccaa": "Extremadura",       "lat": 39.49, "lon": -6.37, "intensidad": 44, "top1": "Fútbol",        "top2": "Caza/pesca",       "top3": "Senderismo",  "top4": "Natación",    "top5": "Ciclismo",    "pct_running": 16, "pct_gym": 12, "pct_padel": 12, "pct_nat": 18, "pct_cicl": 16},
+            {"ccaa": "Murcia",            "lat": 37.99, "lon": -1.13, "intensidad": 57, "top1": "Natación",      "top2": "Fútbol",           "top3": "Pádel",       "top4": "Running",     "top5": "Ciclismo",    "pct_running": 26, "pct_gym": 20, "pct_padel": 24, "pct_nat": 32, "pct_cicl": 22},
+            {"ccaa": "Canarias",          "lat": 28.29, "lon":-15.63, "intensidad": 58, "top1": "Natación",      "top2": "Surf/windsurf",    "top3": "Running",     "top4": "Fútbol",      "top5": "Senderismo",  "pct_running": 30, "pct_gym": 22, "pct_padel": 14, "pct_nat": 42, "pct_cicl": 16},
+            {"ccaa": "Baleares",          "lat": 39.57, "lon":  2.65, "intensidad": 70, "top1": "Ciclismo",      "top2": "Natación",         "top3": "Running",     "top4": "Vela/náutica","top5": "Senderismo",  "pct_running": 36, "pct_gym": 26, "pct_padel": 16, "pct_nat": 38, "pct_cicl": 48},
+            {"ccaa": "La Rioja",          "lat": 42.29, "lon": -2.45, "intensidad": 64, "top1": "Senderismo",    "top2": "Ciclismo",         "top3": "Running",     "top4": "Fútbol",      "top5": "Gimnasio/fitness","pct_running": 30, "pct_gym": 22, "pct_padel": 14, "pct_nat": 14, "pct_cicl": 36},
+            {"ccaa": "Asturias",          "lat": 43.36, "lon": -5.86, "intensidad": 60, "top1": "Senderismo",    "top2": "Fútbol",           "top3": "Ciclismo",    "top4": "Natación",    "top5": "Running",     "pct_running": 26, "pct_gym": 18, "pct_padel": 10, "pct_nat": 24, "pct_cicl": 28},
+            {"ccaa": "Cantabria",         "lat": 43.18, "lon": -3.99, "intensidad": 63, "top1": "Senderismo",    "top2": "Surf",             "top3": "Ciclismo",    "top4": "Running",     "top5": "Fútbol",      "pct_running": 28, "pct_gym": 20, "pct_padel": 10, "pct_nat": 24, "pct_cicl": 32},
+        ]
+        df_dep = pd.DataFrame(CCAA_DEP)
+
+        # Mapa scatter coloreado por intensidad deportiva
+        fig_dep_map = px.scatter_map(
+            df_dep, lat="lat", lon="lon",
+            color="intensidad",
+            size="intensidad",
+            size_max=38,
+            color_continuous_scale=[[0, "#EEF4FF"], [0.4, A3], [0.75, A2], [1.0, ACCENT]],
+            hover_name="ccaa",
+            hover_data={
+                "intensidad": True,
+                "top1": True, "top2": True, "top3": True,
+                "lat": False, "lon": False,
+            },
+            zoom=4.8, center={"lat": 40.2, "lon": -3.5},
+            height=420,
+            labels={"intensidad": "% practica deporte", "top1": "Deporte #1",
+                    "top2": "Deporte #2", "top3": "Deporte #3"},
+        )
+        fig_dep_map.update_layout(
+            map_style="open-street-map",
+            paper_bgcolor="rgba(0,0,0,0)",
+            font=dict(family="Inter", size=11, color=FONT),
+            coloraxis_colorbar=dict(
+                title="% practica<br>deporte", tickfont=dict(size=9), len=0.6),
+            margin=dict(l=0, r=0, t=0, b=0),
+        )
+        st.plotly_chart(fig_dep_map, use_container_width=True,
+                        config={"scrollZoom": True, "displayModeBar": True})
+
+        st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
+
+        # Ranking intensidad + bar chart top deportes
+        dc1, dc2 = st.columns([1, 1.4])
+        with dc1:
+            st.markdown('<div class="chart-label">Ranking de intensidad deportiva por CCAA</div>',
+                        unsafe_allow_html=True)
+            df_dep_sorted = df_dep.sort_values("intensidad", ascending=True)
+            fig_rank = go.Figure(go.Bar(
+                y=df_dep_sorted["ccaa"],
+                x=df_dep_sorted["intensidad"],
+                orientation="h",
+                marker_color=[ACCENT if v >= 70 else A2 if v >= 60 else A3 if v >= 52 else S_BORDER
+                              for v in df_dep_sorted["intensidad"]],
+                marker_line_width=0,
+                text=[f"{v}%" for v in df_dep_sorted["intensidad"]],
+                textposition="outside",
+                textfont=dict(size=9),
+            ))
+            fig_rank.add_vline(x=58, line_dash="dot", line_color=S_MUTED, line_width=1.2,
+                               annotation_text="Media España 58%", annotation_font_size=8)
+            fig_rank.update_layout(**lay(h=460, margin=dict(t=10, b=10, l=8, r=50)))
+            fig_rank.update_xaxes(showgrid=True, gridcolor=GRID, range=[0, 90])
+            st.plotly_chart(fig_rank, use_container_width=True)
+
+        with dc2:
+            st.markdown('<div class="chart-label">Deportes más practicados — top CCAA deportivas</div>',
+                        unsafe_allow_html=True)
+            TOP_CCAA = ["Navarra", "País Vasco", "Cataluña", "Baleares", "Madrid"]
+            dep_cols = ["pct_running", "pct_gym", "pct_padel", "pct_nat", "pct_cicl"]
+            dep_labels = ["Running", "Gimnasio/fitness", "Pádel", "Natación", "Ciclismo"]
+            dep_colors = [ACCENT, A2, A3, "#2E7D32", "#E65100"]
+
+            df_top = df_dep[df_dep["ccaa"].isin(TOP_CCAA)].set_index("ccaa")
+            fig_dep_bar = go.Figure()
+            for col, label, color in zip(dep_cols, dep_labels, dep_colors):
+                fig_dep_bar.add_trace(go.Bar(
+                    name=label,
+                    x=TOP_CCAA,
+                    y=[df_top.loc[c, col] for c in TOP_CCAA],
+                    marker_color=color,
+                    marker_line_width=0,
+                    text=[f"{df_top.loc[c, col]}%" for c in TOP_CCAA],
+                    textposition="inside",
+                    textfont=dict(size=9, color="#fff"),
+                ))
+            fig_dep_bar.update_layout(**lay(h=300, showlegend=True,
+                legend=dict(orientation="h", y=-0.28, font=dict(size=10)),
+                margin=dict(t=10, b=80, l=8, r=8)))
+            fig_dep_bar.update_layout(barmode="group")
+            fig_dep_bar.update_yaxes(showgrid=True, gridcolor=GRID, title="% practicantes")
+            st.plotly_chart(fig_dep_bar, use_container_width=True)
+
+        # Tabla detalle completa
+        st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
+        st.markdown('<div class="chart-label">Detalle completo por comunidad autónoma</div>',
+                    unsafe_allow_html=True)
+
+        def dep_badge(dep):
+            COLORES_DEP = {
+                "Running": ACCENT, "Ciclismo": A2, "Natación": A3,
+                "Gimnasio/fitness": "#2E7D32", "Pádel": "#E65100",
+                "Senderismo": "#6A1B9A", "Fútbol": "#BF360C",
+                "Surf/windsurf": "#006064", "Surf": "#006064",
+                "Vela/náutica": "#0277BD", "Esquí": "#37474F",
+                "Pelota vasca": "#4E342E", "Caza/pesca": "#558B2F",
+            }
+            c = COLORES_DEP.get(dep, S_MUTED)
+            return f'<span style="background:{c};color:#fff;padding:2px 8px;border-radius:10px;font-size:11px;white-space:nowrap">{dep}</span>'
+
+        def int_bar(v):
+            color = ACCENT if v >= 70 else A2 if v >= 60 else A3 if v >= 52 else S_MUTED
+            return f'<div style="display:flex;align-items:center;gap:6px"><div style="background:{color};height:6px;width:{v}%;border-radius:3px"></div><span style="font-size:11px;font-weight:600">{v}%</span></div>'
+
+        rows_html = ""
+        for _, r in df_dep.sort_values("intensidad", ascending=False).iterrows():
+            rows_html += f"""<tr style="border-bottom:1px solid {S_BORDER}">
+              <td style="padding:8px 12px;font-weight:600">{r['ccaa']}</td>
+              <td style="padding:8px 12px">{int_bar(r['intensidad'])}</td>
+              <td style="padding:8px 12px">{dep_badge(r['top1'])}</td>
+              <td style="padding:8px 12px">{dep_badge(r['top2'])}</td>
+              <td style="padding:8px 12px">{dep_badge(r['top3'])}</td>
+              <td style="padding:8px 12px">{dep_badge(r['top4'])}</td>
+              <td style="padding:8px 12px">{dep_badge(r['top5'])}</td>
+            </tr>"""
+
+        tabla_dep = f"""
+        <div style="overflow-x:auto;margin-top:8px">
+        <table style="width:100%;border-collapse:collapse;font-family:Inter,sans-serif;font-size:13px">
+          <thead>
+            <tr style="border-bottom:2px solid {ACCENT}">
+              <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600;letter-spacing:.05em">CCAA</th>
+              <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">INTENSIDAD</th>
+              <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">DEPORTE #1</th>
+              <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">DEPORTE #2</th>
+              <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">DEPORTE #3</th>
+              <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">DEPORTE #4</th>
+              <th style="text-align:left;padding:8px 12px;color:{S_MUTED};font-size:11px;font-weight:600">DEPORTE #5</th>
+            </tr>
+          </thead>
+          <tbody>{rows_html}</tbody>
+        </table>
+        </div>"""
+        st.markdown(tabla_dep, unsafe_allow_html=True)
+
+        callout(
+            "<strong>Oportunidad Sanitas:</strong> Navarra (76%), País Vasco (74%) y Baleares (70%) lideran la intensidad deportiva — "
+            "son también las CCAA con mayor renta media y mayor penetración de seguro privado. "
+            "El <strong>pádel</strong> crece un 40% anual en Madrid, Andalucía y Murcia — perfil 30–50 años, "
+            "segmento objetivo de seguros premium. "
+            "<strong>Acción:</strong> seguro deportivo específico con cobertura traumatológica ampliada "
+            "para practicantes de pádel, ciclismo y running — tres deportes con alta incidencia de lesión."
+        )
+
 # ══════════════════════════════════════════════════════════════════
 # PÁGINA: EXPERIENCIA & RETENCIÓN
 # ══════════════════════════════════════════════════════════════════
@@ -2507,6 +2777,535 @@ elif st.session_state["page"] == "experiencia":
             "gracias a la telemedicina — el canal digital como solución directa al gap de espera. "
             "El segmento <strong>Premium individual</strong> (LR 61%) es el más rentable: "
             "priorizar su captación y retención tiene doble impacto positivo — NPS alto + margen sano."
+        )
+
+# ══════════════════════════════════════════════════════════════════
+# ══════════════════════════════════════════════════════════════════
+# PÁGINA: PANEL EJECUTIVO (CEO VIEW)
+# ══════════════════════════════════════════════════════════════════
+elif st.session_state["page"] == "ejecutivo":
+
+    if st.button("← Inicio", key="back_ceo"):
+        go_to("home"); st.rerun()
+
+    st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
+    section("PANEL EJECUTIVO — VISIÓN CEO")
+
+    ceo_t1, ceo_t2, ceo_t3, ceo_t4 = st.tabs([
+        "Rentabilidad & Crecimiento",
+        "Calidad Clínica",
+        "Prevención & ROI Wellness",
+        "Motor de Adquisición",
+    ])
+
+    # ── TAB 1: Rentabilidad & Crecimiento ─────────────────────────
+    with ceo_t1:
+        ASEG6 = ["Sanitas","DKV","Adeslas","Asisa","Mapfre Salud","AXA Salud"]
+
+        # KPIs financieros clave
+        ck1, ck2, ck3, ck4 = st.columns(4)
+        kpi_card(ck1, "Combined ratio", "96.4%", "Objetivo: <94% — sector: 91.2%", negative=True)
+        kpi_card(ck2, "Revenue per member", "1.284€", "▲ 3.1% vs 2025")
+        kpi_card(ck3, "LTV medio cartera", "6.840€", "DKV estima 9.200€", negative=True)
+        kpi_card(ck4, "Margen técnico neto", "3.6%", "▼ 1.2 pp vs 2024 — presión costes", negative=True)
+
+        st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
+        cr1, cr2 = st.columns(2)
+
+        with cr1:
+            # Combined ratio waterfall: pérdidas + gastos = combined
+            st.markdown('<div class="chart-label">Descomposición combined ratio — Sanitas vs sector</div>', unsafe_allow_html=True)
+            fig_cr = go.Figure()
+            categorias_cr = ["Loss ratio\n(siniestralidad)", "Expense ratio\n(gastos operativos)", "Combined ratio\nresultante"]
+            vals_san = [71.2, 25.2, 96.4]
+            vals_sec = [67.8, 23.4, 91.2]
+            fig_cr.add_trace(go.Bar(
+                name="Sanitas", x=categorias_cr, y=vals_san,
+                marker_color=[ACCENT, A2, "#B71C1C"],
+                marker_line_width=0,
+                text=[f"{v}%" for v in vals_san],
+                textposition="outside", textfont=dict(size=10),
+            ))
+            fig_cr.add_trace(go.Bar(
+                name="Sector medio", x=categorias_cr, y=vals_sec,
+                marker_color=[S_BORDER, S_BORDER, S_MUTED],
+                marker_line_width=0,
+                text=[f"{v}%" for v in vals_sec],
+                textposition="outside", textfont=dict(size=10),
+            ))
+            fig_cr.add_hline(y=94, line_dash="dot", line_color="#E65100", line_width=1.5,
+                             annotation_text="Objetivo dirección 94%", annotation_font_size=9,
+                             annotation_position="top left")
+            fig_cr.add_hline(y=100, line_dash="solid", line_color="#B71C1C", line_width=1,
+                             annotation_text="Punto de equilibrio técnico", annotation_font_size=9,
+                             annotation_position="top right")
+            fig_cr.update_layout(**lay(h=320, showlegend=True,
+                legend=dict(orientation="h", y=-0.2, font=dict(size=10)),
+                margin=dict(t=14, b=60, l=8, r=8)))
+            fig_cr.update_layout(barmode="group")
+            fig_cr.update_yaxes(showgrid=True, gridcolor=GRID, range=[0, 115])
+            st.plotly_chart(fig_cr, use_container_width=True)
+
+        with cr2:
+            # LTV por segmento (bubble: x=CAC, y=LTV, size=volumen cartera)
+            st.markdown('<div class="chart-label">LTV vs CAC por segmento — eficiencia de adquisición</div>', unsafe_allow_html=True)
+            df_ltv = pd.DataFrame({
+                "segmento":   ["Básico adulto", "Premium adulto", "Familiar", "Senior 60+", "Colectivo empresa"],
+                "cac":        [124, 312, 487, 289, 38],
+                "ltv":        [2840, 8920, 14200, 4100, 22400],
+                "volumen":    [28, 22, 32, 11, 7],
+                "ltv_cac":   [22.9, 28.6, 29.1, 14.2, 589.5],
+            })
+            seg_colors_ltv = [A3, ACCENT, "#2E7D32", "#E65100", "#4A148C"]
+            fig_ltv = px.scatter(
+                df_ltv, x="cac", y="ltv",
+                size="volumen", color="segmento",
+                color_discrete_sequence=seg_colors_ltv,
+                text="segmento",
+                labels={"cac": "CAC — Coste adquisición (€)", "ltv": "LTV — Valor de vida (€)"},
+                size_max=45,
+            )
+            fig_ltv.update_traces(textposition="top center", textfont=dict(size=9))
+            # Diagonal LTV/CAC = 20x
+            x_range = [0, 550]
+            fig_ltv.add_scatter(
+                x=x_range, y=[v*20 for v in x_range],
+                mode="lines", name="LTV/CAC = 20x (mínimo)",
+                line=dict(color=S_MUTED, dash="dot", width=1.2),
+            )
+            fig_ltv.add_scatter(
+                x=x_range, y=[v*30 for v in x_range],
+                mode="lines", name="LTV/CAC = 30x (óptimo)",
+                line=dict(color="#2E7D32", dash="dot", width=1.2),
+            )
+            fig_ltv.update_layout(**lay(h=320, showlegend=True,
+                legend=dict(orientation="h", y=-0.26, font=dict(size=9)),
+                margin=dict(t=14, b=70, l=8, r=8)))
+            fig_ltv.update_xaxes(showgrid=True, gridcolor=GRID)
+            fig_ltv.update_yaxes(showgrid=True, gridcolor=GRID)
+            st.plotly_chart(fig_ltv, use_container_width=True)
+
+        cr3, cr4 = st.columns(2)
+        with cr3:
+            # Evolución margen técnico últimos 5 años
+            st.markdown('<div class="chart-label">Evolución margen técnico neto 2021–2025</div>', unsafe_allow_html=True)
+            años = [2021, 2022, 2023, 2024, 2025]
+            margen_san = [6.2, 5.8, 5.1, 4.8, 3.6]
+            margen_dkv = [7.1, 7.4, 7.8, 8.1, 8.4]
+            margen_sec = [5.4, 5.2, 5.0, 4.9, 4.7]
+            fig_margen = go.Figure()
+            fig_margen.add_trace(go.Scatter(
+                x=años, y=margen_san, name="Sanitas",
+                mode="lines+markers+text",
+                line=dict(color=ACCENT, width=2.5),
+                marker=dict(size=7),
+                text=[f"{v}%" for v in margen_san],
+                textposition="top center", textfont=dict(size=9),
+            ))
+            fig_margen.add_trace(go.Scatter(
+                x=años, y=margen_dkv, name="DKV",
+                mode="lines+markers",
+                line=dict(color="#E65100", width=1.8, dash="dash"),
+                marker=dict(size=6),
+            ))
+            fig_margen.add_trace(go.Scatter(
+                x=años, y=margen_sec, name="Sector medio",
+                mode="lines",
+                line=dict(color=S_MUTED, width=1.2, dash="dot"),
+            ))
+            fig_margen.add_hrect(y0=0, y1=4, fillcolor="#FEE2E2", opacity=0.15, line_width=0)
+            fig_margen.update_layout(**lay(h=280, showlegend=True,
+                legend=dict(orientation="h", y=-0.22, font=dict(size=10)),
+                margin=dict(t=14, b=60, l=8, r=8)))
+            fig_margen.update_yaxes(showgrid=True, gridcolor=GRID, title="%", range=[0, 10])
+            st.plotly_chart(fig_margen, use_container_width=True)
+
+        with cr4:
+            # Revenue per member por segmento
+            st.markdown('<div class="chart-label">Revenue per member por segmento (€/año)</div>', unsafe_allow_html=True)
+            df_rpm = pd.DataFrame({
+                "segmento": ["Colectivo\nempresa", "Senior 60+", "Premium\nindividual", "Familiar", "Básico\nindividual"],
+                "rpm_2024": [980, 1840, 1068, 1416, 504],
+                "rpm_2025": [1020, 1910, 1118, 1472, 518],
+            })
+            fig_rpm = go.Figure()
+            fig_rpm.add_trace(go.Bar(
+                name="2024", x=df_rpm["segmento"], y=df_rpm["rpm_2024"],
+                marker_color=S_BORDER, marker_line_width=0,
+                text=[f"{v}€" for v in df_rpm["rpm_2024"]],
+                textposition="outside", textfont=dict(size=9),
+            ))
+            fig_rpm.add_trace(go.Bar(
+                name="2025", x=df_rpm["segmento"], y=df_rpm["rpm_2025"],
+                marker_color=ACCENT, marker_line_width=0,
+                text=[f"{v}€" for v in df_rpm["rpm_2025"]],
+                textposition="outside", textfont=dict(size=9),
+            ))
+            fig_rpm.update_layout(**lay(h=280, showlegend=True,
+                legend=dict(orientation="h", y=-0.22, font=dict(size=10)),
+                margin=dict(t=14, b=60, l=8, r=8)))
+            fig_rpm.update_layout(barmode="group")
+            fig_rpm.update_yaxes(showgrid=True, gridcolor=GRID, range=[0, 2300])
+            st.plotly_chart(fig_rpm, use_container_width=True)
+
+        callout(
+            "<strong>La tendencia del margen técnico es preocupante:</strong> 6.2% en 2021 → 3.6% en 2025, pérdida de 2.6 pp en 4 años. "
+            "El combined ratio de 96.4% deja solo 3.6 pp de margen antes de gastos de capital. "
+            "<strong>Palancas inmediatas:</strong> (1) reducir expense ratio del 25.2% al 23% mediante automatización de autorizaciones, "
+            "(2) mejorar loss ratio en segmento Familiar —78%— con gestión activa de crónicos, "
+            "(3) potenciar canal Colectivo Empresa (CAC 38€ vs 487€ corredor individual)."
+        )
+
+    # ── TAB 2: Calidad Clínica ─────────────────────────────────────
+    with ceo_t2:
+        qk1, qk2, qk3, qk4 = st.columns(4)
+        kpi_card(qk1, "Readmisión <30 días", "8.2%", "Objetivo 6.0% — sector 7.8%", negative=True)
+        kpi_card(qk2, "Resolución en primaria", "61%", "DKV: 74% — objetivo: 70%", negative=True)
+        kpi_card(qk3, "Adherencia terapéutica", "68%", "Objetivo 80% — crónicos en riesgo", negative=True)
+        kpi_card(qk4, "Satisfacción post-alta", "4.21 / 5", "HM Hospitales: 4.48")
+
+        st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
+        qr1, qr2 = st.columns(2)
+
+        with qr1:
+            # Tasa de readmisión por especialidad vs objetivo
+            st.markdown('<div class="chart-label">Tasa de readmisión <30 días por servicio clínico (%)</div>', unsafe_allow_html=True)
+            df_read = pd.DataFrame({
+                "servicio":  ["Cardiología", "Cirugía general", "Traumatología",
+                              "Oncología", "Neumología", "Digestivo", "Neurología"],
+                "sanitas":   [9.4, 7.1, 6.8, 11.2, 8.9, 6.4, 10.1],
+                "objetivo":  [6.0, 5.5, 5.0, 8.0,  6.5, 5.0, 7.5],
+                "sector":    [8.1, 6.4, 6.2, 9.8,  8.2, 5.8, 9.2],
+            })
+            fig_read = go.Figure()
+            fig_read.add_trace(go.Bar(
+                name="Sanitas", x=df_read["servicio"], y=df_read["sanitas"],
+                marker_color=[ACCENT if v > o else A3 for v, o in zip(df_read["sanitas"], df_read["objetivo"])],
+                marker_line_width=0,
+                text=[f"{v}%" for v in df_read["sanitas"]],
+                textposition="outside", textfont=dict(size=9),
+            ))
+            fig_read.add_trace(go.Scatter(
+                name="Objetivo", x=df_read["servicio"], y=df_read["objetivo"],
+                mode="markers", marker=dict(symbol="line-ew", size=20, color="#2E7D32", line=dict(width=2, color="#2E7D32")),
+            ))
+            fig_read.add_trace(go.Scatter(
+                name="Sector", x=df_read["servicio"], y=df_read["sector"],
+                mode="markers", marker=dict(symbol="diamond", size=8, color=S_MUTED),
+            ))
+            fig_read.update_layout(**lay(h=320, showlegend=True,
+                legend=dict(orientation="h", y=-0.22, font=dict(size=10)),
+                margin=dict(t=14, b=60, l=8, r=8)))
+            fig_read.update_yaxes(showgrid=True, gridcolor=GRID, range=[0, 14], title="%")
+            fig_read.update_xaxes(tickfont=dict(size=9))
+            st.plotly_chart(fig_read, use_container_width=True)
+
+        with qr2:
+            # Resolución en primaria sin derivación vs competencia
+            st.markdown('<div class="chart-label">% consultas resueltas en atención primaria sin derivación</div>', unsafe_allow_html=True)
+            df_prim = pd.DataFrame({
+                "marca": ASEG6,
+                "resolucion": [61, 74, 68, 65, 58, 56],
+            })
+            df_prim_s = df_prim.sort_values("resolucion", ascending=True)
+            fig_prim = go.Figure(go.Bar(
+                y=df_prim_s["marca"], x=df_prim_s["resolucion"], orientation="h",
+                marker_color=[ACCENT if m == "Sanitas" else "#2E7D32" if v >= 70 else S_BORDER
+                              for m, v in zip(df_prim_s["marca"], df_prim_s["resolucion"])],
+                marker_line_width=0,
+                text=[f"{v}%" for v in df_prim_s["resolucion"]],
+                textposition="outside", textfont=dict(size=10),
+            ))
+            fig_prim.add_vline(x=70, line_dash="dot", line_color="#2E7D32", line_width=1.5,
+                               annotation_text="Objetivo 70%", annotation_font_size=9)
+            fig_prim.update_layout(**lay(h=280, margin=dict(t=14, b=10, l=8, r=50)))
+            fig_prim.update_xaxes(showgrid=True, gridcolor=GRID, range=[0, 85])
+            callout_prim = "Cada punto porcentual de mejora en resolución primaria evita ~4.200 derivaciones/año a especialista, ahorro estimado de 2.1M€ anuales."
+            st.plotly_chart(fig_prim, use_container_width=True)
+            st.markdown(f'<div class="callout">{callout_prim}</div>', unsafe_allow_html=True)
+
+        qr3, qr4 = st.columns(2)
+        with qr3:
+            # Adherencia terapéutica por patología crónica
+            st.markdown('<div class="chart-label">Adherencia terapéutica en patologías crónicas (%)</div>', unsafe_allow_html=True)
+            df_adh = pd.DataFrame({
+                "patologia": ["Hipertensión", "Diabetes tipo 2", "Dislipemia",
+                              "Asma/EPOC", "Depresión/ansiedad", "Hipotiroidismo"],
+                "adherencia": [72, 64, 58, 61, 48, 79],
+                "coste_mal_control": [1840, 4200, 920, 2100, 3400, 380],
+            })
+            color_adh = ["#2E7D32" if v >= 75 else ACCENT if v >= 65 else "#B71C1C"
+                         for v in df_adh["adherencia"]]
+            fig_adh = go.Figure()
+            fig_adh.add_trace(go.Bar(
+                x=df_adh["patologia"], y=df_adh["adherencia"],
+                marker_color=color_adh, marker_line_width=0,
+                text=[f"{v}%" for v in df_adh["adherencia"]],
+                textposition="outside", textfont=dict(size=9),
+                name="Adherencia",
+            ))
+            fig_adh.add_hline(y=80, line_dash="dot", line_color="#2E7D32", line_width=1.5,
+                              annotation_text="Objetivo 80%", annotation_font_size=9)
+            fig_adh.add_hline(y=60, line_dash="dot", line_color="#B71C1C", line_width=1,
+                              annotation_text="Alerta <60%", annotation_font_size=9,
+                              annotation_position="bottom right")
+            fig_adh.update_layout(**lay(h=300, margin=dict(t=14, b=60, l=8, r=8)))
+            fig_adh.update_xaxes(tickfont=dict(size=9), tickangle=-20)
+            fig_adh.update_yaxes(showgrid=True, gridcolor=GRID, range=[0, 100])
+            st.plotly_chart(fig_adh, use_container_width=True)
+
+        with qr4:
+            # Coste incremental del mal control crónico
+            st.markdown('<div class="chart-label">Coste medio adicional por asegurado con control subóptimo (€/año)</div>', unsafe_allow_html=True)
+            df_adh_s = df_adh.sort_values("coste_mal_control", ascending=True)
+            fig_cost = go.Figure(go.Bar(
+                y=df_adh_s["patologia"], x=df_adh_s["coste_mal_control"],
+                orientation="h",
+                marker_color=["#B71C1C" if v >= 3000 else ACCENT if v >= 1500 else A3
+                              for v in df_adh_s["coste_mal_control"]],
+                marker_line_width=0,
+                text=[f"{v:,}€".replace(",", ".") for v in df_adh_s["coste_mal_control"]],
+                textposition="outside", textfont=dict(size=9),
+            ))
+            fig_cost.update_layout(**lay(h=300, margin=dict(t=14, b=10, l=8, r=70)))
+            fig_cost.update_xaxes(showgrid=True, gridcolor=GRID)
+            st.plotly_chart(fig_cost, use_container_width=True)
+
+        callout(
+            "<strong>Depresión/ansiedad es la mayor brecha de adherencia (48%) y el segundo mayor coste por mal control (3.400€/paciente).</strong> "
+            "Con 34.000 asegurados diagnosticados, mejorar la adherencia del 48% al 70% evitaría recaídas en ~7.500 pacientes y ahorraría 25.5M€/año. "
+            "La oncología presenta la tasa de readmisión más alta (11.2%) — revisión urgente del protocolo de alta y seguimiento post-tratamiento."
+        )
+
+    # ── TAB 3: Prevención & ROI Wellness ──────────────────────────
+    with ceo_t3:
+        wk1, wk2, wk3, wk4 = st.columns(4)
+        kpi_card(wk1, "% asegurados con revisión anual", "34%", "Objetivo 50% — gap 16 pp", negative=True)
+        kpi_card(wk2, "Inversión programas wellness", "2.3M€", "▲ 18% vs 2024")
+        kpi_card(wk3, "Ahorro siniestros estimado", "6.8M€", "ROI 196%")
+        kpi_card(wk4, "Diagnósticos preventivos activos", "12.400", "▲ 8% vs 2024")
+
+        st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
+        wr1, wr2 = st.columns(2)
+
+        with wr1:
+            # % uso revisión preventiva por segmento
+            st.markdown('<div class="chart-label">% asegurados con revisión preventiva anual por segmento</div>', unsafe_allow_html=True)
+            df_prev = pd.DataFrame({
+                "segmento":  ["Senior 60+", "Premium individual", "Familiar", "Colectivo empresa", "Básico adulto"],
+                "uso_prev":  [61, 48, 41, 38, 22],
+                "objetivo":  [75, 60, 55, 50, 40],
+            })
+            fig_prev = go.Figure()
+            fig_prev.add_trace(go.Bar(
+                name="Uso actual", x=df_prev["segmento"], y=df_prev["uso_prev"],
+                marker_color=[ACCENT if v >= 45 else A3 if v >= 35 else S_MUTED for v in df_prev["uso_prev"]],
+                marker_line_width=0,
+                text=[f"{v}%" for v in df_prev["uso_prev"]],
+                textposition="outside", textfont=dict(size=9),
+            ))
+            fig_prev.add_trace(go.Scatter(
+                name="Objetivo", x=df_prev["segmento"], y=df_prev["objetivo"],
+                mode="markers+text",
+                marker=dict(symbol="line-ew", size=22, color="#2E7D32", line=dict(width=2.5, color="#2E7D32")),
+                text=[f"{v}%" for v in df_prev["objetivo"]],
+                textposition="top center", textfont=dict(size=9, color="#2E7D32"),
+            ))
+            fig_prev.update_layout(**lay(h=300, showlegend=True,
+                legend=dict(orientation="h", y=-0.22, font=dict(size=10)),
+                margin=dict(t=14, b=60, l=8, r=8)))
+            fig_prev.update_yaxes(showgrid=True, gridcolor=GRID, range=[0, 90])
+            fig_prev.update_xaxes(tickfont=dict(size=9))
+            st.plotly_chart(fig_prev, use_container_width=True)
+
+        with wr2:
+            # ROI programas wellness — waterfall
+            st.markdown('<div class="chart-label">ROI programas wellness 2025 — impacto en siniestralidad (€M)</div>', unsafe_allow_html=True)
+            fig_roi = go.Figure(go.Waterfall(
+                name="Impacto",
+                orientation="v",
+                measure=["absolute", "relative", "relative", "relative", "relative", "total"],
+                x=["Inversión\nwellness", "Reducción\nurgencias", "Menos\nreadmisiones",
+                   "Crónicos\nbien controlados", "Diagnóstico\ntemprano", "Ahorro\nneto"],
+                y=[-2.3, 1.8, 0.9, 2.4, 1.7, 0],
+                text=["-2.3M€", "+1.8M€", "+0.9M€", "+2.4M€", "+1.7M€", "+4.5M€"],
+                textposition="outside",
+                connector=dict(line=dict(color=S_BORDER, width=1)),
+                decreasing=dict(marker=dict(color="#B71C1C")),
+                increasing=dict(marker=dict(color="#2E7D32")),
+                totals=dict(marker=dict(color=ACCENT)),
+                textfont=dict(size=10),
+            ))
+            fig_roi.update_layout(**lay(h=300, margin=dict(t=14, b=60, l=8, r=8)))
+            fig_roi.update_yaxes(showgrid=True, gridcolor=GRID, title="€M")
+            st.plotly_chart(fig_roi, use_container_width=True)
+
+        wr3, wr4 = st.columns(2)
+        with wr3:
+            # Programas wellness activos y adopción
+            st.markdown('<div class="chart-label">Adopción de programas wellness por tipo (%)</div>', unsafe_allow_html=True)
+            df_well = pd.DataFrame({
+                "programa": ["App Sanitas salud", "Coaching nutricional", "Gestión estrés / mindfulness",
+                             "Plan actividad física", "Monitorización wearable", "Revisión oncológica preventiva"],
+                "adopcion": [71, 38, 29, 44, 18, 34],
+                "satisfaccion": [4.1, 4.3, 4.5, 4.2, 3.8, 4.6],
+            })
+            fig_well = go.Figure()
+            fig_well.add_trace(go.Bar(
+                x=df_well["adopcion"], y=df_well["programa"],
+                orientation="h",
+                marker_color=[ACCENT if v >= 40 else A2 if v >= 25 else A3 for v in df_well["adopcion"]],
+                marker_line_width=0,
+                text=[f"{v}%" for v in df_well["adopcion"]],
+                textposition="outside", textfont=dict(size=9),
+            ))
+            fig_well.update_layout(**lay(h=300, margin=dict(t=10, b=10, l=8, r=50)))
+            fig_well.update_xaxes(showgrid=True, gridcolor=GRID, range=[0, 90])
+            fig_well.update_yaxes(tickfont=dict(size=9))
+            st.plotly_chart(fig_well, use_container_width=True)
+
+        with wr4:
+            # Coste por asegurado: preventivo vs reactivo
+            st.markdown('<div class="chart-label">Coste medio anual: asegurados con revisión preventiva vs sin ella (€)</div>', unsafe_allow_html=True)
+            seg_prev2 = ["Básico adulto", "Premium adulto", "Familiar", "Senior 60+"]
+            coste_con = [680, 1140, 920, 3200]
+            coste_sin = [1240, 1980, 1620, 5800]
+            fig_cp = go.Figure()
+            fig_cp.add_trace(go.Bar(
+                name="Con revisión preventiva", x=seg_prev2, y=coste_con,
+                marker_color="#2E7D32", marker_line_width=0,
+                text=[f"{v}€" for v in coste_con], textposition="outside", textfont=dict(size=9),
+            ))
+            fig_cp.add_trace(go.Bar(
+                name="Sin revisión preventiva", x=seg_prev2, y=coste_sin,
+                marker_color="#B71C1C", marker_line_width=0,
+                text=[f"{v}€" for v in coste_sin], textposition="outside", textfont=dict(size=9),
+            ))
+            fig_cp.update_layout(**lay(h=300, showlegend=True,
+                legend=dict(orientation="h", y=-0.22, font=dict(size=10)),
+                margin=dict(t=14, b=60, l=8, r=8)))
+            fig_cp.update_layout(barmode="group")
+            fig_cp.update_yaxes(showgrid=True, gridcolor=GRID, range=[0, 7000])
+            st.plotly_chart(fig_cp, use_container_width=True)
+
+        callout(
+            "<strong>La prevención genera ROI de 196%</strong> — cada euro invertido en wellness devuelve 2.96€ en reducción de siniestros. "
+            "El segmento Básico adulto tiene solo el 22% de adopción de revisión preventiva pero el mayor gap coste: "
+            "1.240€ sin revisión vs 680€ con ella (-45%). "
+            "<strong>Propuesta:</strong> incentivo económico directo — descuento de 8–12% en prima renovación si el asegurado completa su revisión anual. "
+            "Payback estimado: 14 meses."
+        )
+
+    # ── TAB 4: Motor de Adquisición ────────────────────────────────
+    with ceo_t4:
+        ak1, ak2, ak3, ak4 = st.columns(4)
+        kpi_card(ak1, "CAC medio cartera", "186€", "Canal corredor +161% vs digital", negative=True)
+        kpi_card(ak2, "Tasa de renovación", "91.6%", "DKV: 94.9% — brecha 3.3 pp", negative=True)
+        kpi_card(ak3, "% ventas canal digital", "18%", "Sector líder DKV: 41%", negative=True)
+        kpi_card(ak4, "Referidos activos", "6.200", "▲ 22% vs 2024 — canal más barato")
+
+        st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
+        ar1, ar2 = st.columns(2)
+
+        with ar1:
+            # CAC por canal
+            st.markdown('<div class="chart-label">Coste de adquisición por canal (CAC en €)</div>', unsafe_allow_html=True)
+            df_cac = pd.DataFrame({
+                "canal":  ["Corredor /\nbroker", "Digital\ndirecto", "Empresa /\ncolectivo",
+                           "Referido /\nboca-oído", "Agente\npropio"],
+                "cac":    [487, 124, 38, 67, 312],
+                "vol_pct":[34, 18, 22, 11, 15],
+            })
+            df_cac_s = df_cac.sort_values("cac", ascending=False)
+            fig_cac = go.Figure()
+            fig_cac.add_trace(go.Bar(
+                x=df_cac_s["cac"], y=df_cac_s["canal"], orientation="h",
+                marker_color=["#B71C1C" if v >= 400 else ACCENT if v >= 200 else "#2E7D32"
+                              for v in df_cac_s["cac"]],
+                marker_line_width=0,
+                text=[f"{v}€ ({p}% vol)" for v, p in zip(df_cac_s["cac"], df_cac_s["vol_pct"])],
+                textposition="outside", textfont=dict(size=9),
+            ))
+            fig_cac.update_layout(**lay(h=300, margin=dict(t=10, b=10, l=8, r=120)))
+            fig_cac.update_xaxes(showgrid=True, gridcolor=GRID, range=[0, 620])
+            st.plotly_chart(fig_cac, use_container_width=True)
+
+        with ar2:
+            # Funnel de renovación por canal
+            st.markdown('<div class="chart-label">Tasa de renovación por canal (%)</div>', unsafe_allow_html=True)
+            df_ren = pd.DataFrame({
+                "canal":    ["Empresa/colectivo", "Referido", "Digital directo", "Agente propio", "Corredor/broker"],
+                "renovacion":[96.4, 94.1, 92.8, 91.2, 87.6],
+            })
+            df_ren_s = df_ren.sort_values("renovacion", ascending=True)
+            fig_ren = go.Figure(go.Bar(
+                y=df_ren_s["canal"], x=df_ren_s["renovacion"], orientation="h",
+                marker_color=["#2E7D32" if v >= 94 else ACCENT if v >= 91 else "#B71C1C"
+                              for v in df_ren_s["renovacion"]],
+                marker_line_width=0,
+                text=[f"{v}%" for v in df_ren_s["renovacion"]],
+                textposition="outside", textfont=dict(size=10),
+            ))
+            fig_ren.add_vline(x=91.6, line_dash="dot", line_color=S_MUTED, line_width=1.2,
+                              annotation_text="Media Sanitas 91.6%", annotation_font_size=8)
+            fig_ren.update_layout(**lay(h=280, margin=dict(t=14, b=10, l=8, r=60)))
+            fig_ren.update_xaxes(showgrid=True, gridcolor=GRID, range=[82, 100])
+            st.plotly_chart(fig_ren, use_container_width=True)
+
+        ar3, ar4 = st.columns(2)
+        with ar3:
+            # Mix canal ventas nuevas 2022–2025
+            st.markdown('<div class="chart-label">Evolución mix de canal en nuevas altas (%)</div>', unsafe_allow_html=True)
+            años_mix = [2022, 2023, 2024, 2025]
+            canales_mix = {
+                "Corredor/broker": [48, 44, 40, 34],
+                "Digital directo":  [ 8, 11, 14, 18],
+                "Empresa/colectivo":[24, 24, 23, 22],
+                "Referido":         [ 7,  8,  9, 11],
+                "Agente propio":    [13, 13, 14, 15],
+            }
+            colores_mix = [S_MUTED, ACCENT, A2, "#2E7D32", A3]
+            fig_mix = go.Figure()
+            for (canal, vals), color in zip(canales_mix.items(), colores_mix):
+                fig_mix.add_trace(go.Bar(
+                    name=canal, x=años_mix, y=vals,
+                    marker_color=color, marker_line_width=0,
+                ))
+            fig_mix.update_layout(**lay(h=300, showlegend=True,
+                legend=dict(orientation="h", y=-0.28, font=dict(size=9)),
+                margin=dict(t=10, b=80, l=8, r=8)))
+            fig_mix.update_layout(barmode="stack")
+            fig_mix.update_yaxes(showgrid=True, gridcolor=GRID, title="%")
+            st.plotly_chart(fig_mix, use_container_width=True)
+
+        with ar4:
+            # LTV/CAC ratio por canal
+            st.markdown('<div class="chart-label">Eficiencia por canal — ratio LTV/CAC</div>', unsafe_allow_html=True)
+            df_eff = pd.DataFrame({
+                "canal":   ["Empresa/colectivo", "Referido", "Digital directo", "Agente propio", "Corredor/broker"],
+                "ltv_cac": [589, 102, 55, 28, 17],
+            })
+            df_eff_s = df_eff.sort_values("ltv_cac", ascending=True)
+            fig_eff = go.Figure(go.Bar(
+                y=df_eff_s["canal"], x=df_eff_s["ltv_cac"], orientation="h",
+                marker_color=["#2E7D32" if v >= 100 else ACCENT if v >= 40 else "#B71C1C"
+                              for v in df_eff_s["ltv_cac"]],
+                marker_line_width=0,
+                text=[f"{v}x" for v in df_eff_s["ltv_cac"]],
+                textposition="outside", textfont=dict(size=10),
+            ))
+            fig_eff.add_vline(x=30, line_dash="dot", line_color="#2E7D32", line_width=1.2,
+                              annotation_text="Mínimo saludable 30x", annotation_font_size=8)
+            fig_eff.update_layout(**lay(h=280, margin=dict(t=14, b=10, l=8, r=60)))
+            fig_eff.update_xaxes(showgrid=True, gridcolor=GRID)
+            st.plotly_chart(fig_eff, use_container_width=True)
+
+        callout(
+            "<strong>El canal corredor concentra el 34% de nuevas altas pero tiene el peor ratio LTV/CAC (17x) y la peor renovación (87.6%).</strong> "
+            "El canal digital, aunque solo representa el 18% del volumen, tiene CAC de 124€ y ratio LTV/CAC de 55x. "
+            "El canal empresa/colectivo es estructuralmente superior: CAC de 38€, renovación del 96.4% y ratio LTV/CAC de 589x. "
+            "<strong>Decisión estratégica recomendada:</strong> reasignar el 25% del presupuesto de corredor a digital y B2B corporativo. "
+            "Impacto proyectado: reducción del CAC medio de 186€ a 134€ en 24 meses."
         )
 
 # ══════════════════════════════════════════════════════════════════
