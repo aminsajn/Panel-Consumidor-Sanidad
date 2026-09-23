@@ -1376,20 +1376,21 @@ elif page == "comercial":
                 opacity=0.88,
             ),
         ))
-        fig_map.update_geos(
-            scope="europe",
-            center={"lat": 40.2, "lon": -3.6},
-            projection_scale=5,
-            showland=True,   landcolor="#F0F4FA",
-            showsea=True,    oceancolor="#EEF4FF",
-            showcoastlines=True, coastlinecolor=GRID,
-            showcountries=True,  countrycolor=GRID,
-            showframe=False,
-        )
         fig_map.update_layout(
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
             height=440, margin=dict(t=10,b=10,l=0,r=0),
             font=dict(family="Inter,sans-serif", color=FONT, size=10),
+            geo=dict(
+                scope="europe",
+                center={"lat": 40.2, "lon": -3.6},
+                projection=dict(scale=5),
+                showland=True,      landcolor="#F0F4FA",
+                showocean=True,     oceancolor="#EEF4FF",
+                showcoastlines=True, coastlinecolor=GRID,
+                showcountries=True,  countrycolor=GRID,
+                showframe=False,
+                bgcolor="rgba(0,0,0,0)",
+            ),
         )
         st.plotly_chart(fig_map, use_container_width=True)
 
