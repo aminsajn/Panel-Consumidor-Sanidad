@@ -51,7 +51,8 @@ html,body,[class*="css"]{{font-family:'Inter',-apple-system,BlinkMacSystemFont,'
 [data-testid="stSidebar"]{{display:block!important;visibility:visible!important;transform:none!important;
   width:17rem!important;background:#EEF4FF!important;border-right:1px solid #C0D5F0!important;
   box-shadow:2px 0 12px rgba(0,48,135,.06)!important}}
-[data-testid="stSidebar"] *{{color:#1D1D1F!important;font-family:'Inter',sans-serif!important}}
+[data-testid="stSidebar"] *:not(button):not(button *){{color:#1D1D1F!important;font-family:'Inter',sans-serif!important}}
+[data-testid="stSidebar"] button{{font-family:'Inter',sans-serif!important}}
 [data-testid="stSidebar"] label{{color:{ACCENT}!important;font-size:.62rem!important;
   letter-spacing:.08em;text-transform:uppercase;font-weight:600!important;margin-bottom:4px!important}}
 [data-testid="stSidebar"] [data-baseweb="select"]{{background:#DEEAF8!important;
@@ -67,6 +68,15 @@ button[kind="header"]{{display:none!important}}
 .stButton>button:hover{{background:#F5F5F7;box-shadow:0 3px 8px rgba(0,0,0,.1);
   border-color:rgba(0,0,0,.18)}}
 .stButton>button:active{{transform:scale(.98)}}
+[data-testid="stSidebar"] .stButton>button{{
+  background:transparent!important;color:#374151!important;border:1px solid transparent!important;
+  border-radius:10px!important;width:100%!important;text-align:left!important;
+  padding:10px 14px!important;font-size:.84rem!important;font-weight:500!important;
+  box-shadow:none!important;letter-spacing:.01em!important;margin-bottom:2px!important;
+  transition:all .15s ease!important}}
+[data-testid="stSidebar"] .stButton>button:hover{{
+  background:rgba(0,48,135,.1)!important;color:{ACCENT}!important;
+  border-color:rgba(0,48,135,.2)!important;box-shadow:none!important}}
 .top-bar{{background:transparent;padding:20px 0 0;display:flex;align-items:baseline;
   justify-content:space-between;border-bottom:1px solid rgba(0,0,0,.06);margin-bottom:2.4rem}}
 .top-title{{font-size:.95rem;font-weight:600;color:#1D1D1F;letter-spacing:-.01em}}
@@ -397,17 +407,21 @@ with st.sidebar:
         ("comercial",  "Inteligencia Comercial"),
     ]
     for key, label in pages:
-        active = st.session_state["page"] == key
-        bg  = ACCENT if active else "transparent"
-        col = "#fff" if active else FONT
-        brd = f"1px solid {ACCENT}" if active else "1px solid transparent"
         if st.button(label, key=f"nav_{key}"):
             go_to(key); st.rerun()
-        if active:
-            st.markdown(
-                f'<style>.stButton:last-of-type>button{{background:{bg}!important;'
-                f'color:{col}!important;border:{brd}!important}}</style>',
-                unsafe_allow_html=True)
+
+    # Resalta el botón activo por posición (nth-of-type)
+    _page_idx = {"home":1,"ejecutiva":2,"retencion":3,"operaciones":4,"comercial":5}
+    _idx = _page_idx.get(st.session_state.get("page","home"), 1)
+    st.markdown(f"""
+<style>
+[data-testid="stSidebar"] [data-testid="stButton"]:nth-of-type({_idx}) > button,
+[data-testid="stSidebar"] [data-testid="stButton"]:nth-of-type({_idx}) > button:hover {{
+    background:{ACCENT}!important;color:#FFFFFF!important;
+    font-weight:600!important;border-color:{ACCENT}!important;
+    box-shadow:0 2px 8px rgba(0,48,135,.25)!important;
+}}
+</style>""", unsafe_allow_html=True)
 
     st.markdown('<hr>', unsafe_allow_html=True)
     st.markdown(
