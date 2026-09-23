@@ -385,6 +385,61 @@ heat_mat = []
 for _, pr in df_pol.iterrows():
     heat_mat.append([rent_score(pr, CCAA_VEC_D[c]) for c in ccaa_list_v])
 
+# ── Epidemiología & Eventos cíclicos ─────────────────────────
+EPI_LAT = [40.42,41.39,37.38,39.47,43.26,42.88,41.65,37.99,42.82,39.57,28.29,41.65,39.86,38.92,42.27,43.36,43.18]
+EPI_LON = [-3.70,2.16,-5.97,-0.38,-2.93,-8.54,-0.88,-1.13,-1.64,2.65,-15.65,-4.73,-4.03,-6.34,-2.37,-5.85,-3.99]
+EPI_NOM = ["Madrid","Cataluña","Andalucía","C. Valenciana","País Vasco","Galicia","Aragón",
+           "Murcia","Navarra","Baleares","Canarias","Castilla y León","Castilla-La Mancha",
+           "Extremadura","La Rioja","Asturias","Cantabria"]
+
+df_epi = pd.DataFrame({
+    "ccaa": EPI_NOM, "lat": EPI_LAT, "lon": EPI_LON,
+    "diabetes_pct":    [9.2,8.1,10.4,8.8,7.2,9.6,8.4,9.8,7.8,7.4,10.2,9.8,10.6,11.2,8.2,9.4,8.8],
+    "hta_pct":         [28.4,24.2,30.6,27.8,22.6,29.4,26.8,29.2,24.4,24.8,31.2,30.4,32.6,34.2,26.4,28.8,27.4],
+    "epoc_pct":        [4.2,3.8,5.1,4.4,3.6,4.8,4.1,4.6,3.4,3.8,4.4,4.8,5.2,5.6,4.0,4.6,4.2],
+    "obesidad_pct":    [22.4,18.6,26.8,22.2,18.4,24.6,20.8,24.4,18.8,19.6,26.4,24.8,28.2,30.4,20.4,22.8,21.6],
+    "salud_mental_pct":[14.2,12.8,16.4,13.8,11.6,15.2,13.4,14.6,11.8,12.4,16.8,15.6,17.2,18.4,13.2,14.8,13.6],
+    "oncologia_idx":   [82,78,88,82,72,86,80,84,74,76,88,86,90,92,78,84,80],
+    "espera_pub_dias": [42,38,56,48,34,52,44,50,36,38,62,54,60,66,42,50,46],
+    "penetracion_seg": [62,54,32,44,58,36,38,34,52,48,30,34,28,22,40,38,42],
+    "autonomos_pct":   [18.4,16.8,14.2,15.6,14.8,12.4,13.2,13.6,14.4,18.2,15.8,12.8,12.4,11.6,13.8,12.6,13.4],
+    "pob_35_54_pct":   [28.4,26.8,25.2,26.0,27.6,24.8,25.6,25.8,27.2,26.4,24.6,24.2,23.8,22.4,25.4,24.6,25.0],
+})
+
+MESES_N  = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"]
+GRP_CCAA = ["Madrid","Cataluña","Andalucía","País Vasco/Nav.","C. Valenciana","Galicia/Asturias","Castillas","Can./Baleares"]
+demand_seas = np.array([
+    [72,68,62,58,55,62,58,48,65,68,78,82],
+    [68,82,64,60,58,68,72,55,75,70,74,78],
+    [64,62,68,82,60,64,78,72,68,62,70,72],
+    [68,66,64,62,58,60,88,62,64,66,72,76],
+    [62,64,72,82,58,64,78,82,68,64,68,70],
+    [64,62,60,58,56,58,82,78,72,62,68,70],
+    [70,68,62,58,52,54,56,48,58,64,74,78],
+    [72,68,64,60,60,72,92,96,82,68,64,70],
+], dtype=float)
+
+df_eventos = pd.DataFrame([
+    {"evento":"Temporada gripe",          "mes":1, "dur":3,"ccaa":"Nacional",    "esp":"Respiratorio / Urgencias",   "impacto":96,"tipo":"Estacional","color":"#B71C1C"},
+    {"evento":"Ski Pirineos / Sierra N.", "mes":12,"dur":4,"ccaa":"Aragón/Cat.", "esp":"Traumatología ortopédica",   "impacto":84,"tipo":"Deporte",    "color":ACCENT},
+    {"evento":"Maratón Sevilla",          "mes":2, "dur":1,"ccaa":"Andalucía",   "esp":"Traumatología / Cardio",     "impacto":62,"tipo":"Deporte",    "color":ACCENT},
+    {"evento":"Mobile World Congress",    "mes":2, "dur":1,"ccaa":"Cataluña",    "esp":"Urgencias generales",        "impacto":64,"tipo":"Masivo",     "color":"#E65100"},
+    {"evento":"Fallas Valencia",          "mes":3, "dur":1,"ccaa":"C. Val.",     "esp":"Quemaduras / Urgencias",     "impacto":76,"tipo":"Festivo",    "color":"#E65100"},
+    {"evento":"Maratón Barcelona",        "mes":3, "dur":1,"ccaa":"Cataluña",    "esp":"Traumatología / Cardio",     "impacto":68,"tipo":"Deporte",    "color":ACCENT},
+    {"evento":"Feria de Abril",           "mes":4, "dur":1,"ccaa":"Andalucía",   "esp":"Digestivo / Urgencias",      "impacto":72,"tipo":"Festivo",    "color":"#E65100"},
+    {"evento":"Maratón Madrid",           "mes":4, "dur":1,"ccaa":"Madrid",      "esp":"Traumatología / Cardio",     "impacto":72,"tipo":"Deporte",    "color":ACCENT},
+    {"evento":"Picos polínicos",          "mes":4, "dur":3,"ccaa":"Nacional",    "esp":"Alergología / Neumología",   "impacto":82,"tipo":"Estacional","color":"#2E7D32"},
+    {"evento":"San Fermín",               "mes":7, "dur":1,"ccaa":"Navarra",     "esp":"Traumatología / Cirugía",    "impacto":88,"tipo":"Festivo",    "color":"#E65100"},
+    {"evento":"Temporada turística costas","mes":6,"dur":4,"ccaa":"Can./Bal.",   "esp":"Urgencias / Traumatología",  "impacto":92,"tipo":"Turismo",    "color":"#2E7D32"},
+    {"evento":"Camino de Santiago",       "mes":7, "dur":3,"ccaa":"Galicia",     "esp":"Ortopedia menor",            "impacto":64,"tipo":"Turismo",    "color":"#2E7D32"},
+    {"evento":"Pride Madrid",             "mes":7, "dur":1,"ccaa":"Madrid",      "esp":"Urgencias / Dermatología",   "impacto":56,"tipo":"Masivo",     "color":"#6A1B9A"},
+    {"evento":"Calor extremo",            "mes":7, "dur":3,"ccaa":"Andalucía/Ext.","esp":"Cardio / Urgencias",       "impacto":78,"tipo":"Estacional","color":"#B71C1C"},
+    {"evento":"Semana Grande Bilbao",     "mes":8, "dur":1,"ccaa":"País Vasco",  "esp":"Urgencias generales",        "impacto":64,"tipo":"Festivo",    "color":"#E65100"},
+    {"evento":"Operación Retorno (Ago)",  "mes":8, "dur":1,"ccaa":"Nacional",    "esp":"Accidentes tráfico",         "impacto":72,"tipo":"Estacional","color":"#B71C1C"},
+    {"evento":"Vendimia La Rioja",        "mes":9, "dur":2,"ccaa":"La Rioja",    "esp":"Accidentes laborales",       "impacto":58,"tipo":"Laboral",    "color":"#795548"},
+    {"evento":"Semana Santa",             "mes":4, "dur":1,"ccaa":"Nacional",    "esp":"Traumatología / Urgencias",  "impacto":68,"tipo":"Festivo",    "color":"#E65100"},
+])
+
 # ══════════════════════════════════════════════════════════════════
 # NAVEGACIÓN
 # ══════════════════════════════════════════════════════════════════
@@ -1041,7 +1096,7 @@ elif page == "comercial":
     kpi_card(cm4, "CCAA prioridad máx.", "5 de 17", "Score global >65 — Madrid, PV, Navarra…")
 
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
-    tab1, tab2, tab3 = st.tabs(["Oportunidad Geográfica", "Captación & Pólizas", "Competencia & Pricing"])
+    tab1, tab2, tab3, tab4 = st.tabs(["Oportunidad Geográfica", "Captación & Pólizas", "Competencia & Pricing", "Epidemiología & Demanda"])
 
     # ── TAB 1: Oportunidad ────────────────────────────────────
     with tab1:
@@ -1216,4 +1271,211 @@ elif page == "comercial":
             "DKV y Adeslas están captando el segmento joven con precios muy competitivos. "
             "Sanitas necesita una propuesta digital (Blua) que justifique el diferencial "
             "o ajustar la gama de entrada para no perder la captación de clientes jóvenes."
+        )
+
+    # ── TAB 4: Epidemiología & Demanda ────────────────────────
+    with tab4:
+        EPI_CAPAS = {
+            "Prevalencia Diabetes (%)":     "diabetes_pct",
+            "Hipertensión arterial (%)":     "hta_pct",
+            "EPOC — Enf. respiratoria (%)":  "epoc_pct",
+            "Obesidad (%)":                  "obesidad_pct",
+            "Salud mental (%)":              "salud_mental_pct",
+            "Índice oncológico":             "oncologia_idx",
+            "Espera sanidad pública (días)": "espera_pub_dias",
+            "Penetración seguro privado (%)":"penetracion_seg",
+            "Tasa autónomos (%)":            "autonomos_pct",
+            "Población 35-54 años (%)":      "pob_35_54_pct",
+        }
+        EPI_DESC = {
+            "Prevalencia Diabetes (%)":     ("Diabéticos diagnosticados / población · INE ENSE 2022",     "Mayor siniestralidad endocrina, mayor uso ambulatorio. Clave para pricing Senior."),
+            "Hipertensión arterial (%)":    ("Hipertensos diagnosticados / población · INE ENSE 2022",    "HTA correlaciona con ictus y cardiopatía — driver del loss ratio en >50 años."),
+            "EPOC — Enf. respiratoria (%)": ("Prevalencia EPOC / Obstr. Pulm. · SEPAR / Ministerio",     "Picos invernales de exacerbación. Canarias y Andalucía: mayor prevalencia de tabaco."),
+            "Obesidad (%)":                 ("IMC >30 / población adulta · INE ENSE 2022",               "Comorbilidad mayor: diabetes, HTA, apnea. Loss ratio +18% vs. peso normal."),
+            "Salud mental (%)":             ("Trastornos ansiedad/depresión diagnosticados · ENSE",       "Espera media Sanitas 35 días. Crecimiento post-COVID. NPS muy sensible a tiempos."),
+            "Índice oncológico":            ("Incidencia relativa / Registro Nacional de Tumores",        "Extremadura y Castilla-La Mancha lideran incidencia total. Coberturas oncológicas clave."),
+            "Espera sanidad pública (días)":("Lista de espera quirúrgica · SNS Ministerio de Sanidad",    "Mayor espera pública → mayor propensión a contratar privado. Argumento comercial directo."),
+            "Penetración seguro privado (%)":("Asegurados salud privada / población · DGSFP / ICEA",     "Mercado ya explotado = menor oportunidad incremental pero mayor calidad de cartera."),
+            "Tasa autónomos (%)":           ("Trabajadores cuenta propia / activos · INE EPA Q2 2026",   "Autónomos no tienen cobertura laboral de empresa. Producto Profesionales: alta propensión."),
+            "Población 35-54 años (%)":     ("Padrón Municipal · INE 2025",                              "Franja de mayor contratación: ingresos estables, hijos, percepción de riesgo salud."),
+        }
+
+        ec1, ec2 = st.columns([3, 1])
+        with ec2:
+            capa_sel = st.selectbox("Capa de datos", list(EPI_CAPAS.keys()), key="epi_capa")
+        col_sel = EPI_CAPAS[capa_sel]
+        fuente, lectura = EPI_DESC[capa_sel]
+
+        section(f"MAPA DE ESPAÑA — {capa_sel.upper()}")
+
+        # Bubble map con Scattergeo
+        vals = df_epi[col_sel].values
+        vmin, vmax = vals.min(), vals.max()
+        sizes = ((vals - vmin) / (vmax - vmin + 0.001) * 35 + 12).tolist()
+
+        cs_map = {
+            "espera_pub_dias": [[0,"#2E7D32"],[0.5,"#FFF9C4"],[1,"#B71C1C"]],
+            "penetracion_seg": [[0,"#EEF4FF"],[0.5,A3],[1,ACCENT]],
+            "autonomos_pct":   [[0,"#EEF4FF"],[0.5,A3],[1,ACCENT]],
+            "pob_35_54_pct":   [[0,"#EEF4FF"],[0.5,A3],[1,ACCENT]],
+        }
+        colorscale = cs_map.get(col_sel, [[0,"#FFF9C4"],[0.5,"#E65100"],[1,"#B71C1C"]])
+
+        fig_map = go.Figure(go.Scattergeo(
+            lat=df_epi["lat"], lon=df_epi["lon"],
+            text=df_epi["ccaa"],
+            customdata=df_epi[col_sel],
+            hovertemplate="<b>%{text}</b><br>" + capa_sel + ": %{customdata:.1f}<extra></extra>",
+            mode="markers+text",
+            textposition="top center",
+            textfont=dict(size=8, color=FONT),
+            marker=dict(
+                size=sizes,
+                color=df_epi[col_sel],
+                colorscale=colorscale,
+                showscale=True,
+                colorbar=dict(title=capa_sel[:22], tickfont=dict(size=9), len=0.65, x=1.0),
+                line=dict(color=PAPER, width=1.2),
+                opacity=0.88,
+            ),
+        ))
+        fig_map.update_geos(
+            scope="europe",
+            center={"lat": 40.2, "lon": -3.6},
+            projection_scale=5,
+            showland=True,   landcolor="#F0F4FA",
+            showsea=True,    oceancolor="#EEF4FF",
+            showcoastlines=True, coastlinecolor=GRID,
+            showcountries=True,  countrycolor=GRID,
+            showframe=False,
+            bgcolor="rgba(0,0,0,0)",
+        )
+        fig_map.update_layout(
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            height=440, margin=dict(t=10,b=10,l=0,r=0),
+            font=dict(family="Inter,sans-serif", color=FONT, size=10),
+        )
+        st.plotly_chart(fig_map, use_container_width=True)
+
+        st.markdown(
+            f'<div style="font-size:.72rem;color:{S_MUTED};margin-bottom:4px">'
+            f'<strong style="color:{FONT}">Fuente:</strong> {fuente}</div>',
+            unsafe_allow_html=True)
+        callout(f"<strong>Lectura comercial:</strong> {lectura}")
+
+        # ── Heatmap estacional ────────────────────────────────
+        st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+        section("ÍNDICE DE DEMANDA SANITARIA ESPERADA — MES × REGIÓN (escala 0–100)")
+
+        fig_seas = go.Figure(go.Heatmap(
+            z=demand_seas,
+            x=MESES_N,
+            y=GRP_CCAA,
+            colorscale=[[0,"#EEF4FF"],[0.35,A3],[0.65,A2],[1,"#B71C1C"]],
+            text=[[f"{int(v)}" for v in row] for row in demand_seas],
+            texttemplate="%{text}",
+            textfont=dict(size=9),
+            showscale=True,
+            zmin=45, zmax=100,
+            colorbar=dict(title="Índice", tickfont=dict(size=9), len=0.65),
+        ))
+        fig_seas.update_layout(
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(family="Inter,sans-serif", color=FONT, size=10),
+            height=320, margin=dict(t=10,b=10,l=8,r=10),
+            xaxis=dict(tickfont=dict(size=9)),
+            yaxis=dict(tickfont=dict(size=9)),
+        )
+        st.plotly_chart(fig_seas, use_container_width=True)
+
+        callout(
+            "<strong>Canarias y Baleares alcanzan índice 96 en agosto</strong> — pico de turismo + "
+            "población flotante que puede activar pólizas de reembolso y travel. "
+            "<strong>País Vasco/Navarra llega a 88 en julio</strong> (San Fermín): "
+            "traumatología y cirugía urgente disparan el uso. Enero es el pico nacional "
+            "por gripe (96 en el índice nacional) — momento óptimo para activar Blua digital "
+            "y descomprimir urgencias presenciales."
+        )
+
+        # ── Timeline de eventos ───────────────────────────────
+        st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+        section("CALENDARIO DE EVENTOS MASIVOS Y PATRONES CÍCLICOS — IMPACTO EN SINIESTRALIDAD")
+
+        TIPO_C = {"Estacional":"#B71C1C","Deporte":ACCENT,"Festivo":"#E65100",
+                  "Turismo":"#2E7D32","Masivo":"#6A1B9A","Laboral":"#795548"}
+        ev1, ev2 = st.columns([2, 1])
+
+        with ev1:
+            # Scatter plot: mes (eje X) vs impacto (eje Y), tamaño = duración
+            fig_ev = go.Figure()
+            for tipo, color in TIPO_C.items():
+                sub = df_eventos[df_eventos["tipo"] == tipo]
+                if len(sub) == 0: continue
+                fig_ev.add_trace(go.Scatter(
+                    x=sub["mes"], y=sub["impacto"],
+                    mode="markers+text",
+                    name=tipo,
+                    text=sub["evento"],
+                    textposition="top center",
+                    textfont=dict(size=7.5, color=FONT),
+                    marker=dict(
+                        size=sub["dur"] * 8 + 12,
+                        color=color, opacity=0.82,
+                        line=dict(color=PAPER, width=1.5),
+                    ),
+                    customdata=sub[["ccaa","esp","dur"]].values,
+                    hovertemplate=(
+                        "<b>%{text}</b><br>Mes: %{x}<br>Impacto: %{y}<br>"
+                        "CCAA: %{customdata[0]}<br>Especialidad: %{customdata[1]}<br>"
+                        "Duración: %{customdata[2]} mes(es)<extra></extra>"
+                    ),
+                ))
+            fig_ev.add_hline(y=80, line_dash="dot", line_color="#B71C1C", line_width=1,
+                             annotation_text="Impacto crítico", annotation_font_size=8,
+                             annotation_font_color="#B71C1C")
+            fig_ev.update_layout(
+                **lay(h=400, showlegend=True,
+                      legend=dict(orientation="h", y=-0.18, font=dict(size=9), bgcolor="rgba(0,0,0,0)"),
+                      margin=dict(t=14,b=60,l=8,r=8)),
+            )
+            fig_ev.update_xaxes(
+                tickvals=list(range(1,13)), ticktext=MESES_N,
+                showgrid=True, gridcolor=GRID, range=[0.3, 12.7],
+                title_text="Mes del año", title_font=dict(size=9),
+            )
+            fig_ev.update_yaxes(
+                showgrid=True, gridcolor=GRID, range=[45, 105],
+                title_text="Índice de impacto en siniestralidad (0–100)", title_font=dict(size=9),
+            )
+            st.plotly_chart(fig_ev, use_container_width=True)
+
+        with ev2:
+            section("TABLA DE EVENTOS")
+            df_ev_show = df_eventos[["evento","mes","ccaa","esp","impacto","tipo"]].copy()
+            df_ev_show.columns = ["Evento","Mes","CCAA","Especialidad","Impacto","Tipo"]
+            df_ev_show = df_ev_show.sort_values("Impacto", ascending=False)
+            for _, row in df_ev_show.iterrows():
+                color = TIPO_C.get(row["Tipo"], S_MUTED)
+                mes_txt = MESES_N[int(row["Mes"])-1]
+                st.markdown(
+                    f'<div style="padding:8px 12px;margin-bottom:6px;background:{PAPER};'
+                    f'border-radius:10px;border-left:3px solid {color};'
+                    f'box-shadow:0 1px 4px rgba(0,0,0,.06)">'
+                    f'<div style="font-size:.74rem;font-weight:600;color:{FONT}">{row["Evento"]}</div>'
+                    f'<div style="font-size:.68rem;color:{S_MUTED};margin-top:2px">'
+                    f'{mes_txt} · {row["CCAA"]}</div>'
+                    f'<div style="font-size:.68rem;color:{S_MUTED}">{row["Especialidad"]}</div>'
+                    f'<div style="font-size:.7rem;font-weight:600;color:{color};margin-top:3px">'
+                    f'Impacto {row["Impacto"]}/100</div>'
+                    f'</div>', unsafe_allow_html=True)
+
+        callout(
+            "<strong>Tres picos críticos concentran el 65% del exceso de demanda anual:</strong> "
+            "enero (gripe, índice 96), julio–agosto (verano: San Fermín 88, turismo costero 92, "
+            "calor extremo 78 en Andalucía) y la campaña polínica de abril–junio (82 en alergología). "
+            "<strong>Implicación operativa:</strong> pre-posicionar capacidad en traumatología y "
+            "urgencias en Navarra (julio), en neumología en enero (nacional) y en alergología "
+            "en primavera. <strong>Implicación comercial:</strong> campañas de captación "
+            "digital en Can./Baleares en mayo–junio, antes del pico, cuando el asegurado "
+            "aún no ha necesitado el servicio y el comparador tiene menos tráfico."
         )
