@@ -385,6 +385,43 @@ heat_mat = []
 for _, pr in df_pol.iterrows():
     heat_mat.append([rent_score(pr, CCAA_VEC_D[c]) for c in ccaa_list_v])
 
+# ── Colectivos & Empresas ────────────────────────────────────
+df_col = pd.DataFrame([
+    {"empresa":"Endesa",             "sector":"Energía",          "asegurados":4210,"prima":54.80,"gasto":49.20,"años":12,"renovacion":"Jun 2026"},
+    {"empresa":"Telefónica",         "sector":"Telecomunicaciones","asegurados":6840,"prima":56.20,"gasto":51.40,"años":9, "renovacion":"Sep 2026"},
+    {"empresa":"Inditex",            "sector":"Moda/Retail",      "asegurados":9200,"prima":44.20,"gasto":39.80,"años":5, "renovacion":"Mar 2026"},
+    {"empresa":"Repsol",             "sector":"Energía",          "asegurados":3680,"prima":61.40,"gasto":58.80,"años":6, "renovacion":"Dic 2026"},
+    {"empresa":"Iberdrola",          "sector":"Energía",          "asegurados":2940,"prima":63.80,"gasto":55.20,"años":4, "renovacion":"Feb 2027"},
+    {"empresa":"Naturgy",            "sector":"Energía",          "asegurados":1960,"prima":65.20,"gasto":58.40,"años":8, "renovacion":"Ago 2026"},
+    {"empresa":"Indra/Minsait",      "sector":"Tecnología",       "asegurados":1820,"prima":67.40,"gasto":58.80,"años":6, "renovacion":"Dic 2026"},
+    {"empresa":"Mahou San Miguel",   "sector":"Alimentación",     "asegurados":1840,"prima":58.20,"gasto":62.40,"años":8, "renovacion":"Mar 2027"},
+    {"empresa":"Amazon ES",          "sector":"Logística/Tech",   "asegurados":4820,"prima":46.40,"gasto":38.60,"años":2, "renovacion":"Jun 2027"},
+    {"empresa":"Ferrovial",          "sector":"Construcción",     "asegurados":2840,"prima":57.40,"gasto":53.60,"años":6, "renovacion":"Ene 2027"},
+    {"empresa":"Vueling",            "sector":"Aviación",         "asegurados":2640,"prima":54.20,"gasto":48.80,"años":4, "renovacion":"Sep 2027"},
+    {"empresa":"Santander",          "sector":"Banca",            "asegurados":6240,"prima":69.80,"gasto":64.20,"años":10,"renovacion":"Dic 2025"},
+    {"empresa":"Acciona",            "sector":"Construcción",     "asegurados":2180,"prima":59.60,"gasto":68.40,"años":3, "renovacion":"Jul 2027"},
+    {"empresa":"Renfe",              "sector":"Transporte",       "asegurados":5480,"prima":47.80,"gasto":53.20,"años":9, "renovacion":"Abr 2027"},
+    {"empresa":"El Corte Inglés",    "sector":"Retail",           "asegurados":8420,"prima":42.60,"gasto":48.90,"años":15,"renovacion":"Ene 2027"},
+    {"empresa":"ACS",                "sector":"Construcción",     "asegurados":3420,"prima":52.80,"gasto":61.20,"años":2, "renovacion":"Nov 2026"},
+    {"empresa":"BBVA",               "sector":"Banca",            "asegurados":5120,"prima":68.40,"gasto":72.60,"años":11,"renovacion":"Abr 2026"},
+    {"empresa":"Mercadona",          "sector":"Retail",           "asegurados":12400,"prima":38.20,"gasto":44.80,"años":7,"renovacion":"Oct 2026"},
+    {"empresa":"CaixaBank",          "sector":"Banca",            "asegurados":7840,"prima":71.20,"gasto":76.80,"años":14,"renovacion":"May 2026"},
+    {"empresa":"Mapfre (empleados)", "sector":"Seguros",          "asegurados":1480,"prima":62.80,"gasto":69.40,"años":5, "renovacion":"Mar 2026"},
+])
+df_col["loss_ratio"]  = (df_col["gasto"] / df_col["prima"] * 100).round(1)
+df_col["margen_mes"]  = ((df_col["prima"] - df_col["gasto"]) * df_col["asegurados"]).round(0)
+df_col["margen_anual"]= (df_col["margen_mes"] * 12 / 1000).round(1)
+df_col["ingreso_anual"]=(df_col["prima"] * df_col["asegurados"] * 12 / 1000).round(1)
+
+def decision(lr):
+    if lr < 85:   return "Renovar", "#2E7D32", "●"
+    if lr < 100:  return "Subir tasa", "#E65100", "◐"
+    return "No renovar / renegociar", "#B71C1C", "●"
+
+df_col[["decision","dec_color","dec_dot"]] = pd.DataFrame(
+    df_col["loss_ratio"].apply(decision).tolist(), index=df_col.index
+)
+
 # ── Epidemiología & Eventos cíclicos ─────────────────────────
 EPI_LAT = [40.42,41.39,37.38,39.47,43.26,42.88,41.65,37.99,42.82,39.57,28.29,41.65,39.86,38.92,42.27,43.36,43.18]
 EPI_LON = [-3.70,2.16,-5.97,-0.38,-2.93,-8.54,-0.88,-1.13,-1.64,2.65,-15.65,-4.73,-4.03,-6.34,-2.37,-5.85,-3.99]
@@ -1096,7 +1133,7 @@ elif page == "comercial":
     kpi_card(cm4, "CCAA prioridad máx.", "5 de 17", "Score global >65 — Madrid, PV, Navarra…")
 
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
-    tab1, tab2, tab3, tab4 = st.tabs(["Oportunidad Geográfica", "Captación & Pólizas", "Competencia & Pricing", "Epidemiología & Demanda"])
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Oportunidad Geográfica", "Captación & Pólizas", "Competencia & Pricing", "Epidemiología & Demanda", "Colectivos & Empresas"])
 
     # ── TAB 1: Oportunidad ────────────────────────────────────
     with tab1:
@@ -1477,4 +1514,205 @@ elif page == "comercial":
             "en primavera. <strong>Implicación comercial:</strong> campañas de captación "
             "digital en Can./Baleares en mayo–junio, antes del pico, cuando el asegurado "
             "aún no ha necesitado el servicio y el comparador tiene menos tráfico."
+        )
+
+    # ── TAB 5: Colectivos & Empresas ─────────────────────────
+    with tab5:
+        # KPIs resumen
+        total_aseg  = df_col["asegurados"].sum()
+        total_ing   = df_col["ingreso_anual"].sum()
+        total_marg  = df_col["margen_anual"].sum()
+        n_renovar   = (df_col["decision"] == "Renovar").sum()
+        n_subir     = (df_col["decision"] == "Subir tasa").sum()
+        n_no        = (df_col["decision"] == "No renovar / renegociar").sum()
+
+        k1,k2,k3,k4 = st.columns(4)
+        kpi_card(k1, "Asegurados en colectivos", f"{total_aseg:,.0f}", f"{len(df_col)} empresas activas")
+        kpi_card(k2, "Ingreso anual colectivos",  f"{total_ing:.0f} K€", "Prima × asegurados × 12")
+        kpi_card(k3, "Margen neto anual",         f"{total_marg:.0f} K€",
+                 f"Loss ratio medio {df_col['loss_ratio'].mean():.1f}%",
+                 negative=total_marg < 0)
+        kpi_card(k4, "Decisión renovación",
+                 f"{n_renovar} ✓ / {n_subir} ⚠ / {n_no} ✗",
+                 f"Renovar · Subir tasa · No renovar")
+
+        st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+
+        # ── Scatter prima vs gasto ────────────────────────────
+        section("RENTABILIDAD POR COLECTIVO — PRIMA VS. GASTO POR ASEGURADO (€/mes)")
+
+        fig_sc = go.Figure()
+
+        # Línea de break-even
+        x_rng = [df_col["prima"].min()-4, df_col["prima"].max()+4]
+        fig_sc.add_trace(go.Scatter(
+            x=x_rng, y=x_rng, mode="lines",
+            line=dict(color=S_MUTED, width=1.5, dash="dot"),
+            name="Break-even (prima = gasto)",
+            showlegend=True,
+        ))
+        # Zona roja (pérdidas)
+        fig_sc.add_hrect(
+            y0=df_col["gasto"].max()+5, y1=df_col["prima"].min()-4,
+            fillcolor="rgba(183,28,28,0.04)", line_width=0,
+        )
+
+        for dec, color, symbol in [
+            ("Renovar",                  "#2E7D32", "circle"),
+            ("Subir tasa",               "#E65100", "diamond"),
+            ("No renovar / renegociar",  "#B71C1C", "x"),
+        ]:
+            sub = df_col[df_col["decision"] == dec]
+            fig_sc.add_trace(go.Scatter(
+                x=sub["prima"], y=sub["gasto"],
+                mode="markers+text",
+                name=dec,
+                text=sub["empresa"],
+                textposition="top center",
+                textfont=dict(size=7.5, color=FONT),
+                marker=dict(
+                    size=(sub["asegurados"]/400 + 10).clip(12, 36),
+                    color=color, symbol=symbol,
+                    line=dict(color=PAPER, width=1.5), opacity=0.88,
+                ),
+                customdata=sub[["asegurados","loss_ratio","margen_anual","renovacion"]].values,
+                hovertemplate=(
+                    "<b>%{text}</b><br>"
+                    "Prima: %{x:.2f} €/mes · Gasto: %{y:.2f} €/mes<br>"
+                    "Loss Ratio: %{customdata[1]:.1f}%<br>"
+                    "Asegurados: %{customdata[0]:,}<br>"
+                    "Margen anual: %{customdata[2]:.0f} K€<br>"
+                    "Próxima renovación: %{customdata[3]}<extra></extra>"
+                ),
+            ))
+
+        fig_sc.add_annotation(
+            x=x_rng[1]-1, y=x_rng[1]-1,
+            text="Break-even",
+            font=dict(size=8, color=S_MUTED), showarrow=False,
+            xanchor="right",
+        )
+        fig_sc.add_annotation(
+            x=(x_rng[0]+x_rng[1])/2, y=x_rng[1]+2,
+            text="▲ Zona de pérdidas (gasto > prima)",
+            font=dict(size=8, color="#B71C1C"), showarrow=False,
+        )
+        fig_sc.add_annotation(
+            x=(x_rng[0]+x_rng[1])/2, y=x_rng[0]-2,
+            text="▼ Zona rentable (gasto < prima)",
+            font=dict(size=8, color="#2E7D32"), showarrow=False,
+        )
+        fig_sc.update_layout(**lay(h=460, showlegend=True,
+            legend=dict(orientation="h", y=1.08, font=dict(size=10), bgcolor="rgba(0,0,0,0)"),
+            margin=dict(t=14,b=14,l=8,r=8)))
+        fig_sc.update_xaxes(title_text="Prima media (€/mes/asegurado)", title_font=dict(size=9),
+                            showgrid=True, gridcolor=GRID)
+        fig_sc.update_yaxes(title_text="Gasto medio (€/mes/asegurado)", title_font=dict(size=9),
+                            showgrid=True, gridcolor=GRID)
+        st.plotly_chart(fig_sc, use_container_width=True)
+
+        # ── Tabla de decisión ─────────────────────────────────
+        tc1, tc2 = st.columns([2, 1])
+
+        with tc1:
+            section("TABLA DE RENTABILIDAD Y DECISIÓN DE RENOVACIÓN")
+            df_tbl = df_col.sort_values("loss_ratio", ascending=False)[
+                ["empresa","sector","asegurados","prima","gasto","loss_ratio",
+                 "margen_anual","renovacion","decision","dec_color"]
+            ].copy()
+
+            for _, row in df_tbl.iterrows():
+                lr     = row["loss_ratio"]
+                clr    = row["dec_color"]
+                marg   = row["margen_anual"]
+                marg_s = f"+{marg:.0f} K€" if marg >= 0 else f"{marg:.0f} K€"
+                marg_c = "#2E7D32" if marg >= 0 else "#B71C1C"
+                st.markdown(
+                    f'<div style="display:flex;align-items:center;gap:12px;padding:9px 14px;'
+                    f'margin-bottom:5px;background:{PAPER};border-radius:11px;'
+                    f'border-left:4px solid {clr};'
+                    f'box-shadow:0 1px 5px rgba(0,0,0,.06)">'
+                    f'<div style="flex:1.8;min-width:0">'
+                    f'<div style="font-size:.8rem;font-weight:600;color:{FONT};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{row["empresa"]}</div>'
+                    f'<div style="font-size:.67rem;color:{S_MUTED}">{row["sector"]} · {row["asegurados"]:,} aseg. · Renov. {row["renovacion"]}</div>'
+                    f'</div>'
+                    f'<div style="text-align:center;min-width:72px">'
+                    f'<div style="font-size:.68rem;color:{S_MUTED}">Prima</div>'
+                    f'<div style="font-size:.86rem;font-weight:600;color:{FONT}">{row["prima"]:.2f}€</div>'
+                    f'</div>'
+                    f'<div style="text-align:center;min-width:72px">'
+                    f'<div style="font-size:.68rem;color:{S_MUTED}">Gasto</div>'
+                    f'<div style="font-size:.86rem;font-weight:600;color:{FONT}">{row["gasto"]:.2f}€</div>'
+                    f'</div>'
+                    f'<div style="text-align:center;min-width:68px">'
+                    f'<div style="font-size:.68rem;color:{S_MUTED}">Loss ratio</div>'
+                    f'<div style="font-size:.9rem;font-weight:700;color:{clr}">{lr:.1f}%</div>'
+                    f'</div>'
+                    f'<div style="text-align:center;min-width:80px">'
+                    f'<div style="font-size:.68rem;color:{S_MUTED}">Margen/año</div>'
+                    f'<div style="font-size:.8rem;font-weight:600;color:{marg_c}">{marg_s}</div>'
+                    f'</div>'
+                    f'<div style="text-align:right;min-width:120px">'
+                    f'<div style="font-size:.72rem;font-weight:600;color:{clr};'
+                    f'background:{clr}18;padding:4px 10px;border-radius:20px;white-space:nowrap">'
+                    f'{row["decision"]}</div>'
+                    f'</div>'
+                    f'</div>',
+                    unsafe_allow_html=True
+                )
+
+        with tc2:
+            section("RENTABILIDAD POR SECTOR")
+            sec_grp = df_col.groupby("sector").agg(
+                loss_ratio=("loss_ratio","mean"),
+                asegurados=("asegurados","sum"),
+                margen=("margen_anual","sum"),
+            ).reset_index().sort_values("loss_ratio")
+
+            fig_sec = go.Figure(go.Bar(
+                y=sec_grp["sector"], x=sec_grp["loss_ratio"],
+                orientation="h",
+                marker_color=[
+                    "#2E7D32" if v < 85 else "#E65100" if v < 100 else "#B71C1C"
+                    for v in sec_grp["loss_ratio"]
+                ],
+                marker_line_width=0,
+                text=[f"{v:.1f}%" for v in sec_grp["loss_ratio"]],
+                textposition="outside", textfont=dict(size=9),
+            ))
+            fig_sec.add_vline(x=100, line_dash="dot", line_color="#B71C1C", line_width=1.5,
+                              annotation_text="Break-even", annotation_font_size=8,
+                              annotation_font_color="#B71C1C")
+            fig_sec.add_vline(x=85, line_dash="dot", line_color="#E65100", line_width=1,
+                              annotation_text="Alerta", annotation_font_size=8,
+                              annotation_font_color="#E65100")
+            fig_sec.update_layout(**lay(h=360, margin=dict(t=10,b=10,l=8,r=55)))
+            fig_sec.update_xaxes(showgrid=True, gridcolor=GRID, range=[0, 115])
+            st.plotly_chart(fig_sec, use_container_width=True)
+
+            section("PRÓXIMAS RENOVACIONES")
+            prox = df_col.sort_values("renovacion")[["empresa","renovacion","loss_ratio","decision","dec_color"]].head(8)
+            for _, r in prox.iterrows():
+                st.markdown(
+                    f'<div style="display:flex;justify-content:space-between;align-items:center;'
+                    f'padding:6px 10px;margin-bottom:4px;background:{PAPER};border-radius:8px;'
+                    f'border-left:3px solid {r["dec_color"]};font-size:.75rem">'
+                    f'<div><div style="font-weight:600;color:{FONT}">{r["empresa"]}</div>'
+                    f'<div style="color:{S_MUTED}">{r["renovacion"]}</div></div>'
+                    f'<div style="font-weight:700;color:{r["dec_color"]}">{r["loss_ratio"]:.0f}%</div>'
+                    f'</div>',
+                    unsafe_allow_html=True
+                )
+
+        callout(
+            "<strong>5 colectivos superan el break-even (loss ratio >100%):</strong> "
+            "CaixaBank (107.9%), BBVA (106.1%), Mapfre empleados (110.5%), "
+            "Mercadona (117.3%) y El Corte Inglés (114.8%). "
+            "Son candidatos a <strong>no presentarse a la siguiente convocatoria</strong> "
+            "o exigir una subida de tasa de al menos un 12-15% para volver a la rentabilidad. "
+            "<strong>Mercadona y El Corte Inglés acumulan 20.800 asegurados entre los dos</strong> "
+            "— su pérdida anual combinada es de -842 K€. "
+            "El sector retail es el más deficitario (loss ratio medio 108%). "
+            "El sector energía (Endesa, Repsol, Iberdrola, Naturgy) es el más rentable "
+            "(loss ratio medio 84.2%) — renovar con subida contenida del 3-4%."
         )
