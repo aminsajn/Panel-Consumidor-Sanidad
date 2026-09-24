@@ -22,8 +22,8 @@ def _img_b64(p):
 _LOGO_DIR = Path(__file__).parent.parent
 SANITAS_B64 = _img_b64(_LOGO_DIR / "logo-sanitas.png")
 MINSAIT_B64  = _img_b64(_LOGO_DIR / "Logo-Minsait.png")
-_SAN_IMG = f'<img src="data:image/png;base64,{SANITAS_B64}" height="36" style="object-fit:contain;display:block">' if SANITAS_B64 else ""
-_MIN_IMG = f'<img src="data:image/png;base64,{MINSAIT_B64}" height="26" style="object-fit:contain;display:block">' if MINSAIT_B64 else ""
+_SAN_IMG = f'<img src="data:image/png;base64,{SANITAS_B64}" height="38" style="object-fit:contain;display:block">' if SANITAS_B64 else ""
+_MIN_IMG = f'<img src="data:image/png;base64,{MINSAIT_B64}" height="38" style="object-fit:contain;display:block;margin-left:auto">' if MINSAIT_B64 else ""
 
 # ══════════════════════════════════════════════════════════════════
 # PALETA
@@ -91,8 +91,10 @@ button[kind="header"]{{display:none!important}}
 [data-testid="stSidebar"] .stButton>button:hover{{
   background:rgba(0,48,135,.1)!important;color:{ACCENT}!important;
   border-color:rgba(0,48,135,.2)!important;box-shadow:none!important}}
-.top-bar{{background:transparent;padding:20px 0 0;display:flex;align-items:center;
-  justify-content:space-between;border-bottom:1px solid rgba(0,0,0,.06);margin-bottom:2.4rem}}
+.top-bar{{background:transparent;padding:20px 0 0;display:grid;
+  grid-template-columns:1fr auto 1fr;align-items:center;
+  border-bottom:1px solid rgba(0,0,0,.06);margin-bottom:2.4rem}}
+.top-bar-center{{text-align:center}}
 .top-title{{font-size:.95rem;font-weight:600;color:#1D1D1F;letter-spacing:-.01em}}
 .top-sub{{font-size:.72rem;color:#86868B;letter-spacing:.02em}}
 .section-title{{font-size:.68rem;font-weight:600;color:#86868B;letter-spacing:.1em;
@@ -687,9 +689,9 @@ page = st.session_state.get("page", "home")
 if page == "home":
     st.markdown(
         f'<div class="top-bar">'
-        f'<div style="display:flex;align-items:center;gap:14px">{_SAN_IMG}'
-        f'<div><div class="top-title">Plataforma de Inteligencia Corporativa · Sanitas</div>'
-        f'<div class="top-sub">Panel ejecutivo · Datos ficticios orientativos · Septiembre 2026</div></div></div>'
+        f'{_SAN_IMG}'
+        f'<div class="top-bar-center"><div class="top-title">Plataforma de Inteligencia Corporativa · Sanitas</div>'
+        f'<div class="top-sub">Panel ejecutivo · Datos ficticios orientativos · Septiembre 2026</div></div>'
         f'{_MIN_IMG}</div>', unsafe_allow_html=True)
 
     h1, h2, h3, h4 = st.columns(4)
@@ -751,9 +753,9 @@ if page == "home":
 elif page == "ejecutiva":
     st.markdown(
         f'<div class="top-bar">'
-        f'<div style="display:flex;align-items:center;gap:14px">{_SAN_IMG}'
-        f'<div><div class="top-title">Vista Ejecutiva</div>'
-        f'<div class="top-sub">CEO · Dirección General · Septiembre 2026</div></div></div>'
+        f'{_SAN_IMG}'
+        f'<div class="top-bar-center"><div class="top-title">Vista Ejecutiva</div>'
+        f'<div class="top-sub">CEO · Dirección General · Septiembre 2026</div></div>'
         f'{_MIN_IMG}</div>', unsafe_allow_html=True)
 
     e1, e2, e3, e4 = st.columns(4)
@@ -884,9 +886,9 @@ elif page == "ejecutiva":
 elif page == "retencion":
     st.markdown(
         f'<div class="top-bar">'
-        f'<div style="display:flex;align-items:center;gap:14px">{_SAN_IMG}'
-        f'<div><div class="top-title">Retención & Optimización de Cartera</div>'
-        f'<div class="top-sub">Dirección de Clientes · Modelo de churn · Campañas · Rentabilidad</div></div></div>'
+        f'{_SAN_IMG}'
+        f'<div class="top-bar-center"><div class="top-title">Retención & Optimización de Cartera</div>'
+        f'<div class="top-sub">Dirección de Clientes · Modelo de churn · Campañas · Rentabilidad</div></div>'
         f'{_MIN_IMG}</div>', unsafe_allow_html=True)
 
     r1, r2, r3, r4 = st.columns(4)
@@ -1063,9 +1065,9 @@ elif page == "retencion":
 elif page == "operaciones":
     st.markdown(
         f'<div class="top-bar">'
-        f'<div style="display:flex;align-items:center;gap:14px">{_SAN_IMG}'
-        f'<div><div class="top-title">Optimización Operativa</div>'
-        f'<div class="top-sub">Dirección Médica · CFO · Combined Ratio · Recursos · Fraude</div></div></div>'
+        f'{_SAN_IMG}'
+        f'<div class="top-bar-center"><div class="top-title">Optimización Operativa</div>'
+        f'<div class="top-sub">Dirección Médica · CFO · Combined Ratio · Recursos · Fraude</div></div>'
         f'{_MIN_IMG}</div>', unsafe_allow_html=True)
 
     o1, o2, o3, o4 = st.columns(4)
@@ -1382,9 +1384,9 @@ elif page == "operaciones":
 elif page == "comercial":
     st.markdown(
         f'<div class="top-bar">'
-        f'<div style="display:flex;align-items:center;gap:14px">{_SAN_IMG}'
-        f'<div><div class="top-title">Inteligencia Comercial</div>'
-        f'<div class="top-sub">Dirección Comercial · Oportunidad geográfica · Pricing · Captación</div></div></div>'
+        f'{_SAN_IMG}'
+        f'<div class="top-bar-center"><div class="top-title">Inteligencia Comercial</div>'
+        f'<div class="top-sub">Dirección Comercial · Oportunidad geográfica · Pricing · Captación</div></div>'
         f'{_MIN_IMG}</div>', unsafe_allow_html=True)
 
     cm1, cm2, cm3, cm4 = st.columns(4)
