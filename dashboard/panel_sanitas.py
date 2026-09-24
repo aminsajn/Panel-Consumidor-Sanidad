@@ -1540,7 +1540,7 @@ elif page == "comercial":
         colorscale = cs_density.get(col_sel, [[0,"#FFF9C4"],[0.5,"#E65100"],[1,"#B71C1C"]])
 
         fig_map = go.Figure()
-        fig_map.add_trace(go.Densitymapbox(
+        fig_map.add_trace(go.Densitymap(
             lat=df_epi["lat"],
             lon=df_epi["lon"],
             z=df_epi[col_sel].tolist(),
@@ -1551,7 +1551,7 @@ elif page == "comercial":
             hoverinfo="none",
             name="Prevalencia",
         ))
-        fig_map.add_trace(go.Scattermapbox(
+        fig_map.add_trace(go.Scattermap(
             lat=df_epi["lat"],
             lon=df_epi["lon"],
             mode="text+markers",
@@ -1565,9 +1565,9 @@ elif page == "comercial":
             showlegend=False,
         ))
         fig_map.update_layout(
-            mapbox_style="open-street-map",
-            mapbox_zoom=4.4,
-            mapbox_center={"lat": 39.8, "lon": -3.2},
+            map_style="open-street-map",
+            map_zoom=4.4,
+            map_center={"lat": 39.8, "lon": -3.2},
             height=460,
             margin=dict(t=10, b=10, l=0, r=0),
             paper_bgcolor="rgba(0,0,0,0)",
