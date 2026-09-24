@@ -1669,71 +1669,71 @@ elif page == "comercial":
 
         TIPO_C = {"Estacional":"#B71C1C","Deporte":ACCENT,"Festivo":"#E65100",
                   "Turismo":"#2E7D32","Masivo":"#6A1B9A","Laboral":"#795548"}
-        ev1, ev2 = st.columns([2, 1])
 
-        with ev1:
-            # Scatter plot: mes (eje X) vs impacto (eje Y), tamaño = duración
-            fig_ev = go.Figure()
-            for tipo, color in TIPO_C.items():
-                sub = df_eventos[df_eventos["tipo"] == tipo]
-                if len(sub) == 0: continue
-                fig_ev.add_trace(go.Scatter(
-                    x=sub["mes"], y=sub["impacto"],
-                    mode="markers+text",
-                    name=tipo,
-                    text=sub["evento"],
-                    textposition="top center",
-                    textfont=dict(size=7.5, color=FONT),
-                    marker=dict(
-                        size=sub["dur"] * 8 + 12,
-                        color=color, opacity=0.82,
-                        line=dict(color=PAPER, width=1.5),
-                    ),
-                    customdata=sub[["ccaa","esp","dur"]].values,
-                    hovertemplate=(
-                        "<b>%{text}</b><br>Mes: %{x}<br>Impacto: %{y}<br>"
-                        "CCAA: %{customdata[0]}<br>Especialidad: %{customdata[1]}<br>"
-                        "Duración: %{customdata[2]} mes(es)<extra></extra>"
-                    ),
-                ))
-            fig_ev.add_hline(y=80, line_dash="dot", line_color="#B71C1C", line_width=1,
-                             annotation_text="Impacto crítico", annotation_font_size=8,
-                             annotation_font_color="#B71C1C")
-            fig_ev.update_layout(
-                **lay(h=400, showlegend=True,
-                      legend=dict(orientation="h", y=-0.18, font=dict(size=9), bgcolor="rgba(0,0,0,0)"),
-                      margin=dict(t=14,b=60,l=8,r=8)),
-            )
-            fig_ev.update_xaxes(
-                tickvals=list(range(1,13)), ticktext=MESES_N,
-                showgrid=True, gridcolor=GRID, range=[0.3, 12.7],
-                title_text="Mes del año", title_font=dict(size=9),
-            )
-            fig_ev.update_yaxes(
-                showgrid=True, gridcolor=GRID, range=[45, 105],
-                title_text="Índice de impacto en siniestralidad (0–100)", title_font=dict(size=9),
-            )
-            st.plotly_chart(fig_ev, use_container_width=True)
+        # Gráfico a ancho completo
+        fig_ev = go.Figure()
+        for tipo, color in TIPO_C.items():
+            sub = df_eventos[df_eventos["tipo"] == tipo]
+            if len(sub) == 0: continue
+            fig_ev.add_trace(go.Scatter(
+                x=sub["mes"], y=sub["impacto"],
+                mode="markers+text",
+                name=tipo,
+                text=sub["evento"],
+                textposition="top center",
+                textfont=dict(size=7.5, color=FONT),
+                marker=dict(
+                    size=sub["dur"] * 8 + 12,
+                    color=color, opacity=0.82,
+                    line=dict(color=PAPER, width=1.5),
+                ),
+                customdata=sub[["ccaa","esp","dur"]].values,
+                hovertemplate=(
+                    "<b>%{text}</b><br>Mes: %{x}<br>Impacto: %{y}<br>"
+                    "CCAA: %{customdata[0]}<br>Especialidad: %{customdata[1]}<br>"
+                    "Duración: %{customdata[2]} mes(es)<extra></extra>"
+                ),
+            ))
+        fig_ev.add_hline(y=80, line_dash="dot", line_color="#B71C1C", line_width=1,
+                         annotation_text="Impacto crítico", annotation_font_size=8,
+                         annotation_font_color="#B71C1C")
+        fig_ev.update_layout(
+            **lay(h=420, showlegend=True,
+                  legend=dict(orientation="h", y=-0.14, font=dict(size=9), bgcolor="rgba(0,0,0,0)"),
+                  margin=dict(t=14, b=56, l=8, r=8)),
+        )
+        fig_ev.update_xaxes(
+            tickvals=list(range(1, 13)), ticktext=MESES_N,
+            showgrid=True, gridcolor=GRID, range=[0.3, 12.7],
+            title_text="Mes del año", title_font=dict(size=9),
+        )
+        fig_ev.update_yaxes(
+            showgrid=True, gridcolor=GRID, range=[45, 105],
+            title_text="Índice de impacto en siniestralidad (0–100)", title_font=dict(size=9),
+        )
+        st.plotly_chart(fig_ev, use_container_width=True)
 
-        with ev2:
-            section("TABLA DE EVENTOS")
-            df_ev_show = df_eventos[["evento","mes","ccaa","esp","impacto","tipo"]].copy()
-            df_ev_show.columns = ["Evento","Mes","CCAA","Especialidad","Impacto","Tipo"]
-            df_ev_show = df_ev_show.sort_values("Impacto", ascending=False)
-            for _, row in df_ev_show.iterrows():
-                color = TIPO_C.get(row["Tipo"], S_MUTED)
-                mes_txt = MESES_N[int(row["Mes"])-1]
-                st.markdown(
-                    f'<div style="padding:8px 12px;margin-bottom:6px;background:{PAPER};'
-                    f'border-radius:10px;border-left:3px solid {color};'
-                    f'box-shadow:0 1px 4px rgba(0,0,0,.06)">'
-                    f'<div style="font-size:.74rem;font-weight:600;color:{FONT}">{row["Evento"]}</div>'
-                    f'<div style="font-size:.68rem;color:{S_MUTED};margin-top:2px">'
-                    f'{mes_txt} · {row["CCAA"]}</div>'
-                    f'<div style="font-size:.68rem;color:{S_MUTED}">{row["Especialidad"]}</div>'
-                    f'<div style="font-size:.7rem;font-weight:600;color:{color};margin-top:3px">'
-                    f'Impacto {row["Impacto"]}/100</div>'
-                    f'</div>', unsafe_allow_html=True)
+        # Chips de eventos en fila horizontal
+        df_ev_show = df_eventos[["evento","mes","ccaa","esp","impacto","tipo"]].copy()
+        df_ev_show = df_ev_show.sort_values("impacto", ascending=False)
+        chips_html = (
+            f'<div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:12px">'
+        )
+        for _, row in df_ev_show.iterrows():
+            c = TIPO_C.get(row["tipo"], S_MUTED)
+            mes_txt = MESES_N[int(row["mes"]) - 1]
+            chips_html += (
+                f'<div style="display:flex;align-items:center;gap:6px;'
+                f'padding:6px 11px;background:{PAPER};border-radius:20px;'
+                f'border:1px solid {c}22;border-left:3px solid {c};'
+                f'box-shadow:0 1px 3px rgba(0,0,0,.05);white-space:nowrap">'
+                f'<span style="font-size:.72rem;font-weight:600;color:{FONT}">{row["evento"]}</span>'
+                f'<span style="font-size:.65rem;color:{S_MUTED}">{mes_txt}</span>'
+                f'<span style="font-size:.68rem;font-weight:700;color:{c}">{int(row["impacto"])}</span>'
+                f'</div>'
+            )
+        chips_html += '</div>'
+        st.markdown(chips_html, unsafe_allow_html=True)
 
         callout(
             "<strong>Tres picos críticos concentran el 65% del exceso de demanda anual:</strong> "
