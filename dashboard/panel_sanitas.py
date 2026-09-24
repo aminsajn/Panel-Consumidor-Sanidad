@@ -1784,11 +1784,6 @@ elif page == "comercial":
             name="Break-even (prima = gasto)",
             showlegend=True,
         ))
-        # Zona roja (pérdidas)
-        fig_sc.add_hrect(
-            y0=df_col["gasto"].max()+5, y1=df_col["prima"].min()-4,
-            fillcolor="rgba(183,28,28,0.04)", line_width=0,
-        )
 
         for dec, color, symbol in [
             ("Renovar",                  "#1B6B4A", "circle"),
