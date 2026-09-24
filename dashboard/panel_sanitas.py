@@ -22,8 +22,8 @@ def _img_b64(p):
 _LOGO_DIR = Path(__file__).parent.parent
 SANITAS_B64 = _img_b64(_LOGO_DIR / "logo-sanitas.png")
 MINSAIT_B64  = _img_b64(_LOGO_DIR / "Logo-Minsait.png")
-_SAN_IMG = f'<img src="data:image/png;base64,{SANITAS_B64}" height="38" style="object-fit:contain;display:block">' if SANITAS_B64 else ""
-_MIN_IMG = f'<img src="data:image/png;base64,{MINSAIT_B64}" height="38" style="object-fit:contain;display:block;margin-left:auto">' if MINSAIT_B64 else ""
+_SAN_IMG = f'<img src="data:image/png;base64,{SANITAS_B64}" height="52" style="object-fit:contain;display:block">' if SANITAS_B64 else ""
+_MIN_IMG = f'<img src="data:image/png;base64,{MINSAIT_B64}" style="height:52px;max-width:140px;object-fit:contain;display:block;margin-left:auto">' if MINSAIT_B64 else ""
 
 # ══════════════════════════════════════════════════════════════════
 # PALETA
@@ -95,8 +95,8 @@ button[kind="header"]{{display:none!important}}
   grid-template-columns:1fr auto 1fr;align-items:center;
   border-bottom:1px solid rgba(0,0,0,.06);margin-bottom:2.4rem}}
 .top-bar-center{{text-align:center}}
-.top-title{{font-size:.95rem;font-weight:600;color:#1D1D1F;letter-spacing:-.01em}}
-.top-sub{{font-size:.72rem;color:#86868B;letter-spacing:.02em}}
+.top-title{{font-size:1.15rem;font-weight:600;color:#1D1D1F;letter-spacing:-.01em}}
+.top-sub{{font-size:.78rem;color:#86868B;letter-spacing:.02em}}
 .section-title{{font-size:.68rem;font-weight:600;color:#86868B;letter-spacing:.1em;
   text-transform:uppercase;margin-bottom:14px;margin-top:4px}}
 .kpi-card{{background:#FFFFFF;border:none;border-radius:16px;padding:22px 24px;
