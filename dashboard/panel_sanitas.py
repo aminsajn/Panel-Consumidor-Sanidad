@@ -416,13 +416,49 @@ df_col["margen_mes"]  = ((df_col["prima"] - df_col["gasto"]) * df_col["asegurado
 df_col["margen_anual"]= (df_col["margen_mes"] * 12 / 1000).round(1)
 df_col["ingreso_anual"]=(df_col["prima"] * df_col["asegurados"] * 12 / 1000).round(1)
 
-def decision(lr):
-    if lr < 85:   return "Renovar", "#1B6B4A", "●"
-    if lr < 100:  return "Subir tasa", "#D4940A", "◐"
-    return "No renovar / renegociar", "#9B2C2C", "●"
+VINC_DATA = {
+    "Amazon ES":          {"products": ["Dental","Psico"],                           "score": 2},
+    "Indra/Minsait":      {"products": ["Dental","VIP Dir.","Psico"],                "score": 3},
+    "Vueling":            {"products": ["Dental","Accidentes"],                      "score": 2},
+    "Inditex":            {"products": ["Dental","VIP Dir.","Vida"],                 "score": 3},
+    "Iberdrola":          {"products": ["Dental","VIP Dir.","Vida"],                 "score": 3},
+    "Telefónica":         {"products": ["Dental","VIP Dir.","Vida","Psico","Fisio"], "score": 5},
+    "Ferrovial":          {"products": ["Dental","Accidentes","Fisio"],              "score": 3},
+    "Endesa":             {"products": ["Dental","VIP Dir.","Vida","Accidentes"],    "score": 4},
+    "Naturgy":            {"products": ["Dental","VIP Dir.","Vida"],                 "score": 3},
+    "Repsol":             {"products": ["Dental","VIP Dir.","Accidentes"],           "score": 3},
+    "Santander":          {"products": ["Dental","VIP Dir.","Vida","Psico"],         "score": 4},
+    "Mahou San Miguel":   {"products": ["Dental"],                                   "score": 1},
+    "El Corte Inglés":    {"products": ["Dental","VIP Dir.","Fisio"],                "score": 3},
+    "Mercadona":          {"products": ["Dental"],                                   "score": 1},
+    "BBVA":               {"products": ["Dental","VIP Dir.","Vida","Psico"],         "score": 4},
+    "CaixaBank":          {"products": ["Dental","VIP Dir.","Vida","Psico","Fisio"], "score": 5},
+    "ACS":                {"products": ["Accidentes"],                               "score": 1},
+    "Renfe":              {"products": ["Dental","Accidentes"],                      "score": 2},
+    "Acciona":            {"products": ["Dental"],                                   "score": 1},
+    "Mapfre (empleados)": {"products": ["Dental","VIP Dir.","Vida"],                 "score": 3},
+}
+VINC_PROD_C = {
+    "Dental":     "#0891B2",
+    "VIP Dir.":   "#003087",
+    "Vida":       "#1B6B4A",
+    "Psico":      "#6A1B9A",
+    "Fisio":      "#D4940A",
+    "Accidentes": "#C2410C",
+}
+
+df_col["score_vinc"]    = df_col["empresa"].map(lambda e: VINC_DATA.get(e, {}).get("score", 0))
+df_col["productos_vinc"]= df_col["empresa"].map(lambda e: VINC_DATA.get(e, {}).get("products", []))
+
+def decision(lr, score_vinc=0):
+    if lr < 85:   return "Renovar",                "#1B6B4A", "●"
+    if lr < 100:  return "Subir tasa",             "#D4940A", "◐"
+    if score_vinc >= 2: return "Renegociar",       "#6A1B9A", "◑"
+    return "No renovar / renegociar",              "#9B2C2C", "●"
 
 df_col[["decision","dec_color","dec_dot"]] = pd.DataFrame(
-    df_col["loss_ratio"].apply(decision).tolist(), index=df_col.index
+    df_col.apply(lambda r: decision(r["loss_ratio"], r["score_vinc"]), axis=1).tolist(),
+    index=df_col.index
 )
 
 # ── Epidemiología & Eventos cíclicos ─────────────────────────
@@ -1764,7 +1800,9 @@ elif page == "comercial":
         total_marg  = df_col["margen_anual"].sum()
         n_renovar   = (df_col["decision"] == "Renovar").sum()
         n_subir     = (df_col["decision"] == "Subir tasa").sum()
+        n_reneg     = (df_col["decision"] == "Renegociar").sum()
         n_no        = (df_col["decision"] == "No renovar / renegociar").sum()
+        vinc_alta   = (df_col["score_vinc"] >= 4).sum()
 
         k1,k2,k3,k4 = st.columns(4)
         kpi_card(k1, "Asegurados en colectivos", f"{total_aseg:,.0f}", f"{len(df_col)} empresas activas")
@@ -1773,8 +1811,8 @@ elif page == "comercial":
                  f"Loss ratio medio {df_col['loss_ratio'].mean():.1f}%",
                  negative=total_marg < 0)
         kpi_card(k4, "Decisión renovación",
-                 f"{n_renovar} ✓ / {n_subir} ⚠ / {n_no} ✗",
-                 f"Renovar · Subir tasa · No renovar")
+                 f"{n_renovar} ✓  {n_subir} ⚠  {n_reneg} ◑  {n_no} ✗",
+                 f"Renovar · Subir tasa · Renegociar · No renovar")
 
         st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
@@ -1795,6 +1833,7 @@ elif page == "comercial":
         for dec, color, symbol in [
             ("Renovar",                  "#1B6B4A", "circle"),
             ("Subir tasa",               "#D4940A", "diamond"),
+            ("Renegociar",               "#6A1B9A", "circle-open"),
             ("No renovar / renegociar",  "#9B2C2C", "x"),
         ]:
             sub = df_col[df_col["decision"] == dec]
@@ -1853,7 +1892,7 @@ elif page == "comercial":
             section("TABLA DE RENTABILIDAD Y DECISIÓN DE RENOVACIÓN")
             df_tbl = df_col.sort_values("loss_ratio", ascending=False)[
                 ["empresa","sector","asegurados","prima","gasto","loss_ratio",
-                 "margen_anual","renovacion","decision","dec_color"]
+                 "margen_anual","renovacion","decision","dec_color","score_vinc","productos_vinc"]
             ].copy()
 
             for _, row in df_tbl.iterrows():
@@ -1862,6 +1901,15 @@ elif page == "comercial":
                 marg   = row["margen_anual"]
                 marg_s = f"+{marg:.0f} K€" if marg >= 0 else f"{marg:.0f} K€"
                 marg_c = "#1B6B4A" if marg >= 0 else "#9B2C2C"
+                score  = int(row["score_vinc"])
+                sc_c   = "#1B6B4A" if score >= 4 else "#D4940A" if score >= 2 else S_MUTED
+                dots   = "●" * score + "○" * (5 - score)
+                prod_chips = "".join(
+                    f'<span style="font-size:.58rem;padding:2px 5px;background:{VINC_PROD_C.get(p,"#888")}18;'
+                    f'color:{VINC_PROD_C.get(p,"#888")};border-radius:10px;'
+                    f'border:1px solid {VINC_PROD_C.get(p,"#888")}44;white-space:nowrap">{p}</span>'
+                    for p in row["productos_vinc"]
+                )
                 st.markdown(
                     f'<div style="display:flex;align-items:center;gap:12px;padding:9px 14px;'
                     f'margin-bottom:5px;background:{PAPER};border-radius:11px;'
@@ -1886,6 +1934,11 @@ elif page == "comercial":
                     f'<div style="text-align:center;min-width:80px">'
                     f'<div style="font-size:.68rem;color:{S_MUTED}">Margen/año</div>'
                     f'<div style="font-size:.8rem;font-weight:600;color:{marg_c}">{marg_s}</div>'
+                    f'</div>'
+                    f'<div style="flex:0 0 160px;display:flex;flex-direction:column;gap:3px;align-items:flex-start">'
+                    f'<div style="font-size:.68rem;color:{S_MUTED}">Vinculación</div>'
+                    f'<div style="font-size:.75rem;font-weight:700;color:{sc_c};letter-spacing:.04em">{dots} {score}/5</div>'
+                    f'<div style="display:flex;flex-wrap:wrap;gap:3px">{prod_chips}</div>'
                     f'</div>'
                     f'<div style="text-align:right;min-width:120px">'
                     f'<div style="font-size:.72rem;font-weight:600;color:{clr};'
