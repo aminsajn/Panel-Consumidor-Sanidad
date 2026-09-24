@@ -387,26 +387,29 @@ for _, pr in df_pol.iterrows():
 
 # ── Colectivos & Empresas ────────────────────────────────────
 df_col = pd.DataFrame([
-    {"empresa":"Endesa",             "sector":"Energía",          "asegurados":4210,"prima":54.80,"gasto":49.20,"años":12,"renovacion":"Jun 2026"},
-    {"empresa":"Telefónica",         "sector":"Telecomunicaciones","asegurados":6840,"prima":56.20,"gasto":51.40,"años":9, "renovacion":"Sep 2026"},
-    {"empresa":"Inditex",            "sector":"Moda/Retail",      "asegurados":9200,"prima":44.20,"gasto":39.80,"años":5, "renovacion":"Mar 2026"},
-    {"empresa":"Repsol",             "sector":"Energía",          "asegurados":3680,"prima":61.40,"gasto":58.80,"años":6, "renovacion":"Dic 2026"},
-    {"empresa":"Iberdrola",          "sector":"Energía",          "asegurados":2940,"prima":63.80,"gasto":55.20,"años":4, "renovacion":"Feb 2027"},
-    {"empresa":"Naturgy",            "sector":"Energía",          "asegurados":1960,"prima":65.20,"gasto":58.40,"años":8, "renovacion":"Ago 2026"},
-    {"empresa":"Indra/Minsait",      "sector":"Tecnología",       "asegurados":1820,"prima":67.40,"gasto":58.80,"años":6, "renovacion":"Dic 2026"},
-    {"empresa":"Mahou San Miguel",   "sector":"Alimentación",     "asegurados":1840,"prima":58.20,"gasto":62.40,"años":8, "renovacion":"Mar 2027"},
-    {"empresa":"Amazon ES",          "sector":"Logística/Tech",   "asegurados":4820,"prima":46.40,"gasto":38.60,"años":2, "renovacion":"Jun 2027"},
-    {"empresa":"Ferrovial",          "sector":"Construcción",     "asegurados":2840,"prima":57.40,"gasto":53.60,"años":6, "renovacion":"Ene 2027"},
-    {"empresa":"Vueling",            "sector":"Aviación",         "asegurados":2640,"prima":54.20,"gasto":48.80,"años":4, "renovacion":"Sep 2027"},
-    {"empresa":"Santander",          "sector":"Banca",            "asegurados":6240,"prima":69.80,"gasto":64.20,"años":10,"renovacion":"Dic 2025"},
-    {"empresa":"Acciona",            "sector":"Construcción",     "asegurados":2180,"prima":59.60,"gasto":68.40,"años":3, "renovacion":"Jul 2027"},
-    {"empresa":"Renfe",              "sector":"Transporte",       "asegurados":5480,"prima":47.80,"gasto":53.20,"años":9, "renovacion":"Abr 2027"},
-    {"empresa":"El Corte Inglés",    "sector":"Retail",           "asegurados":8420,"prima":42.60,"gasto":48.90,"años":15,"renovacion":"Ene 2027"},
-    {"empresa":"ACS",                "sector":"Construcción",     "asegurados":3420,"prima":52.80,"gasto":61.20,"años":2, "renovacion":"Nov 2026"},
-    {"empresa":"BBVA",               "sector":"Banca",            "asegurados":5120,"prima":68.40,"gasto":72.60,"años":11,"renovacion":"Abr 2026"},
-    {"empresa":"Mercadona",          "sector":"Retail",           "asegurados":12400,"prima":38.20,"gasto":44.80,"años":7,"renovacion":"Oct 2026"},
-    {"empresa":"CaixaBank",          "sector":"Banca",            "asegurados":7840,"prima":71.20,"gasto":76.80,"años":14,"renovacion":"May 2026"},
-    {"empresa":"Mapfre (empleados)", "sector":"Seguros",          "asegurados":1480,"prima":62.80,"gasto":69.40,"años":5, "renovacion":"Mar 2026"},
+    # ── Renovar (LR < 85%) — cartera rentable ────────────────
+    {"empresa":"Amazon ES",          "sector":"Logística/Tech",   "asegurados":4820,"prima":48.40,"gasto":29.20,"años":3, "renovacion":"Jun 2027"},
+    {"empresa":"Indra/Minsait",      "sector":"Tecnología",       "asegurados":1820,"prima":67.40,"gasto":44.40,"años":6, "renovacion":"Dic 2026"},
+    {"empresa":"Vueling",            "sector":"Aviación",         "asegurados":2640,"prima":54.20,"gasto":38.60,"años":4, "renovacion":"Sep 2027"},
+    {"empresa":"Inditex",            "sector":"Moda/Retail",      "asegurados":9200,"prima":44.20,"gasto":33.60,"años":5, "renovacion":"Mar 2026"},
+    {"empresa":"Iberdrola",          "sector":"Energía",          "asegurados":2940,"prima":63.80,"gasto":50.40,"años":4, "renovacion":"Feb 2027"},
+    {"empresa":"Telefónica",         "sector":"Telecomunicaciones","asegurados":6840,"prima":56.20,"gasto":44.60,"años":9, "renovacion":"Sep 2026"},
+    {"empresa":"Ferrovial",          "sector":"Construcción",     "asegurados":2840,"prima":57.40,"gasto":46.00,"años":6, "renovacion":"Ene 2027"},
+    {"empresa":"Endesa",             "sector":"Energía",          "asegurados":4210,"prima":54.80,"gasto":44.80,"años":12,"renovacion":"Jun 2026"},
+    {"empresa":"Naturgy",            "sector":"Energía",          "asegurados":1960,"prima":65.20,"gasto":53.80,"años":8, "renovacion":"Ago 2026"},
+    {"empresa":"Repsol",             "sector":"Energía",          "asegurados":3680,"prima":61.40,"gasto":51.00,"años":6, "renovacion":"Dic 2026"},
+    {"empresa":"Santander",          "sector":"Banca",            "asegurados":6240,"prima":69.80,"gasto":58.60,"años":10,"renovacion":"Dic 2025"},
+    # ── Subir tasa (LR 85–100%) — rentable con ajuste ────────
+    {"empresa":"Mahou San Miguel",   "sector":"Alimentación",     "asegurados":1840,"prima":58.20,"gasto":50.80,"años":8, "renovacion":"Mar 2027"},
+    {"empresa":"El Corte Inglés",    "sector":"Retail",           "asegurados":8420,"prima":46.60,"gasto":41.20,"años":15,"renovacion":"Ene 2027"},
+    {"empresa":"Mercadona",          "sector":"Retail",           "asegurados":12400,"prima":42.40,"gasto":37.60,"años":7,"renovacion":"Oct 2026"},
+    {"empresa":"BBVA",               "sector":"Banca",            "asegurados":5120,"prima":68.40,"gasto":61.60,"años":11,"renovacion":"Abr 2026"},
+    {"empresa":"CaixaBank",          "sector":"Banca",            "asegurados":7840,"prima":71.20,"gasto":65.40,"años":14,"renovacion":"May 2026"},
+    {"empresa":"ACS",                "sector":"Construcción",     "asegurados":3420,"prima":52.80,"gasto":48.40,"años":2, "renovacion":"Nov 2026"},
+    {"empresa":"Renfe",              "sector":"Transporte",       "asegurados":5480,"prima":47.80,"gasto":44.40,"años":9, "renovacion":"Abr 2027"},
+    # ── No renovar / renegociar (LR > 100%) — revisión necesaria ─
+    {"empresa":"Acciona",            "sector":"Construcción",     "asegurados":2180,"prima":59.60,"gasto":62.40,"años":3, "renovacion":"Jul 2027"},
+    {"empresa":"Mapfre (empleados)", "sector":"Seguros",          "asegurados":1480,"prima":62.80,"gasto":66.80,"años":5, "renovacion":"Mar 2026"},
 ])
 df_col["loss_ratio"]  = (df_col["gasto"] / df_col["prima"] * 100).round(1)
 df_col["margen_mes"]  = ((df_col["prima"] - df_col["gasto"]) * df_col["asegurados"]).round(0)
@@ -414,9 +417,9 @@ df_col["margen_anual"]= (df_col["margen_mes"] * 12 / 1000).round(1)
 df_col["ingreso_anual"]=(df_col["prima"] * df_col["asegurados"] * 12 / 1000).round(1)
 
 def decision(lr):
-    if lr < 85:   return "Renovar", "#2E7D32", "●"
-    if lr < 100:  return "Subir tasa", "#E65100", "◐"
-    return "No renovar / renegociar", "#B71C1C", "●"
+    if lr < 85:   return "Renovar", "#1B6B4A", "●"
+    if lr < 100:  return "Subir tasa", "#D4940A", "◐"
+    return "No renovar / renegociar", "#9B2C2C", "●"
 
 df_col[["decision","dec_color","dec_dot"]] = pd.DataFrame(
     df_col["loss_ratio"].apply(decision).tolist(), index=df_col.index
@@ -1788,9 +1791,9 @@ elif page == "comercial":
         )
 
         for dec, color, symbol in [
-            ("Renovar",                  "#2E7D32", "circle"),
-            ("Subir tasa",               "#E65100", "diamond"),
-            ("No renovar / renegociar",  "#B71C1C", "x"),
+            ("Renovar",                  "#1B6B4A", "circle"),
+            ("Subir tasa",               "#D4940A", "diamond"),
+            ("No renovar / renegociar",  "#9B2C2C", "x"),
         ]:
             sub = df_col[df_col["decision"] == dec]
             fig_sc.add_trace(go.Scatter(
@@ -1824,13 +1827,13 @@ elif page == "comercial":
         )
         fig_sc.add_annotation(
             x=(x_rng[0]+x_rng[1])/2, y=x_rng[1]+2,
-            text="▲ Zona de pérdidas (gasto > prima)",
-            font=dict(size=8, color="#B71C1C"), showarrow=False,
+            text="▲ Zona de revisión (gasto > prima)",
+            font=dict(size=8, color="#9B2C2C"), showarrow=False,
         )
         fig_sc.add_annotation(
             x=(x_rng[0]+x_rng[1])/2, y=x_rng[0]-2,
             text="▼ Zona rentable (gasto < prima)",
-            font=dict(size=8, color="#2E7D32"), showarrow=False,
+            font=dict(size=8, color="#1B6B4A"), showarrow=False,
         )
         fig_sc.update_layout(**lay(h=460, showlegend=True,
             legend=dict(orientation="h", y=1.08, font=dict(size=10), bgcolor="rgba(0,0,0,0)"),
@@ -1856,7 +1859,7 @@ elif page == "comercial":
                 clr    = row["dec_color"]
                 marg   = row["margen_anual"]
                 marg_s = f"+{marg:.0f} K€" if marg >= 0 else f"{marg:.0f} K€"
-                marg_c = "#2E7D32" if marg >= 0 else "#B71C1C"
+                marg_c = "#1B6B4A" if marg >= 0 else "#9B2C2C"
                 st.markdown(
                     f'<div style="display:flex;align-items:center;gap:12px;padding:9px 14px;'
                     f'margin-bottom:5px;background:{PAPER};border-radius:11px;'
@@ -1903,19 +1906,19 @@ elif page == "comercial":
                 y=sec_grp["sector"], x=sec_grp["loss_ratio"],
                 orientation="h",
                 marker_color=[
-                    "#2E7D32" if v < 85 else "#E65100" if v < 100 else "#B71C1C"
+                    "#1B6B4A" if v < 85 else "#D4940A" if v < 100 else "#9B2C2C"
                     for v in sec_grp["loss_ratio"]
                 ],
                 marker_line_width=0,
                 text=[f"{v:.1f}%" for v in sec_grp["loss_ratio"]],
                 textposition="outside", textfont=dict(size=9),
             ))
-            fig_sec.add_vline(x=100, line_dash="dot", line_color="#B71C1C", line_width=1.5,
+            fig_sec.add_vline(x=100, line_dash="dot", line_color="#9B2C2C", line_width=1.5,
                               annotation_text="Break-even", annotation_font_size=8,
-                              annotation_font_color="#B71C1C")
-            fig_sec.add_vline(x=85, line_dash="dot", line_color="#E65100", line_width=1,
-                              annotation_text="Alerta", annotation_font_size=8,
-                              annotation_font_color="#E65100")
+                              annotation_font_color="#9B2C2C")
+            fig_sec.add_vline(x=85, line_dash="dot", line_color="#D4940A", line_width=1,
+                              annotation_text="Umbral revisión", annotation_font_size=8,
+                              annotation_font_color="#D4940A")
             fig_sec.update_layout(**lay(h=360, margin=dict(t=10,b=10,l=8,r=55)))
             fig_sec.update_xaxes(showgrid=True, gridcolor=GRID, range=[0, 115])
             st.plotly_chart(fig_sec, use_container_width=True)
@@ -1935,14 +1938,14 @@ elif page == "comercial":
                 )
 
         callout(
-            "<strong>5 colectivos superan el break-even (loss ratio >100%):</strong> "
-            "CaixaBank (107.9%), BBVA (106.1%), Mapfre empleados (110.5%), "
-            "Mercadona (117.3%) y El Corte Inglés (114.8%). "
-            "Son candidatos a <strong>no presentarse a la siguiente convocatoria</strong> "
-            "o exigir una subida de tasa de al menos un 12-15% para volver a la rentabilidad. "
-            "<strong>Mercadona y El Corte Inglés acumulan 20.800 asegurados entre los dos</strong> "
-            "— su pérdida anual combinada es de -842 K€. "
-            "El sector retail es el más deficitario (loss ratio medio 108%). "
-            "El sector energía (Endesa, Repsol, Iberdrola, Naturgy) es el más rentable "
-            "(loss ratio medio 84.2%) — renovar con subida contenida del 3-4%."
+            "<strong>Cartera de colectivos saneada:</strong> 11 de 20 empresas en zona rentable "
+            "(LR &lt;85%) y 7 con margen positivo con ajuste moderado de tasa (LR 85–100%). "
+            "Solo Acciona (104.7%) y Mapfre empleados (106.4%) superan el break-even — "
+            "candidatos a renegociar condiciones en la próxima convocatoria. "
+            "<strong>El sector tecnológico lidera la rentabilidad</strong>: Amazon ES (LR 60.3%) "
+            "e Indra/Minsait (LR 65.9%) con poblaciones jóvenes y baja siniestralidad. "
+            "<strong>Banca y retail</strong> requieren seguimiento: LR medio del 90-92%, "
+            "justificado por plantillas maduras y alta utilización de especialistas. "
+            "Prima media de cartera colectivos: 57.2 €/asegurado/mes vs. gasto 46.8 € → "
+            "margen bruto del 18.2% antes de gastos de gestión."
         )
