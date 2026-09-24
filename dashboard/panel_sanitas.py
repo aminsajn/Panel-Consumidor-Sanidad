@@ -5,11 +5,25 @@ Vista Ejecutiva · Retención & Cartera · Optimización Operativa · Inteligenc
 python -m streamlit run panel_sanitas.py
 """
 import warnings; warnings.filterwarnings("ignore")
+import base64
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+
+def _img_b64(p):
+    try:
+        return base64.b64encode(Path(p).read_bytes()).decode()
+    except Exception:
+        return ""
+
+_LOGO_DIR = Path(__file__).parent.parent
+SANITAS_B64 = _img_b64(_LOGO_DIR / "logo-sanitas.png")
+MINSAIT_B64  = _img_b64(_LOGO_DIR / "Logo-Minsait.png")
+_SAN_IMG = f'<img src="data:image/png;base64,{SANITAS_B64}" height="36" style="object-fit:contain;display:block">' if SANITAS_B64 else ""
+_MIN_IMG = f'<img src="data:image/png;base64,{MINSAIT_B64}" height="26" style="object-fit:contain;display:block">' if MINSAIT_B64 else ""
 
 # ══════════════════════════════════════════════════════════════════
 # PALETA
@@ -77,7 +91,7 @@ button[kind="header"]{{display:none!important}}
 [data-testid="stSidebar"] .stButton>button:hover{{
   background:rgba(0,48,135,.1)!important;color:{ACCENT}!important;
   border-color:rgba(0,48,135,.2)!important;box-shadow:none!important}}
-.top-bar{{background:transparent;padding:20px 0 0;display:flex;align-items:baseline;
+.top-bar{{background:transparent;padding:20px 0 0;display:flex;align-items:center;
   justify-content:space-between;border-bottom:1px solid rgba(0,0,0,.06);margin-bottom:2.4rem}}
 .top-title{{font-size:.95rem;font-weight:600;color:#1D1D1F;letter-spacing:-.01em}}
 .top-sub{{font-size:.72rem;color:#86868B;letter-spacing:.02em}}
@@ -673,9 +687,10 @@ page = st.session_state.get("page", "home")
 if page == "home":
     st.markdown(
         f'<div class="top-bar">'
+        f'<div style="display:flex;align-items:center;gap:14px">{_SAN_IMG}'
         f'<div><div class="top-title">Plataforma de Inteligencia Corporativa · Sanitas</div>'
-        f'<div class="top-sub">Panel ejecutivo · Datos ficticios orientativos · Septiembre 2026</div></div>'
-        f'</div>', unsafe_allow_html=True)
+        f'<div class="top-sub">Panel ejecutivo · Datos ficticios orientativos · Septiembre 2026</div></div></div>'
+        f'{_MIN_IMG}</div>', unsafe_allow_html=True)
 
     h1, h2, h3, h4 = st.columns(4)
     kpi_card(h1, "Combined Ratio", "94.2%", "Loss 79.3% + Gasto 14.9%")
@@ -736,9 +751,10 @@ if page == "home":
 elif page == "ejecutiva":
     st.markdown(
         f'<div class="top-bar">'
+        f'<div style="display:flex;align-items:center;gap:14px">{_SAN_IMG}'
         f'<div><div class="top-title">Vista Ejecutiva</div>'
-        f'<div class="top-sub">CEO · Dirección General · Septiembre 2026</div></div>'
-        f'</div>', unsafe_allow_html=True)
+        f'<div class="top-sub">CEO · Dirección General · Septiembre 2026</div></div></div>'
+        f'{_MIN_IMG}</div>', unsafe_allow_html=True)
 
     e1, e2, e3, e4 = st.columns(4)
     kpi_card(e1, "Combined Ratio", "94.2%", "Obj. <95% — en rango")
@@ -868,9 +884,10 @@ elif page == "ejecutiva":
 elif page == "retencion":
     st.markdown(
         f'<div class="top-bar">'
+        f'<div style="display:flex;align-items:center;gap:14px">{_SAN_IMG}'
         f'<div><div class="top-title">Retención & Optimización de Cartera</div>'
-        f'<div class="top-sub">Dirección de Clientes · Modelo de churn · Campañas · Rentabilidad</div></div>'
-        f'</div>', unsafe_allow_html=True)
+        f'<div class="top-sub">Dirección de Clientes · Modelo de churn · Campañas · Rentabilidad</div></div></div>'
+        f'{_MIN_IMG}</div>', unsafe_allow_html=True)
 
     r1, r2, r3, r4 = st.columns(4)
     kpi_card(r1, "Tasa de churn anual",   "12.4%",  "−0.8pp si se activan campañas")
@@ -1046,9 +1063,10 @@ elif page == "retencion":
 elif page == "operaciones":
     st.markdown(
         f'<div class="top-bar">'
+        f'<div style="display:flex;align-items:center;gap:14px">{_SAN_IMG}'
         f'<div><div class="top-title">Optimización Operativa</div>'
-        f'<div class="top-sub">Dirección Médica · CFO · Combined Ratio · Recursos · Fraude</div></div>'
-        f'</div>', unsafe_allow_html=True)
+        f'<div class="top-sub">Dirección Médica · CFO · Combined Ratio · Recursos · Fraude</div></div></div>'
+        f'{_MIN_IMG}</div>', unsafe_allow_html=True)
 
     o1, o2, o3, o4 = st.columns(4)
     kpi_card(o1, "Combined Ratio",        "94.2%",  "Loss 79.3% + Gasto 14.9%")
@@ -1364,9 +1382,10 @@ elif page == "operaciones":
 elif page == "comercial":
     st.markdown(
         f'<div class="top-bar">'
+        f'<div style="display:flex;align-items:center;gap:14px">{_SAN_IMG}'
         f'<div><div class="top-title">Inteligencia Comercial</div>'
-        f'<div class="top-sub">Dirección Comercial · Oportunidad geográfica · Pricing · Captación</div></div>'
-        f'</div>', unsafe_allow_html=True)
+        f'<div class="top-sub">Dirección Comercial · Oportunidad geográfica · Pricing · Captación</div></div></div>'
+        f'{_MIN_IMG}</div>', unsafe_allow_html=True)
 
     cm1, cm2, cm3, cm4 = st.columns(4)
     kpi_card(cm1, "Cuota de mercado",    "18.7%",   "2.ª aseguradora España")
