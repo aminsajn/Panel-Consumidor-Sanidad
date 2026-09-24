@@ -645,9 +645,8 @@ if "page" not in st.session_state:
 
 with st.sidebar:
     st.markdown(
-        f'<div style="padding:20px 0 6px">'
-        f'<div style="font-size:1.02rem;font-weight:700;color:{ACCENT};letter-spacing:-.01em">Sanitas</div>'
-        f'<div style="font-size:.68rem;color:{S_MUTED};margin-top:2px;letter-spacing:.04em">INTELIGENCIA CORPORATIVA</div>'
+        f'<div style="padding:18px 12px 14px;text-align:center">'
+        f'<img src="data:image/png;base64,{SANITAS_B64}" style="max-width:160px;width:100%;object-fit:contain" />'
         f'</div>', unsafe_allow_html=True)
     st.markdown('<hr>', unsafe_allow_html=True)
 
