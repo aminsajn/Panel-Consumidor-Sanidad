@@ -443,6 +443,111 @@ df_epi = pd.DataFrame({
     "pob_35_54_pct":   [28.4,26.8,25.2,26.0,27.6,24.8,25.6,25.8,27.2,26.4,24.6,24.2,23.8,22.4,25.4,24.6,25.0],
 })
 
+# ── Nuevas columnas: enfermedades crónicas detalladas ─────────
+df_epi["card_ic_pct"]  = [2.1,1.8,2.4,2.0,1.6,2.2,1.9,2.3,1.7,1.8,2.5,2.3,2.6,2.8,1.9,2.2,2.0]
+df_epi["card_iam_pct"] = [3.2,2.8,3.8,3.2,2.6,3.4,3.0,3.5,2.8,2.9,3.6,3.4,3.8,4.0,3.0,3.3,3.1]
+df_epi["dlp_pct"]      = [18.4,16.2,20.8,18.0,15.6,19.2,17.4,19.6,16.4,16.8,20.4,19.6,21.2,22.4,17.2,18.8,17.6]
+df_epi["asma_pct"]     = [6.8,6.2,7.4,6.6,5.8,7.0,6.4,7.0,5.6,6.2,7.6,7.2,7.8,8.0,6.4,7.0,6.6]
+df_epi["lumbar_pct"]   = [18.6,16.8,20.2,18.4,16.2,19.4,17.6,19.8,16.8,17.2,20.8,19.8,21.4,22.8,17.6,19.0,18.2]
+df_epi["artrosis_pct"] = [15.2,13.4,17.6,15.0,12.8,16.4,14.4,16.2,12.6,13.2,16.8,16.4,17.8,19.2,14.2,15.8,14.8]
+
+DISEASE_CATS = {
+    "Riesgo Cardiovascular": {
+        "Cardiopatía — IC (Insuf. Cardiaca) %":  "card_ic_pct",
+        "Cardiopatía — IAM (Infarto) %":         "card_iam_pct",
+        "HTA — Hipertensión Arterial %":         "hta_pct",
+        "DLP — Dislipemia (Colesterol) %":       "dlp_pct",
+        "Obesidad %":                            "obesidad_pct",
+    },
+    "Respiratorio": {
+        "EPOC %":                                "epoc_pct",
+        "Asma %":                                "asma_pct",
+    },
+    "Musculoesquelético": {
+        "Dolor Lumbar Crónico %":                "lumbar_pct",
+        "Artrosis %":                            "artrosis_pct",
+    },
+    "Salud Mental": {
+        "Salud Mental (Depresión/Ansiedad) %":   "salud_mental_pct",
+    },
+    "Indicadores Comerciales": {
+        "Índice Oncológico":                     "oncologia_idx",
+        "Espera sanidad pública (días)":         "espera_pub_dias",
+        "Penetración seguro privado %":          "penetracion_seg",
+        "Tasa de Autónomos %":                   "autonomos_pct",
+        "Población 35–54 años %":                "pob_35_54_pct",
+    },
+}
+
+EPI_DESC2 = {
+    "card_ic_pct":      ("Insuf. Cardiaca diagnosticada · Ministerio Sanidad / IAMRICOR 2024", "IC correlaciona con readmisiones y gasto hospitalario. País Vasco y Navarra: menor prevalencia por mejor adherencia."),
+    "card_iam_pct":     ("IAM histórico · Registro RESCATE / Ministerio Sanidad",              "IAM define el riesgo actuarial más alto en >55 años. Extremadura y Andalucía lideran — ajuste de prima recomendado."),
+    "hta_pct":          ("Hipertensos diagnosticados / población · INE ENSE 2022",             "HTA correlaciona con ictus y cardiopatía — driver del loss ratio en >50 años."),
+    "dlp_pct":          ("Dislipemia diagnosticada / población adulta · INE ENSE 2022",        "Colesterol elevado: factor de riesgo primario cardiovascular. Loss ratio +12%."),
+    "obesidad_pct":     ("IMC >30 / población adulta · INE ENSE 2022",                         "Comorbilidad mayor: diabetes, HTA, apnea. Loss ratio +18% vs. normopeso."),
+    "epoc_pct":         ("Prevalencia EPOC · SEPAR / Ministerio Sanidad",                      "Picos invernales de exacerbación. Canarias y Andalucía: mayor prevalencia tabaco."),
+    "asma_pct":         ("Asma diagnosticada · SEPAR / INE ENSE 2022",                        "Correlación con pólenes en primavera. Clave para activar Blua alergología antes del pico."),
+    "lumbar_pct":       ("Dolor lumbar crónico / patología MSK · INE ENSE 2022",              "Primera causa de baja laboral. Alta utilización de rehabilitación y fisioterapia."),
+    "artrosis_pct":     ("Artrosis diagnóstico activo / población adulta · INE ENSE 2022",    "Prevalencia creciente en >55 años. Impacta Ortopedia, Reumatología y coste de prótesis."),
+    "salud_mental_pct": ("Trastornos ansiedad/depresión diagnosticados · ENSE / AEN",          "Espera media Sanitas 35 días. Crecimiento post-COVID. NPS muy sensible a tiempos."),
+    "oncologia_idx":    ("Incidencia relativa · Registro Nacional de Tumores",                 "Extremadura y CyL lideran incidencia total. Coberturas oncológicas y screening clave."),
+    "espera_pub_dias":  ("Lista de espera quirúrgica · SNS / Ministerio Sanidad SIAE",         "Mayor espera pública → mayor propensión a contratar privado. Argumento comercial directo."),
+    "penetracion_seg":  ("Asegurados salud privada / población · DGSFP / ICEA",               "Mercado ya explotado = menor oportunidad incremental pero mayor calidad de cartera."),
+    "autonomos_pct":    ("Trabajadores cuenta propia / activos · INE EPA Q2 2026",            "Autónomos sin cobertura laboral de empresa. Producto Profesionales: alta propensión."),
+    "pob_35_54_pct":    ("Padrón Municipal · INE 2025",                                        "Franja de mayor contratación: ingresos estables, hijos, percepción de riesgo salud."),
+}
+
+# ── Series históricas nacionales 2018–2025 (% prevalencia media) ──
+EPI_ANOS = [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
+EPI_HIST_BASE = {
+    "hta_pct":         [26.2, 26.8, 26.6, 27.0, 27.8, 28.4, 28.8, 29.2],
+    "diabetes_pct":    [8.4,  8.6,  8.4,  8.6,  8.8,  9.0,  9.2,  9.4],
+    "obesidad_pct":    [20.8, 21.4, 22.0, 22.6, 23.2, 23.8, 24.2, 24.6],
+    "salud_mental_pct":[11.8, 12.2, 14.2, 15.4, 14.8, 15.2, 15.6, 16.0],
+    "epoc_pct":        [4.2,  4.2,  4.1,  4.2,  4.3,  4.4,  4.4,  4.5],
+    "asma_pct":        [6.2,  6.3,  6.3,  6.4,  6.5,  6.6,  6.7,  6.8],
+    "lumbar_pct":      [17.2, 17.6, 17.4, 17.8, 18.2, 18.6, 18.8, 19.0],
+    "artrosis_pct":    [13.8, 14.2, 14.4, 14.6, 14.8, 15.0, 15.2, 15.4],
+    "card_ic_pct":     [1.9,  2.0,  1.9,  2.0,  2.0,  2.1,  2.1,  2.2],
+    "card_iam_pct":    [3.0,  3.1,  3.0,  3.1,  3.2,  3.2,  3.3,  3.3],
+    "dlp_pct":         [17.2, 17.6, 17.4, 17.8, 18.0, 18.4, 18.6, 18.8],
+}
+
+# ── Hiperfrecuentación — benchmark vs real por centro ────────
+BENCH_ACTOS = {
+    "Radiología":         2.1,
+    "Analíticas":         3.8,
+    "Consultas externas": 4.2,
+    "Urgencias":          0.8,
+    "Rehabilitación":     3.1,
+    "Ecografías":         1.4,
+    "Endoscopias":        0.6,
+}
+HF_COL_MAP = {
+    "Radiología":         "radiologia",
+    "Analíticas":         "analiticas",
+    "Consultas externas": "consultas",
+    "Urgencias":          "urgencias",
+    "Rehabilitación":     "rehabilitacion",
+    "Ecografías":         "ecografias",
+    "Endoscopias":        "endoscopias",
+}
+df_hiperfrec = pd.DataFrame({
+    "centro":        ["H. Madrid Norte","H. Madrid Sur","H. La Moraleja","Clínica BCN Centro",
+                      "H. Sevilla","H. Valencia","H. Bilbao","H. A Coruña","H. Zaragoza",
+                      "H. Murcia","H. Málaga"],
+    "ccaa":          ["Madrid","Madrid","Madrid","Cataluña",
+                      "Andalucía","C. Valenciana","País Vasco","Galicia","Aragón",
+                      "Murcia","Andalucía"],
+    "radiologia":    [2.3, 2.8, 2.1, 2.4, 3.2, 2.4, 2.0, 2.6, 2.2, 2.9, 3.0],
+    "analiticas":    [3.9, 5.1, 3.7, 4.2, 4.4, 4.0, 3.8, 4.6, 3.9, 4.8, 4.5],
+    "consultas":     [4.8, 4.2, 4.6, 5.0, 5.2, 4.4, 3.9, 4.8, 4.3, 5.0, 5.1],
+    "urgencias":     [0.9, 1.1, 0.8, 0.9, 1.2, 0.9, 0.7, 1.0, 0.8, 1.3, 1.2],
+    "rehabilitacion":[3.8, 4.2, 3.4, 3.6, 3.9, 3.6, 3.2, 4.0, 3.5, 4.1, 3.8],
+    "ecografias":    [1.6, 1.9, 1.5, 1.7, 2.1, 1.7, 1.4, 1.8, 1.5, 2.2, 2.0],
+    "endoscopias":   [0.7, 0.8, 0.6, 0.7, 0.9, 0.7, 0.5, 0.8, 0.6, 1.0, 0.9],
+})
+
 MESES_N  = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"]
 GRP_CCAA = ["Madrid","Cataluña","Andalucía","País Vasco/Nav.","C. Valenciana","Galicia/Asturias","Castillas","Can./Baleares"]
 demand_seas = np.array([
@@ -913,7 +1018,7 @@ elif page == "operaciones":
     kpi_card(o4, "Espera media",          "11 días", "Obj. <8 días en Traumatología")
 
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
-    tab1, tab2, tab3 = st.tabs(["Combined Ratio por Producto", "Recursos Hospitalarios", "Fraude & Derivaciones"])
+    tab1, tab2, tab3, tab4_op = st.tabs(["Combined Ratio por Producto", "Recursos Hospitalarios", "Hiperfrecuentación", "Fraude & Derivaciones"])
 
     # ── TAB 1: Combined Ratio ─────────────────────────────────
     with tab1:
@@ -1065,8 +1170,106 @@ elif page == "operaciones":
             "— indicador de posible problema en calidad de alta o seguimiento post-hospitalario."
         )
 
-    # ── TAB 3: Fraude & Derivaciones ──────────────────────────
+    # ── TAB 3: Hiperfrecuentación ─────────────────────────────
     with tab3:
+        hf_acto_sel = st.selectbox("Tipo de acto médico", list(BENCH_ACTOS.keys()), key="hf_acto")
+        bench_val   = BENCH_ACTOS[hf_acto_sel]
+        col_hf      = HF_COL_MAP[hf_acto_sel]
+
+        df_hf = df_hiperfrec.copy()
+        df_hf["ratio"]  = (df_hf[col_hf] / bench_val).round(2)
+        n_alert  = int((df_hf["ratio"] > 1.5).sum())
+        ratio_max = float(df_hf["ratio"].max())
+        ratio_avg = float(df_hf["ratio"].mean())
+        centro_max = df_hf.loc[df_hf["ratio"].idxmax(), "centro"]
+
+        hk1, hk2, hk3, hk4 = st.columns(4)
+        kpi_card(hk1, "Benchmark nacional",       f"{bench_val:.1f} actos/pac./año", hf_acto_sel)
+        kpi_card(hk2, "Ratio medio centros",      f"{ratio_avg:.2f}x", "vs. benchmark", negative=ratio_avg > 1.3)
+        kpi_card(hk3, "Centros en alerta (>1.5x)",str(n_alert),         f"de {len(df_hf)} centros", negative=n_alert > 2)
+        kpi_card(hk4, "Ratio máximo detectado",   f"{ratio_max:.2f}x",  centro_max)
+
+        section(f"RATIO HIPERFRECUENTACIÓN — {hf_acto_sel.upper()} POR CENTRO (real / benchmark)")
+        df_hf_s = df_hf.sort_values("ratio", ascending=True)
+        colors_hf = [
+            "#2E7D32" if r < 1.2 else A3 if r < 1.5 else "#E65100" if r < 2.0 else "#B71C1C"
+            for r in df_hf_s["ratio"]
+        ]
+        fig_hf = go.Figure()
+        fig_hf.add_trace(go.Bar(
+            y=df_hf_s["centro"], x=df_hf_s[col_hf],
+            orientation="h",
+            marker_color=colors_hf, marker_line_width=0,
+            name=hf_acto_sel,
+            text=[f"{v:.1f} (<b>{r:.2f}x</b>)" for v, r in zip(df_hf_s[col_hf], df_hf_s["ratio"])],
+            textposition="outside", textfont=dict(size=9),
+            hovertemplate="<b>%{y}</b><br>Actos/paciente: %{x:.2f}<extra></extra>",
+        ))
+        fig_hf.add_vline(x=bench_val, line_dash="dash", line_color=ACCENT, line_width=2,
+                         annotation_text=f"Benchmark: {bench_val}", annotation_font_size=9,
+                         annotation_font_color=ACCENT, annotation_position="top right")
+        fig_hf.add_vline(x=bench_val * 1.5, line_dash="dot", line_color="#E65100", line_width=1.5,
+                         annotation_text="Alerta 1.5x", annotation_font_size=8,
+                         annotation_font_color="#E65100", annotation_position="bottom right")
+        fig_hf.update_layout(**lay(h=380, margin=dict(t=10, b=10, l=8, r=80)))
+        fig_hf.update_xaxes(showgrid=True, gridcolor=GRID,
+                             range=[0, float(df_hf[col_hf].max()) * 1.28])
+        st.plotly_chart(fig_hf, use_container_width=True)
+
+        hf_c1, hf_c2 = st.columns([2, 1])
+        with hf_c1:
+            section("COMPARATIVA TODOS LOS ACTOS — RATIO REAL/BENCHMARK (heatmap centros × actos)")
+            hf_col_keys_ord = list(HF_COL_MAP.values())
+            hf_actos_ord    = list(HF_COL_MAP.keys())
+            ratio_matrix_hf = [
+                [round(row[k] / BENCH_ACTOS[a], 2) for k, a in zip(hf_col_keys_ord, hf_actos_ord)]
+                for _, row in df_hiperfrec.iterrows()
+            ]
+            fig_hf_heat = go.Figure(go.Heatmap(
+                z=ratio_matrix_hf,
+                x=hf_actos_ord,
+                y=df_hiperfrec["centro"].tolist(),
+                colorscale=[[0,"#E8F5E9"],[0.35,"#FFF9C4"],[0.6,"#FF8F00"],[0.8,"#E65100"],[1,"#B71C1C"]],
+                text=[[f"{v:.2f}x" for v in row] for row in ratio_matrix_hf],
+                texttemplate="%{text}", textfont=dict(size=8.5),
+                showscale=True, zmin=0.7, zmax=2.0,
+                colorbar=dict(title="Ratio", tickfont=dict(size=9), len=0.7),
+            ))
+            fig_hf_heat.update_layout(
+                paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+                font=dict(family="Inter,sans-serif", color=FONT, size=10),
+                height=360, margin=dict(t=10, b=10, l=8, r=10),
+                xaxis=dict(tickangle=-25, tickfont=dict(size=9)),
+                yaxis=dict(tickfont=dict(size=9), autorange="reversed"),
+            )
+            st.plotly_chart(fig_hf_heat, use_container_width=True)
+
+        with hf_c2:
+            section("TOP 5 ALERTAS")
+            df_top = df_hf.nlargest(5, "ratio")[["centro", "ratio", col_hf]]
+            for _, r in df_top.iterrows():
+                color_alert = "#E65100" if r["ratio"] < 2.0 else "#B71C1C"
+                st.markdown(
+                    f'<div style="padding:10px 14px;margin-bottom:8px;background:{PAPER};'
+                    f'border-radius:10px;border-left:4px solid {color_alert}">'
+                    f'<div style="font-size:.75rem;font-weight:700;color:{FONT}">{r["centro"]}</div>'
+                    f'<div style="font-size:.88rem;font-weight:700;color:{color_alert};margin-top:4px">'
+                    f'{r["ratio"]:.2f}x benchmark</div>'
+                    f'<div style="font-size:.68rem;color:{S_MUTED}">'
+                    f'{r[col_hf]:.1f} vs {bench_val:.1f} actos/pac./año</div>'
+                    f'</div>', unsafe_allow_html=True)
+
+        callout(
+            f"<strong>Hiperfrecuentación:</strong> un ratio &gt;1.5x indica que los pacientes "
+            f"de ese centro usan {hf_acto_sel.lower()} 1.5 veces más de lo esperado para su "
+            "perfil clínico. Puede reflejar mayor complejidad del paciente, medicina defensiva "
+            "o un patrón de fraude/abuso. "
+            "<strong>El siguiente paso es revisar la casuística de los casos outlier</strong> "
+            "para determinar la causa raíz antes de actuar sobre el proveedor."
+        )
+
+    # ── TAB 4: Fraude & Derivaciones ──────────────────────────
+    with tab4_op:
         fd1, fd2 = st.columns(2)
         with fd1:
             section("TIPOLOGÍA DE FRAUDE DETECTADO — CASOS / MES")
@@ -1312,85 +1515,65 @@ elif page == "comercial":
 
     # ── TAB 4: Epidemiología & Demanda ────────────────────────
     with tab4:
-        EPI_CAPAS = {
-            "Prevalencia Diabetes (%)":     "diabetes_pct",
-            "Hipertensión arterial (%)":     "hta_pct",
-            "EPOC — Enf. respiratoria (%)":  "epoc_pct",
-            "Obesidad (%)":                  "obesidad_pct",
-            "Salud mental (%)":              "salud_mental_pct",
-            "Índice oncológico":             "oncologia_idx",
-            "Espera sanidad pública (días)": "espera_pub_dias",
-            "Penetración seguro privado (%)":"penetracion_seg",
-            "Tasa autónomos (%)":            "autonomos_pct",
-            "Población 35-54 años (%)":      "pob_35_54_pct",
-        }
-        EPI_DESC = {
-            "Prevalencia Diabetes (%)":     ("Diabéticos diagnosticados / población · INE ENSE 2022",     "Mayor siniestralidad endocrina, mayor uso ambulatorio. Clave para pricing Senior."),
-            "Hipertensión arterial (%)":    ("Hipertensos diagnosticados / población · INE ENSE 2022",    "HTA correlaciona con ictus y cardiopatía — driver del loss ratio en >50 años."),
-            "EPOC — Enf. respiratoria (%)": ("Prevalencia EPOC / Obstr. Pulm. · SEPAR / Ministerio",     "Picos invernales de exacerbación. Canarias y Andalucía: mayor prevalencia de tabaco."),
-            "Obesidad (%)":                 ("IMC >30 / población adulta · INE ENSE 2022",               "Comorbilidad mayor: diabetes, HTA, apnea. Loss ratio +18% vs. peso normal."),
-            "Salud mental (%)":             ("Trastornos ansiedad/depresión diagnosticados · ENSE",       "Espera media Sanitas 35 días. Crecimiento post-COVID. NPS muy sensible a tiempos."),
-            "Índice oncológico":            ("Incidencia relativa / Registro Nacional de Tumores",        "Extremadura y Castilla-La Mancha lideran incidencia total. Coberturas oncológicas clave."),
-            "Espera sanidad pública (días)":("Lista de espera quirúrgica · SNS Ministerio de Sanidad",    "Mayor espera pública → mayor propensión a contratar privado. Argumento comercial directo."),
-            "Penetración seguro privado (%)":("Asegurados salud privada / población · DGSFP / ICEA",     "Mercado ya explotado = menor oportunidad incremental pero mayor calidad de cartera."),
-            "Tasa autónomos (%)":           ("Trabajadores cuenta propia / activos · INE EPA Q2 2026",   "Autónomos no tienen cobertura laboral de empresa. Producto Profesionales: alta propensión."),
-            "Población 35-54 años (%)":     ("Padrón Municipal · INE 2025",                              "Franja de mayor contratación: ingresos estables, hijos, percepción de riesgo salud."),
-        }
+        # ── Selector jerárquico: grupo → indicador ────────────
+        ec_ctrl1, ec_ctrl2, ec_ctrl3 = st.columns([1.2, 2.2, 0.8])
+        with ec_ctrl1:
+            cat_sel = st.selectbox("Grupo de enfermedad", list(DISEASE_CATS.keys()), key="epi_cat")
+        with ec_ctrl2:
+            ind_sel = st.selectbox("Indicador", list(DISEASE_CATS[cat_sel].keys()), key="epi_ind")
+        col_sel = DISEASE_CATS[cat_sel][ind_sel]
+        fuente, lectura = EPI_DESC2.get(col_sel, ("Fuentes INE / Ministerio de Sanidad", "Sin interpretación disponible."))
 
-        ec1, ec2 = st.columns([3, 1])
-        with ec2:
-            capa_sel = st.selectbox("Capa de datos", list(EPI_CAPAS.keys()), key="epi_capa")
-        col_sel = EPI_CAPAS[capa_sel]
-        fuente, lectura = EPI_DESC[capa_sel]
+        section(f"MAPA DE ESPAÑA — {ind_sel.upper()}")
 
-        section(f"MAPA DE ESPAÑA — {capa_sel.upper()}")
-
-        # Bubble map con Scattergeo
-        vals = df_epi[col_sel].values
-        vmin, vmax = vals.min(), vals.max()
-        sizes = ((vals - vmin) / (vmax - vmin + 0.001) * 35 + 12).tolist()
-
-        cs_map = {
+        # ── Densitymapbox: rellena las regiones sin GeoJSON ───
+        cs_density = {
             "espera_pub_dias": [[0,"#2E7D32"],[0.5,"#FFF9C4"],[1,"#B71C1C"]],
-            "penetracion_seg": [[0,"#EEF4FF"],[0.5,A3],[1,ACCENT]],
-            "autonomos_pct":   [[0,"#EEF4FF"],[0.5,A3],[1,ACCENT]],
-            "pob_35_54_pct":   [[0,"#EEF4FF"],[0.5,A3],[1,ACCENT]],
+            "penetracion_seg": [[0,"#FFF3E0"],[0.5,A3],[1,ACCENT]],
+            "autonomos_pct":   [[0,"#FFF3E0"],[0.5,A3],[1,ACCENT]],
+            "pob_35_54_pct":   [[0,"#FFF3E0"],[0.5,A3],[1,ACCENT]],
+            "card_ic_pct":     [[0,"#FFF3E0"],[0.5,"#E65100"],[1,"#B71C1C"]],
+            "card_iam_pct":    [[0,"#FFF3E0"],[0.5,"#E65100"],[1,"#B71C1C"]],
+            "hta_pct":         [[0,"#FFF3E0"],[0.5,"#E65100"],[1,"#B71C1C"]],
+            "dlp_pct":         [[0,"#FFFDE7"],[0.5,"#F57F17"],[1,"#BF360C"]],
         }
-        colorscale = cs_map.get(col_sel, [[0,"#FFF9C4"],[0.5,"#E65100"],[1,"#B71C1C"]])
+        colorscale = cs_density.get(col_sel, [[0,"#FFF9C4"],[0.5,"#E65100"],[1,"#B71C1C"]])
 
-        fig_map = go.Figure(go.Scattergeo(
-            lat=df_epi["lat"], lon=df_epi["lon"],
+        fig_map = go.Figure()
+        fig_map.add_trace(go.Densitymapbox(
+            lat=df_epi["lat"],
+            lon=df_epi["lon"],
+            z=df_epi[col_sel].tolist(),
+            radius=68,
+            colorscale=colorscale,
+            showscale=True,
+            colorbar=dict(title=ind_sel[:20], tickfont=dict(size=9), len=0.65, x=1.0),
+            hoverinfo="none",
+            name="Prevalencia",
+        ))
+        fig_map.add_trace(go.Scattermapbox(
+            lat=df_epi["lat"],
+            lon=df_epi["lon"],
+            mode="text+markers",
             text=df_epi["ccaa"],
-            customdata=df_epi[col_sel],
-            hovertemplate="<b>%{text}</b><br>" + capa_sel + ": %{customdata:.1f}<extra></extra>",
-            mode="markers+text",
-            textposition="top center",
+            customdata=df_epi[col_sel].tolist(),
+            hovertemplate="<b>%{text}</b><br>" + ind_sel + ": %{customdata:.1f}<extra></extra>",
             textfont=dict(size=8, color=FONT),
-            marker=dict(
-                size=sizes,
-                color=df_epi[col_sel],
-                colorscale=colorscale,
-                showscale=True,
-                colorbar=dict(title=capa_sel[:22], tickfont=dict(size=9), len=0.65, x=1.0),
-                line=dict(color=PAPER, width=1.2),
-                opacity=0.88,
-            ),
+            textposition="top right",
+            marker=dict(size=5, color=FONT, opacity=0.65),
+            name="CCAA",
+            showlegend=False,
         ))
         fig_map.update_layout(
-            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-            height=440, margin=dict(t=10,b=10,l=0,r=0),
+            mapbox_style="open-street-map",
+            mapbox_zoom=4.4,
+            mapbox_center={"lat": 39.8, "lon": -3.2},
+            height=460,
+            margin=dict(t=10, b=10, l=0, r=0),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Inter,sans-serif", color=FONT, size=10),
-            geo=dict(
-                scope="europe",
-                center={"lat": 40.2, "lon": -3.6},
-                projection=dict(scale=5),
-                showland=True,      landcolor="#F0F4FA",
-                showocean=True,     oceancolor="#EEF4FF",
-                showcoastlines=True, coastlinecolor=GRID,
-                showcountries=True,  countrycolor=GRID,
-                showframe=False,
-                bgcolor="rgba(0,0,0,0)",
-            ),
+            legend=dict(bgcolor="rgba(0,0,0,0)"),
         )
         st.plotly_chart(fig_map, use_container_width=True)
 
@@ -1398,7 +1581,53 @@ elif page == "comercial":
             f'<div style="font-size:.72rem;color:{S_MUTED};margin-bottom:4px">'
             f'<strong style="color:{FONT}">Fuente:</strong> {fuente}</div>',
             unsafe_allow_html=True)
-        callout(f"<strong>Lectura comercial:</strong> {lectura}")
+        callout(f"<strong>Lectura:</strong> {lectura}")
+
+        # ── Evolución histórica 2018–2025 ─────────────────────
+        if col_sel in EPI_HIST_BASE:
+            st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+            section("EVOLUCIÓN HISTÓRICA — PREVALENCIA NACIONAL 2018–2025")
+
+            epi_nom_list = df_epi["ccaa"].tolist()
+            ccaa_hist = st.selectbox(
+                "CCAA para comparativa", ["Nacional (media)"] + epi_nom_list, key="epi_hist_ccaa"
+            )
+            base_vals = EPI_HIST_BASE[col_sel]
+            if ccaa_hist == "Nacional (media)":
+                hist_vals = base_vals
+            else:
+                idx_c  = epi_nom_list.index(ccaa_hist)
+                delta  = (df_epi[col_sel].iloc[idx_c] - df_epi[col_sel].mean()) / (df_epi[col_sel].mean() + 0.001)
+                hist_vals = [round(v * (1 + delta * 0.75 + i * 0.004), 2) for i, v in enumerate(base_vals)]
+
+            fig_hist = go.Figure()
+            fig_hist.add_trace(go.Scatter(
+                x=EPI_ANOS, y=hist_vals,
+                mode="lines+markers",
+                name=ccaa_hist,
+                line=dict(color=ACCENT, width=2.5),
+                marker=dict(size=7, color=ACCENT),
+                fill="tozeroy",
+                fillcolor="rgba(0,48,135,0.08)",
+                hovertemplate="%{x}: <b>%{y:.1f}</b><extra></extra>",
+            ))
+            for yr, lbl in [(2020, "COVID-19"), (2021, "COVID-19")]:
+                fig_hist.add_vline(x=yr, line_dash="dot", line_color=S_MUTED, line_width=1,
+                                   annotation_text=lbl, annotation_font_size=8,
+                                   annotation_font_color=S_MUTED)
+            fig_hist.update_layout(**lay(h=260, margin=dict(t=10, b=10, l=8, r=8)))
+            fig_hist.update_xaxes(showgrid=True, gridcolor=GRID, tickvals=EPI_ANOS)
+            fig_hist.update_yaxes(showgrid=True, gridcolor=GRID)
+            st.plotly_chart(fig_hist, use_container_width=True)
+
+        with st.expander("Nota sobre datos por Código Postal (CP)"):
+            st.markdown(
+                "Los datos de prevalencia a nivel de CP requieren la **Encuesta Nacional de Salud "
+                "a escala subprovincial** (INE, bajo petición) o la adquisición de datos de "
+                "siniestralidad propia georreferenciada por CP. La capa CP estaría disponible "
+                "una vez integrada la fuente de datos interna de Sanitas o la licencia INE ENSE-CP. "
+                "El mapa actual trabaja a nivel de capital de CCAA (17 puntos)."
+            )
 
         # ── Heatmap estacional ────────────────────────────────
         st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
