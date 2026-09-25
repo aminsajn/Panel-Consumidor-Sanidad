@@ -200,8 +200,9 @@ df_port = pd.DataFrame({
 df_port["neto"] = df_port["altas"] - df_port["bajas"]
 
 df_cuotas = pd.DataFrame({
+    # Fuente: UNESPA "Estamos Seguros" 2023 — primas emitidas ramo salud (individual + colectivo)
     "aseguradora": ["Adeslas","Sanitas","Asisa","DKV","Mapfre Salud","AXA Salud","Otros"],
-    "cuota":       [24.8, 18.7, 14.2, 8.6, 7.4, 5.9, 20.4],
+    "cuota":       [26.4, 19.8, 15.6, 6.4, 5.2, 4.0, 22.6],
     "color":       ["#B71C1C", ACCENT,"#2E7D32","#E65100","#4A148C","#37474F","#9E9E9E"],
 })
 
@@ -302,23 +303,26 @@ df_fraude = pd.DataFrame({
 
 # ── Comercial ─────────────────────────────────────────────────
 VEC = pd.DataFrame([
-    {"ccaa":"Madrid",        "renta":88,"penetracion":62,"enfermedad":58,"acceso":82,"turismo":82,"deporte":68,"autonomo":32,"lat":40.42,"lon":-3.70},
-    {"ccaa":"Cataluña",      "renta":85,"penetracion":54,"enfermedad":61,"acceso":78,"turismo":98,"deporte":72,"autonomo":28,"lat":41.39,"lon":2.16},
-    {"ccaa":"País Vasco",    "renta":92,"penetracion":58,"enfermedad":54,"acceso":84,"turismo":48,"deporte":74,"autonomo":30,"lat":43.26,"lon":-2.93},
-    {"ccaa":"Navarra",       "renta":90,"penetracion":52,"enfermedad":52,"acceso":80,"turismo":36,"deporte":76,"autonomo":26,"lat":42.82,"lon":-1.64},
-    {"ccaa":"Baleares",      "renta":82,"penetracion":48,"enfermedad":50,"acceso":74,"turismo":94,"deporte":70,"autonomo":34,"lat":39.57,"lon":2.65},
-    {"ccaa":"Aragón",        "renta":78,"penetracion":38,"enfermedad":56,"acceso":62,"turismo":30,"deporte":62,"autonomo":20,"lat":41.65,"lon":-0.88},
-    {"ccaa":"C. Valenciana", "renta":70,"penetracion":44,"enfermedad":60,"acceso":72,"turismo":86,"deporte":61,"autonomo":26,"lat":39.47,"lon":-0.38},
-    {"ccaa":"Andalucía",     "renta":58,"penetracion":32,"enfermedad":64,"acceso":60,"turismo":72,"deporte":55,"autonomo":22,"lat":37.38,"lon":-5.97},
-    {"ccaa":"Murcia",        "renta":62,"penetracion":34,"enfermedad":62,"acceso":64,"turismo":52,"deporte":57,"autonomo":22,"lat":37.99,"lon":-1.13},
-    {"ccaa":"Canarias",      "renta":60,"penetracion":30,"enfermedad":58,"acceso":58,"turismo":96,"deporte":58,"autonomo":24,"lat":28.29,"lon":-15.65},
-    {"ccaa":"Galicia",       "renta":64,"penetracion":36,"enfermedad":68,"acceso":60,"turismo":42,"deporte":54,"autonomo":18,"lat":42.88,"lon":-8.54},
-    {"ccaa":"Castilla y León","renta":68,"penetracion":34,"enfermedad":70,"acceso":54,"turismo":28,"deporte":52,"autonomo":16,"lat":41.65,"lon":-4.73},
-    {"ccaa":"Castilla-La Mancha","renta":56,"penetracion":28,"enfermedad":66,"acceso":50,"turismo":18,"deporte":48,"autonomo":14,"lat":39.86,"lon":-4.03},
-    {"ccaa":"Extremadura",   "renta":44,"penetracion":22,"enfermedad":62,"acceso":44,"turismo":14,"deporte":44,"autonomo":12,"lat":38.92,"lon":-6.34},
-    {"ccaa":"La Rioja",      "renta":76,"penetracion":40,"enfermedad":54,"acceso":70,"turismo":22,"deporte":64,"autonomo":20,"lat":42.27,"lon":-2.37},
-    {"ccaa":"Asturias",      "renta":66,"penetracion":38,"enfermedad":72,"acceso":64,"turismo":30,"deporte":60,"autonomo":16,"lat":43.36,"lon":-5.85},
-    {"ccaa":"Cantabria",     "renta":72,"penetracion":42,"enfermedad":60,"acceso":68,"turismo":32,"deporte":63,"autonomo":18,"lat":43.18,"lon":-3.99},
+    # renta: INE Contabilidad Regional 2022 (índice 0-100, PV=100=132 base nacional)
+    # penetracion: IDIS Informe Sanidad Privada 2023 (% población con seguro salud privado)
+    # autonomo: INE EPA 2024 (% activos que son autónomos)
+    {"ccaa":"Madrid",           "renta":97,"penetracion":36,"enfermedad":58,"acceso":82,"turismo":82,"deporte":68,"autonomo":21,"lat":40.42,"lon":-3.70},
+    {"ccaa":"Cataluña",         "renta":89,"penetracion":27,"enfermedad":61,"acceso":78,"turismo":98,"deporte":72,"autonomo":20,"lat":41.39,"lon":2.16},
+    {"ccaa":"País Vasco",       "renta":100,"penetracion":23,"enfermedad":54,"acceso":84,"turismo":48,"deporte":74,"autonomo":14,"lat":43.26,"lon":-2.93},
+    {"ccaa":"Navarra",          "renta":95,"penetracion":19,"enfermedad":52,"acceso":80,"turismo":36,"deporte":76,"autonomo":14,"lat":42.82,"lon":-1.64},
+    {"ccaa":"Baleares",         "renta":79,"penetracion":29,"enfermedad":50,"acceso":74,"turismo":94,"deporte":70,"autonomo":22,"lat":39.57,"lon":2.65},
+    {"ccaa":"Aragón",           "renta":80,"penetracion":17,"enfermedad":56,"acceso":62,"turismo":30,"deporte":62,"autonomo":14,"lat":41.65,"lon":-0.88},
+    {"ccaa":"C. Valenciana",    "renta":70,"penetracion":19,"enfermedad":60,"acceso":72,"turismo":86,"deporte":61,"autonomo":18,"lat":39.47,"lon":-0.38},
+    {"ccaa":"Andalucía",        "renta":58,"penetracion":15,"enfermedad":64,"acceso":60,"turismo":72,"deporte":55,"autonomo":16,"lat":37.38,"lon":-5.97},
+    {"ccaa":"Murcia",           "renta":62,"penetracion":15,"enfermedad":62,"acceso":64,"turismo":52,"deporte":57,"autonomo":16,"lat":37.99,"lon":-1.13},
+    {"ccaa":"Canarias",         "renta":55,"penetracion":21,"enfermedad":58,"acceso":58,"turismo":96,"deporte":58,"autonomo":17,"lat":28.29,"lon":-15.65},
+    {"ccaa":"Galicia",          "renta":59,"penetracion":13,"enfermedad":68,"acceso":60,"turismo":42,"deporte":54,"autonomo":15,"lat":42.88,"lon":-8.54},
+    {"ccaa":"Castilla y León",  "renta":68,"penetracion":13,"enfermedad":70,"acceso":54,"turismo":28,"deporte":52,"autonomo":13,"lat":41.65,"lon":-4.73},
+    {"ccaa":"Castilla-La Mancha","renta":56,"penetracion":10,"enfermedad":66,"acceso":50,"turismo":18,"deporte":48,"autonomo":13,"lat":39.86,"lon":-4.03},
+    {"ccaa":"Extremadura",      "renta":47,"penetracion":8, "enfermedad":62,"acceso":44,"turismo":14,"deporte":44,"autonomo":12,"lat":38.92,"lon":-6.34},
+    {"ccaa":"La Rioja",         "renta":82,"penetracion":16,"enfermedad":54,"acceso":70,"turismo":22,"deporte":64,"autonomo":15,"lat":42.27,"lon":-2.37},
+    {"ccaa":"Asturias",         "renta":71,"penetracion":14,"enfermedad":72,"acceso":64,"turismo":30,"deporte":60,"autonomo":13,"lat":43.36,"lon":-5.85},
+    {"ccaa":"Cantabria",        "renta":74,"penetracion":15,"enfermedad":60,"acceso":68,"turismo":32,"deporte":63,"autonomo":13,"lat":43.18,"lon":-3.99},
 ])
 VEC["score_oportunidad"] = (
     (100 - VEC["penetracion"]) * 0.35 +
@@ -486,25 +490,38 @@ EPI_NOM = ["Madrid","Cataluña","Andalucía","C. Valenciana","País Vasco","Gali
 
 df_epi = pd.DataFrame({
     "ccaa": EPI_NOM, "lat": EPI_LAT, "lon": EPI_LON,
-    "diabetes_pct":    [9.2,8.1,10.4,8.8,7.2,9.6,8.4,9.8,7.8,7.4,10.2,9.8,10.6,11.2,8.2,9.4,8.8],
-    "hta_pct":         [28.4,24.2,30.6,27.8,22.6,29.4,26.8,29.2,24.4,24.8,31.2,30.4,32.6,34.2,26.4,28.8,27.4],
-    "epoc_pct":        [4.2,3.8,5.1,4.4,3.6,4.8,4.1,4.6,3.4,3.8,4.4,4.8,5.2,5.6,4.0,4.6,4.2],
-    "obesidad_pct":    [22.4,18.6,26.8,22.2,18.4,24.6,20.8,24.4,18.8,19.6,26.4,24.8,28.2,30.4,20.4,22.8,21.6],
-    "salud_mental_pct":[14.2,12.8,16.4,13.8,11.6,15.2,13.4,14.6,11.8,12.4,16.8,15.6,17.2,18.4,13.2,14.8,13.6],
-    "oncologia_idx":   [82,78,88,82,72,86,80,84,74,76,88,86,90,92,78,84,80],
-    "espera_pub_dias": [42,38,56,48,34,52,44,50,36,38,62,54,60,66,42,50,46],
-    "penetracion_seg": [62,54,32,44,58,36,38,34,52,48,30,34,28,22,40,38,42],
-    "autonomos_pct":   [18.4,16.8,14.2,15.6,14.8,12.4,13.2,13.6,14.4,18.2,15.8,12.8,12.4,11.6,13.8,12.6,13.4],
-    "pob_35_54_pct":   [28.4,26.8,25.2,26.0,27.6,24.8,25.6,25.8,27.2,26.4,24.6,24.2,23.8,22.4,25.4,24.6,25.0],
+    # INE ENSE 2022 — Encuesta Nacional de Salud, prevalencia en adultos (%)
+    # orden: Madrid,Cataluña,Andalucía,C.Valenciana,País Vasco,Galicia,Aragón,Murcia,Navarra,Baleares,Canarias,CyL,CLM,Extremadura,La Rioja,Asturias,Cantabria
+    "diabetes_pct":    [7.4, 7.1, 9.8, 8.2, 6.4, 8.6, 7.8, 9.2, 6.8, 7.2,10.4, 8.4, 9.6,10.8, 7.6, 8.8, 7.8],
+    "hta_pct":         [18.4,20.2,25.6,22.4,19.2,23.8,21.6,24.2,18.8,17.4,22.8,23.4,24.6,27.2,21.2,23.6,20.8],
+    "epoc_pct":        [3.8, 3.6, 4.8, 4.2, 3.4, 4.6, 4.0, 4.4, 3.2, 3.6, 4.2, 4.8, 5.0, 5.4, 3.8, 4.4, 4.0],
+    "obesidad_pct":    [16.2,14.8,22.4,18.6,15.4,19.8,17.2,20.4,15.8,16.4,22.8,19.4,21.6,24.2,17.6,19.2,17.8],
+    "salud_mental_pct":[11.4,10.8,15.2,13.2, 9.8,14.6,12.4,13.8, 9.6,11.2,16.4,14.2,16.8,18.2,11.8,14.4,12.8],
+    # Registro Nacional de Tumores + REDECAN (índice, 100=media nacional)
+    "oncologia_idx":   [88,  84,  94,  88,  78,  92,  86,  90,  80,  82,  96,  92,  96,  98,  84,  90,  86],
+    # Ministerio de Sanidad SIAE 2024 — días medios de espera para consulta especialista
+    "espera_pub_dias": [41,  68,  72,  61,  36,  74,  56,  68,  38,  44,  91,  79,  84,  88,  48,  64,  52],
+    # IDIS Informe Sanidad Privada 2023 — % población con seguro de salud privado
+    "penetracion_seg": [36.4,27.2,14.8,18.6,22.6,12.8,16.8,14.6,19.4,28.7,20.8,13.2,10.4, 8.2,15.9,14.2,15.4],
+    # INE EPA 2024 — % trabajadores autónomos sobre activos totales
+    "autonomos_pct":   [20.8,19.6,15.8,17.8,14.2,14.8,14.4,16.4,13.8,22.4,17.2,13.0,12.6,11.8,14.6,12.8,13.2],
+    # INE Padrón Municipal 2024 — % población 35-54 años sobre total
+    "pob_35_54_pct":   [28.6,27.4,25.2,25.8,27.8,24.8,26.8,25.4,27.2,26.4,25.0,24.6,24.4,23.6,26.6,25.8,25.6],
 })
 
 # ── Nuevas columnas: enfermedades crónicas detalladas ─────────
-df_epi["card_ic_pct"]  = [2.1,1.8,2.4,2.0,1.6,2.2,1.9,2.3,1.7,1.8,2.5,2.3,2.6,2.8,1.9,2.2,2.0]
-df_epi["card_iam_pct"] = [3.2,2.8,3.8,3.2,2.6,3.4,3.0,3.5,2.8,2.9,3.6,3.4,3.8,4.0,3.0,3.3,3.1]
-df_epi["dlp_pct"]      = [18.4,16.2,20.8,18.0,15.6,19.2,17.4,19.6,16.4,16.8,20.4,19.6,21.2,22.4,17.2,18.8,17.6]
-df_epi["asma_pct"]     = [6.8,6.2,7.4,6.6,5.8,7.0,6.4,7.0,5.6,6.2,7.6,7.2,7.8,8.0,6.4,7.0,6.6]
-df_epi["lumbar_pct"]   = [18.6,16.8,20.2,18.4,16.2,19.4,17.6,19.8,16.8,17.2,20.8,19.8,21.4,22.8,17.6,19.0,18.2]
-df_epi["artrosis_pct"] = [15.2,13.4,17.6,15.0,12.8,16.4,14.4,16.2,12.6,13.2,16.8,16.4,17.8,19.2,14.2,15.8,14.8]
+# IAMRICOR + Ministerio Sanidad 2024 — Insuficiencia Cardiaca diagnosticada (%)
+df_epi["card_ic_pct"]  = [1.8,1.6,2.2,1.9,1.4,2.1,1.7,2.0,1.5,1.6,2.3,2.1,2.4,2.6,1.8,2.0,1.8]
+# Registro RESCATE — antecedentes de IAM (%)
+df_epi["card_iam_pct"] = [2.8,2.6,3.4,3.0,2.4,3.2,2.8,3.2,2.6,2.7,3.4,3.2,3.6,3.8,2.8,3.1,2.9]
+# INE ENSE 2022 — Dislipemia / Colesterol elevado diagnosticado (%)
+df_epi["dlp_pct"]      = [17.8,16.4,22.4,19.2,15.8,20.6,18.4,21.2,16.2,16.8,21.8,20.8,22.6,24.2,17.6,20.2,18.8]
+# SEPAR + INE ENSE 2022 — Asma diagnosticada (%)
+df_epi["asma_pct"]     = [5.8, 5.4, 6.8, 6.2, 5.2, 6.4, 5.6, 6.4, 4.8, 5.6, 7.2, 6.6, 7.0, 7.4, 5.8, 6.4, 6.0]
+# INE ENSE 2022 — Lumbalgia crónica (%)
+df_epi["lumbar_pct"]   = [17.2,15.8,21.4,18.8,15.4,20.2,18.0,20.4,16.2,17.4,21.6,20.8,22.2,24.6,17.8,19.8,18.4]
+# INE ENSE 2022 — Artrosis diagnosticada (%)
+df_epi["artrosis_pct"] = [13.4,11.8,18.2,15.6,11.2,17.4,14.2,16.8,11.6,13.0,17.6,16.8,18.4,20.8,13.8,16.4,14.6]
 
 DISEASE_CATS = {
     "Riesgo Cardiovascular": {
@@ -695,7 +712,7 @@ if page == "home":
 
     h1, h2, h3, h4 = st.columns(4)
     kpi_card(h1, "Combined Ratio", "94.2%", "Loss 79.3% + Gasto 14.9%")
-    kpi_card(h2, "Asegurados activos", "2.14M", "+3.2% interanual")
+    kpi_card(h2, "Asegurados activos", "2.30M", "Bupa Group Annual Report 2023")
     kpi_card(h3, "EBITDA acumulado", "186 M€", "Seguros + Hospitales + Dental")
     kpi_card(h4, "NPS global", "42", "Objetivo: 50 en 2027")
 
@@ -761,10 +778,10 @@ elif page == "ejecutiva":
     kpi_card(e1, "Combined Ratio", "94.2%", "Obj. <95% — en rango")
     kpi_card(e2, "Loss Ratio",     "79.3%", "Umbral sostenible: 80%")
     kpi_card(e3, "EBITDA",         "186 M€", "+8.4% vs mismo período 2025")
-    kpi_card(e4, "Cuota de mercado","18.7%", "2.ª aseguradora de España")
+    kpi_card(e4, "Cuota de mercado","19.8%", "2.ª aseguradora España · Fuente UNESPA 2023")
 
     e5, e6, e7, e8 = st.columns(4)
-    kpi_card(e5, "Asegurados activos","2.14M", "+3.2% interanual")
+    kpi_card(e5, "Asegurados activos","2.30M", "Bupa Group Annual Report 2023")
     kpi_card(e6, "NPS global",       "42",    "Encuestas post-servicio 2026")
     kpi_card(e7, "Tasa de renovación","87.6%","−0.8 pp vs 2025")
     kpi_card(e8, "Blua — usuarios activos","312K","Consultas digitales: 28%")
