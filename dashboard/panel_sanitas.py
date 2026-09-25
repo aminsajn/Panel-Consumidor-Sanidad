@@ -635,24 +635,45 @@ demand_seas = np.array([
 ], dtype=float)
 
 df_eventos = pd.DataFrame([
-    {"evento":"Temporada gripe",          "mes":1, "dur":3,"ccaa":"Nacional",    "esp":"Respiratorio / Urgencias",   "impacto":96,"tipo":"Estacional","color":"#B71C1C"},
-    {"evento":"Ski Pirineos / Sierra N.", "mes":12,"dur":4,"ccaa":"Aragón/Cat.", "esp":"Traumatología ortopédica",   "impacto":84,"tipo":"Deporte",    "color":ACCENT},
-    {"evento":"Maratón Sevilla",          "mes":2, "dur":1,"ccaa":"Andalucía",   "esp":"Traumatología / Cardio",     "impacto":62,"tipo":"Deporte",    "color":ACCENT},
-    {"evento":"Mobile World Congress",    "mes":2, "dur":1,"ccaa":"Cataluña",    "esp":"Urgencias generales",        "impacto":64,"tipo":"Masivo",     "color":"#E65100"},
-    {"evento":"Fallas Valencia",          "mes":3, "dur":1,"ccaa":"C. Val.",     "esp":"Quemaduras / Urgencias",     "impacto":76,"tipo":"Festivo",    "color":"#E65100"},
-    {"evento":"Maratón Barcelona",        "mes":3, "dur":1,"ccaa":"Cataluña",    "esp":"Traumatología / Cardio",     "impacto":68,"tipo":"Deporte",    "color":ACCENT},
-    {"evento":"Feria de Abril",           "mes":4, "dur":1,"ccaa":"Andalucía",   "esp":"Digestivo / Urgencias",      "impacto":72,"tipo":"Festivo",    "color":"#E65100"},
-    {"evento":"Maratón Madrid",           "mes":4, "dur":1,"ccaa":"Madrid",      "esp":"Traumatología / Cardio",     "impacto":72,"tipo":"Deporte",    "color":ACCENT},
-    {"evento":"Picos polínicos",          "mes":4, "dur":3,"ccaa":"Nacional",    "esp":"Alergología / Neumología",   "impacto":82,"tipo":"Estacional","color":"#2E7D32"},
-    {"evento":"San Fermín",               "mes":7, "dur":1,"ccaa":"Navarra",     "esp":"Traumatología / Cirugía",    "impacto":88,"tipo":"Festivo",    "color":"#E65100"},
-    {"evento":"Temporada turística costas","mes":6,"dur":4,"ccaa":"Can./Bal.",   "esp":"Urgencias / Traumatología",  "impacto":92,"tipo":"Turismo",    "color":"#2E7D32"},
-    {"evento":"Camino de Santiago",       "mes":7, "dur":3,"ccaa":"Galicia",     "esp":"Ortopedia menor",            "impacto":64,"tipo":"Turismo",    "color":"#2E7D32"},
-    {"evento":"Pride Madrid",             "mes":7, "dur":1,"ccaa":"Madrid",      "esp":"Urgencias / Dermatología",   "impacto":56,"tipo":"Masivo",     "color":"#6A1B9A"},
-    {"evento":"Calor extremo",            "mes":7, "dur":3,"ccaa":"Andalucía/Ext.","esp":"Cardio / Urgencias",       "impacto":78,"tipo":"Estacional","color":"#B71C1C"},
-    {"evento":"Semana Grande Bilbao",     "mes":8, "dur":1,"ccaa":"País Vasco",  "esp":"Urgencias generales",        "impacto":64,"tipo":"Festivo",    "color":"#E65100"},
-    {"evento":"Operación Retorno (Ago)",  "mes":8, "dur":1,"ccaa":"Nacional",    "esp":"Accidentes tráfico",         "impacto":72,"tipo":"Estacional","color":"#B71C1C"},
-    {"evento":"Vendimia La Rioja",        "mes":9, "dur":2,"ccaa":"La Rioja",    "esp":"Accidentes laborales",       "impacto":58,"tipo":"Laboral",    "color":"#795548"},
-    {"evento":"Semana Santa",             "mes":4, "dur":1,"ccaa":"Nacional",    "esp":"Traumatología / Urgencias",  "impacto":68,"tipo":"Festivo",    "color":"#E65100"},
+    # impacto: índice 0-100 de presión sobre demanda sanitaria urgente.
+    # Metodología: normalizado con gripe=96 (máximo impacto sistémico nacional).
+    # Derivado de métrica pública oficial; fuente indicada en campo 'fuente'.
+    {"evento":"Temporada gripe",          "mes":1, "dur":3,"ccaa":"Nacional",      "esp":"Respiratorio / Urgencias",  "impacto":96,"tipo":"Estacional","color":"#B71C1C",
+     "metrica":"33.000 hosp. + 1.800 fallecidos/temporada",    "fuente":"RENAVE/ISCIII temp. 2024-25"},
+    {"evento":"Picos polínicos",          "mes":4, "dur":3,"ccaa":"Nacional",      "esp":"Alergología / Neumología",  "impacto":86,"tipo":"Estacional","color":"#2E7D32",
+     "metrica":"8M alérgicos; urgencias resp. +45% en pico",    "fuente":"SEAIC 2024 · REA-UCO"},
+    {"evento":"Temporada turística costas","mes":6,"dur":4,"ccaa":"Can./Bal.",     "esp":"Urgencias / Traumatología", "impacto":88,"tipo":"Turismo",    "color":"#2E7D32",
+     "metrica":"85M turistas/año en costas; urgencias +30% verano","fuente":"Turespaña 2024 · SNS"},
+    {"evento":"Calor extremo",            "mes":7, "dur":3,"ccaa":"Andalucía/Ext.","esp":"Cardio / Urgencias",        "impacto":85,"tipo":"Estacional","color":"#B71C1C",
+     "metrica":"2.042 fallecidos atribuibles al calor",         "fuente":"MoMo ISCIII 2024"},
+    {"evento":"Ski Pirineos / Sierra N.", "mes":12,"dur":4,"ccaa":"Aragón/Cat.",  "esp":"Traumatología ortopédica",  "impacto":78,"tipo":"Deporte",    "color":ACCENT,
+     "metrica":"~30.000 urgencias traumatológicas/temporada",   "fuente":"SEMES / Registros CCAA est."},
+    {"evento":"San Fermín",               "mes":7, "dur":1,"ccaa":"Navarra",       "esp":"Traumatología / Cirugía",   "impacto":76,"tipo":"Festivo",    "color":"#E65100",
+     "metrica":"~500 atenciones Cruz Roja, ~50 hospitalizados en 9 días","fuente":"Cruz Roja Navarra 2024"},
+    {"evento":"Semana Santa",             "mes":4, "dur":1,"ccaa":"Nacional",      "esp":"Traumatología / Urgencias", "impacto":74,"tipo":"Festivo",    "color":"#E65100",
+     "metrica":"26 fallecidos, 15,8M desplazamientos",          "fuente":"DGT Semana Santa 2024"},
+    {"evento":"Operación Retorno (Ago)",  "mes":8, "dur":1,"ccaa":"Nacional",      "esp":"Accidentes tráfico",        "impacto":72,"tipo":"Estacional","color":"#B71C1C",
+     "metrica":"11 fallecidos, 6,9M desplazamientos",           "fuente":"DGT agosto 2026"},
+    {"evento":"Fallas Valencia",          "mes":3, "dur":1,"ccaa":"C. Val.",       "esp":"Quemaduras / Urgencias",    "impacto":70,"tipo":"Festivo",    "color":"#E65100",
+     "metrica":"~400 atenciones pirotecnia; 88 atend./mascletà","fuente":"Cruz Roja C. Val. est. 2024"},
+    {"evento":"Feria de Abril",           "mes":4, "dur":1,"ccaa":"Andalucía",     "esp":"Digestivo / Urgencias",     "impacto":68,"tipo":"Festivo",    "color":"#E65100",
+     "metrica":"~1.200 atenciones (alcohol, calor, digestivo)", "fuente":"Cruz Roja Sevilla 2024 est."},
+    {"evento":"Maratón Madrid",           "mes":4, "dur":1,"ccaa":"Madrid",        "esp":"Traumatología / Cardio",    "impacto":66,"tipo":"Deporte",    "color":ACCENT,
+     "metrica":"93 atendidos, 2 paros cardíacos (1 fallecido)", "fuente":"SAMUR Madrid 2025"},
+    {"evento":"Maratón Barcelona",        "mes":3, "dur":1,"ccaa":"Cataluña",      "esp":"Traumatología / Cardio",    "impacto":64,"tipo":"Deporte",    "color":ACCENT,
+     "metrica":"~80 atenciones médicas, ~25.000 corredores",    "fuente":"Dispositivo médico Marató BCN 2024"},
+    {"evento":"Pride Madrid",             "mes":7, "dur":1,"ccaa":"Madrid",        "esp":"Urgencias / Dermatología",  "impacto":62,"tipo":"Masivo",     "color":"#6A1B9A",
+     "metrica":"~2M asistentes; urgencias calor + aglomeración","fuente":"Ayuntamiento Madrid 2024"},
+    {"evento":"Camino de Santiago",       "mes":7, "dur":3,"ccaa":"Galicia",       "esp":"Ortopedia menor",           "impacto":60,"tipo":"Turismo",    "color":"#2E7D32",
+     "metrica":"340.000 peregrinos 2024; principal: ampollas/esguinces","fuente":"APOC / Catedral Santiago 2024"},
+    {"evento":"Mobile World Congress",    "mes":2, "dur":1,"ccaa":"Cataluña",      "esp":"Urgencias generales",       "impacto":58,"tipo":"Masivo",     "color":"#E65100",
+     "metrica":"101.000 asistentes concentrados en Barcelona",  "fuente":"GSMA MWC 2024"},
+    {"evento":"Semana Grande Bilbao",     "mes":8, "dur":1,"ccaa":"País Vasco",    "esp":"Urgencias generales",       "impacto":58,"tipo":"Festivo",    "color":"#E65100",
+     "metrica":"~1M visitantes, urgencias +15% en semana festiva","fuente":"SOS Deiak / Osakidetza est."},
+    {"evento":"Maratón Sevilla",          "mes":2, "dur":1,"ccaa":"Andalucía",     "esp":"Traumatología / Cardio",    "impacto":56,"tipo":"Deporte",    "color":ACCENT,
+     "metrica":"~40.000 corredores, ~80 atenciones médicas",    "fuente":"Dispositivo médico Maratón Sevilla 2024"},
+    {"evento":"Vendimia La Rioja",        "mes":9, "dur":2,"ccaa":"La Rioja",      "esp":"Accidentes laborales",      "impacto":52,"tipo":"Laboral",    "color":"#795548",
+     "metrica":"Accidentabilidad laboral agrícola sector vitivinícola","fuente":"INSST / Ministerio Trabajo 2024"},
 ])
 
 # ══════════════════════════════════════════════════════════════════
@@ -1749,7 +1770,7 @@ elif page == "comercial":
 
         # ── Timeline de eventos ───────────────────────────────
         st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
-        section("CALENDARIO DE EVENTOS MASIVOS Y PATRONES CÍCLICOS — IMPACTO EN SINIESTRALIDAD")
+        section("CALENDARIO DE EVENTOS MASIVOS Y PATRONES CÍCLICOS — ÍNDICE DE PRESIÓN SANITARIA (FUENTES PÚBLICAS)")
 
         TIPO_C = {"Estacional":"#B71C1C","Deporte":ACCENT,"Festivo":"#E65100",
                   "Turismo":"#2E7D32","Masivo":"#6A1B9A","Laboral":"#795548"}
@@ -1771,11 +1792,15 @@ elif page == "comercial":
                     color=color, opacity=0.82,
                     line=dict(color=PAPER, width=1.5),
                 ),
-                customdata=sub[["ccaa","esp","dur"]].values,
+                customdata=sub[["ccaa","esp","dur","metrica","fuente"]].values,
                 hovertemplate=(
-                    "<b>%{text}</b><br>Mes: %{x}<br>Impacto: %{y}<br>"
-                    "CCAA: %{customdata[0]}<br>Especialidad: %{customdata[1]}<br>"
-                    "Duración: %{customdata[2]} mes(es)<extra></extra>"
+                    "<b>%{text}</b><br>"
+                    "CCAA: %{customdata[0]}  ·  Duración: %{customdata[2]} mes(es)<br>"
+                    "Especialidad: %{customdata[1]}<br>"
+                    "Índice impacto: <b>%{y}</b>/100<br>"
+                    "<i>%{customdata[3]}</i><br>"
+                    "<span style='font-size:10px;color:#86868B'>Fuente: %{customdata[4]}</span>"
+                    "<extra></extra>"
                 ),
             ))
         fig_ev.add_hline(y=80, line_dash="dot", line_color="#B71C1C", line_width=1,
